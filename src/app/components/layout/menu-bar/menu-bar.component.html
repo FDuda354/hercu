@@ -1,0 +1,12 @@
+<h4 class="text-center mt-0">Menu</h4>
+<div class="text-center">
+  <p-avatar image="assets/images/logo.png" styleClass="mr-2" size="xlarge" shape="circle"></p-avatar>
+</div>
+<div class="p-3">
+  <app-menu-item
+    *ngFor="let item of menuItems"
+    [menuItem]="item"
+    routerLink="{{item.url}}"
+  >
+  </app-menu-item>
+</div>

@@ -1,0 +1,29 @@
+<div class="flex flex-column " style="height: 85vh;">
+
+  <div class="p-inputgroup max-w-30rem mb-4 mt-3">
+    <span class="p-inputgroup-addon"><i class="pi pi-user "></i></span>
+    <span class="p-float-label">
+    <input id="login" type="text" pInputText [(ngModel)]="login">
+    <label for="login">Login</label>
+    </span>
+  </div>
+
+  <div class="p-inputgroup max-w-30rem mb-4 mt-1">
+  <span class="p-inputgroup-addon"><i class="pi pi-lock p-float-label "></i></span>
+  <p-password placeholder="Hasło" class="p-inputgroup" [(ngModel)]="password" [toggleMask]="true" [feedback]="false"></p-password>
+  </div>
+
+
+  <div class="flex flex-row mr-7 mb-4 max-w-30rem stick-to-bottom">
+    <button pButton pRipple type="button" label="Zaloguj"cd
+            class="p-button-success  p-button-text" style="flex: 1 1 48%;">
+    </button>
+    <div class="mr-3 ml-3"></div>
+    <button pButton pRipple type="button" label="Zarejestruj się"
+            routerLink=""
+            class="p-button-info p-button-text" style="flex: 1 1 48%;">
+    </button>
+  </div>
+
+
+</div>

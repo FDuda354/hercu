@@ -1,0 +1,36 @@
+<div class="flex flex-row align-items-center justify-content-between border-bottom-1 border-gray-200 pt-3 pb-3">
+  <!-- Elementy po lewej -->
+  <div class="flex flex-row" >
+    <div *ngIf="isMobileVisible" class="block md:hidden">
+      <button class="p-button-rounded p-button-secondary p-button-text mr-3" type="button" pButton icon="pi pi-bars" (click)="menu.toggle($event)"></button>
+      <p-menu #menu
+              [popup]="true"
+              [model]="menuItems"
+              [showTransitionOptions]="'300ms'"
+              [hideTransitionOptions]="'100ms'"
+      ></p-menu>
+    </div>
+  </div>
+
+  <!-- Elementy po prawej -->
+  <div class="flex flex-row align-items-center">
+    <button pButton pRipple type="button" icon="pi pi-bell" class="p-button-rounded p-button-secondary p-button-text mr-3">
+    </button>
+    <p-avatar icon="pi pi-user" size="small" shape="circle" class="mr-2"></p-avatar>
+    <div>
+      <p class="text-base mb-0 mt-1 text-gray-700">filipduda9@iCloud.com</p>
+      <p class="text-sm mb-1 mt-0 text-gray-500">ADMIN</p>
+    </div>
+    <div>
+      <button pButton pRipple type="button" icon="pi pi-angle-down" class="p-button-rounded p-button-secondary p-button-text ml-2"
+              (click)="menu.toggle($event)">
+      </button>
+      <p-menu #menu
+              [popup]="true"
+              [model]="items"
+              [showTransitionOptions]="'300ms'"
+              [hideTransitionOptions]="'100ms'"
+      ></p-menu>
+    </div>
+  </div>
+</div>

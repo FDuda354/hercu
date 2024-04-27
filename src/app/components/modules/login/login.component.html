@@ -1,0 +1,25 @@
+<div class="flex flex-row" style="height: 100vh">
+  <div [ngStyle]="{
+          'background-color': '#edf2f2',
+          'width': isMobileVisible ? '100%' : 'auto',
+          'max-width': isMobileVisible ? 'none' : '500px',
+          'min-width': isMobileVisible ? 'auto' : '500px',
+          'padding-right': isMobileVisible ? '0px' : '30px',
+          'padding-left': isMobileVisible ? '0px' : '30px',
+       }">
+    <div class="flex flex-column align-items-center ">
+      <div class="text-center pt-5">
+        <p-avatar image="assets/images/logo.png" styleClass="mr-2" size="xlarge" shape="circle"></p-avatar>
+        <h1>Zaloguj się</h1>
+      </div>
+      <app-login-page></app-login-page>
+    </div>
+
+
+
+
+  </div>
+  <div *ngIf="!isMobileVisible" style="background-color: white; flex-grow: 1;" class=" flex flex-column justify-content-center ">
+    <img src="assets/images/tapeta.png" alt="">
+  </div>
+</div>
