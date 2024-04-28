@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import { Component } from '@angular/core';
+import { AuthRequest } from '../../../../servicces/models/auth-request';
 
 @Component({
   selector: 'app-login-page',
@@ -6,6 +7,6 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./login-page.component.scss']
 })
 export class LoginPageComponent {
-  login!: string;
-  password!: string;
+
+  authRequest: AuthRequest = {};
 }

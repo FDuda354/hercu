@@ -3,14 +3,14 @@
   <div class="p-inputgroup max-w-30rem mb-4 mt-3">
     <span class="p-inputgroup-addon"><i class="pi pi-user "></i></span>
     <span class="p-float-label">
-    <input id="login" type="text" pInputText [(ngModel)]="login">
-    <label for="login">Login</label>
+    <input id="username" type="text" pInputText [(ngModel)]="authRequest.username">
+    <label for="username">Login</label>
     </span>
   </div>
 
   <div class="p-inputgroup max-w-30rem mb-4 mt-1">
   <span class="p-inputgroup-addon"><i class="pi pi-lock p-float-label "></i></span>
-  <p-password placeholder="Hasło" class="p-inputgroup" [(ngModel)]="password" [toggleMask]="true" [feedback]="false"></p-password>
+  <p-password placeholder="Hasło" class="p-inputgroup" [(ngModel)]="authRequest.password" [toggleMask]="true" [feedback]="false"></p-password>
   </div>
 
 
