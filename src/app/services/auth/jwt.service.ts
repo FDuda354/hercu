@@ -1,9 +1,6 @@
 import {Injectable} from '@angular/core';
 import { CustomerDTO } from '../../components/common/models/customer-dto';
 import { JwtHelperService } from '@auth0/angular-jwt';
-// import jwt_decode from 'jwt-decode';
-// npm install jwt-decode
-// npm install --save @types/jwt-decode
 
 
 @Injectable({

@@ -28,9 +28,11 @@ import { CalendarModule } from 'primeng/calendar';
 import { LoginComponent } from './components/modules/login/login.component';
 import { LoginPageComponent } from './components/modules/login/login-page/login-page.component';
 import { PasswordModule } from 'primeng/password';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ToastModule } from 'primeng/toast';
 import { UserAuthGuard } from './components/common/guard/user-auth-guard';
+import { PaginatorModule } from 'primeng/paginator';
+import { HttpInterceptorService } from './services/auth/http-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -68,9 +70,11 @@ import { UserAuthGuard } from './components/common/guard/user-auth-guard';
     BrowserModule,
     BrowserAnimationsModule,
     ToastModule,
+    PaginatorModule,
   ],
   providers: [
     UserAuthGuard,
+    {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true},
   ],
   bootstrap: [AppComponent]
 })

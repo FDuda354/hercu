@@ -13,9 +13,9 @@ export class UserAuthGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     if (!this.jwtService.isLoggedIn()) {
       if (state.url !== '/login') {
-        this.router.navigate(['/login']);
+        //this.router.navigate(['/login']);
       }
-      return false;
+     // return false;
     }
     return true;
   }
