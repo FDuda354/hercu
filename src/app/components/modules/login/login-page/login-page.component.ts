@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthRequest } from '../../../../servicces/models/auth-request';
+import { AuthRequest } from '../../../../services/models/auth-request';
 
 @Component({
   selector: 'app-login-page',
