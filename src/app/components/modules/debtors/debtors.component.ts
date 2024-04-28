@@ -66,4 +66,8 @@ export class DebtorsComponent implements OnInit {
   }
 
   protected readonly Component = Component;
+
+  deleteCustomer(customer: CustomerDTO) {
+
+  }
 }
