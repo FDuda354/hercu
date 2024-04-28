@@ -7,16 +7,17 @@ import { CreditorsComponent } from './components/modules/creditors/creditors.com
 import { TransactionsComponent } from './components/modules/transactions/transactions.component';
 import { SettingsComponent } from './components/modules/settings/settings.component';
 import { LoginComponent } from './components/modules/login/login.component';
+import { UserAuthGuard } from './components/common/guard/user-auth-guard';
 
 
 const routes: Routes = [
   {
     path: '', component: DefaultComponent, children: [
-      {path: '', component: HomeComponent},
-      {path: 'debtors', component: DebtorsComponent},
-      {path: 'creditors', component: CreditorsComponent},
-      {path: 'transactions', component: TransactionsComponent},
-      {path: 'settings', component: SettingsComponent},
+      {path: '', component: HomeComponent, canActivate: [UserAuthGuard]},
+      {path: 'debtors', component: DebtorsComponent, canActivate: [UserAuthGuard]},
+      {path: 'creditors', component: CreditorsComponent, canActivate: [UserAuthGuard]},
+      {path: 'transactions', component: TransactionsComponent, canActivate: [UserAuthGuard]},
+      {path: 'settings', component: SettingsComponent, canActivate: [UserAuthGuard]},
 
     ]
   },

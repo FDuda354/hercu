@@ -16,8 +16,10 @@
 
 
   <div class="flex flex-row mr-7 mb-4 max-w-30rem stick-to-bottom">
-    <button pButton pRipple type="button" label="Zaloguj" cd
-            class="p-button-success  p-button-text" style="flex: 1 1 48%;">
+    <button pButton pRipple type="button" label="Zaloguj"
+            class="p-button-success  p-button-text" style="flex: 1 1 48%;"
+    (click)="login()"
+    >
     </button>
     <div class="mr-3 ml-3"></div>
     <button pButton pRipple type="button" label="Zarejestruj się"
@@ -25,6 +27,6 @@
             class="p-button-info p-button-text" style="flex: 1 1 48%;">
     </button>
   </div>
-
+  <p-toast position="bottom-left" key="bl"></p-toast>
 
 </div>

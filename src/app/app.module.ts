@@ -21,13 +21,16 @@ import { CreditorsComponent } from './components/modules/creditors/creditors.com
 import { TransactionsComponent } from './components/modules/transactions/transactions.component';
 import { SettingsComponent } from './components/modules/settings/settings.component';
 import { RouterModule } from '@angular/router';
-import { MenagePersonComponent } from './components/common/menage-person/menage-person.component';
+import { MenagePersonComponent } from './components/common/components/menage-person/menage-person.component';
 import { CheckboxModule } from 'primeng/checkbox';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { CalendarModule } from 'primeng/calendar';
 import { LoginComponent } from './components/modules/login/login.component';
 import { LoginPageComponent } from './components/modules/login/login-page/login-page.component';
 import { PasswordModule } from 'primeng/password';
+import { HttpClientModule } from '@angular/common/http';
+import { ToastModule } from 'primeng/toast';
+import { UserAuthGuard } from './components/common/guard/user-auth-guard';
 
 @NgModule({
   declarations: [
@@ -50,6 +53,7 @@ import { PasswordModule } from 'primeng/password';
     BrowserAnimationsModule,
     RouterModule,
     AppRoutingModule,
+    HttpClientModule,
     FormsModule,
     InputTextModule,
     SidebarModule,
@@ -60,9 +64,14 @@ import { PasswordModule } from 'primeng/password';
     CheckboxModule,
     InputNumberModule,
     CalendarModule,
-    PasswordModule
+    PasswordModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    ToastModule,
   ],
-  providers: [],
+  providers: [
+    UserAuthGuard,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
