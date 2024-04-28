@@ -1,6 +1,5 @@
-import {Component, Input} from '@angular/core';
-import {MenuItem} from "primeng/api";
-import {Router} from "@angular/router";
+import { Component, Input } from '@angular/core';
+import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-header-bar',

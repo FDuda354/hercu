@@ -1,11 +1,11 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-debtors',
   templateUrl: './debtors.component.html',
   styleUrls: ['./debtors.component.scss']
 })
-export class DebtorsComponent implements OnInit{
+export class DebtorsComponent implements OnInit {
   display: boolean = false;
   isMobileVisible = false;
 
