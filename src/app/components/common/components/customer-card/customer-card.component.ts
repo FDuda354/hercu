@@ -17,6 +17,6 @@ export class CustomerCardComponent {
   }
 
   get customerImage(): string {
-    return `https://randomuser.me/api/portraits/MALE/${this.customerIndex}.jpg`;
+    return `https://randomuser.me/api/portraits/men/1.jpg`;
   }
 }

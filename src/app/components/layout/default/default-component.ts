@@ -22,7 +22,7 @@ export class DefaultComponent implements OnInit {
     {
       label: 'Pulpit', icon: 'pi pi-home',
       url: '',
-      routerLink: '',
+      routerLink: '/',
     },
     {
       label: 'Dłużnicy', icon: 'pi pi-users',

@@ -35,6 +35,7 @@ import { PaginatorModule } from 'primeng/paginator';
 import { HttpInterceptorService } from './services/auth/http-interceptor.service';
 import { CustomerCardComponent } from './components/common/components/customer-card/customer-card.component';
 import {CardModule} from "primeng/card";
+import { NgOptimizedImage } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -75,6 +76,7 @@ import {CardModule} from "primeng/card";
     ToastModule,
     PaginatorModule,
     CardModule,
+    NgOptimizedImage,
   ],
   providers: [
     UserAuthGuard,
