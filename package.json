@@ -1,6 +1,6 @@
 {
-  "name": "shopfront",
-  "version": "0.0.0",
+  "name": "debtorfront",
+  "version": "0.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
