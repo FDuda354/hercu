@@ -1,3 +1,4 @@
+<div class="min-h-full">
 <button pButton pRipple type="button"
         icon="pi pi-plus"
         label="Dodaj Wierzyciela"
@@ -22,3 +23,23 @@
 >
   <app-menage-person></app-menage-person>
 </p-sidebar>
+<div class="flex justify-content-center align-items-center flex-wrap gap-5 mt-4 pb-2">
+  <app-customer-card
+    *ngFor="let customer of customers; let index = index"
+    [customer]="customer"
+    [type]="'debtor'"
+    [customerIndex]="index"
+    (details)="deleteCustomer($event)"
+  ></app-customer-card>
+</div>
+<p-toast position="top-right" key="tr"></p-toast>
+</div>
+
+<div *ngIf="customers.length >= 5" class="flex flex-row justify-content-center align-content-end">
+  <p-paginator
+    [rows]="rows"
+    [totalRecords]="totalRecords"
+    (onPageChange)="onPageChange($event)"
+    [rowsPerPageOptions]="[5, 10, 20]"
+  ></p-paginator>
+</div>
