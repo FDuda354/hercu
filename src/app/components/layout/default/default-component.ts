@@ -7,15 +7,10 @@ import { MenuItem } from 'primeng/api';
   styleUrls: ['./default-component.scss']
 })
 export class DefaultComponent implements OnInit {
-  isMobileVisible = false;
 
-  @HostListener('window:resize', ['$event'])
-  onResize(event: Event) {
-    this.isMobileVisible = window.innerWidth <= 768;
-  }
+
 
   ngOnInit(): void {
-    this.isMobileVisible = window.innerWidth <= 768;
   }
 
   menuItems: Array<MenuItem> = [

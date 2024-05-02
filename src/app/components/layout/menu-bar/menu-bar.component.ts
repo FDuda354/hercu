@@ -8,7 +8,6 @@ import { MenuItem } from 'primeng/api';
 })
 export class MenuBarComponent {
 
-  @Input() isMobileVisible!: boolean;
   @Input() menuItems!: Array<MenuItem>;
 
 }
