@@ -15,17 +15,17 @@
   </p-sidebar>
   <div class="flex justify-content-center align-items-center flex-wrap gap-5 mt-4 pb-2">
     <app-customer-card
-      *ngFor="let customer of customers; let index = index"
-      [customer]="customer"
+      *ngFor="let debt of debts; let index = index"
+      [debt]="debt"
       [type]="'debtor'"
       [customerIndex]="index"
-      (details)="deleteCustomer($event)"
+      (details)="goToDetailsCustomer($event)"
     ></app-customer-card>
   </div>
   <p-toast position="top-right" key="tr"></p-toast>
 </div>
 
-<div *ngIf="customers.length >= 5" class="flex flex-row justify-content-center align-content-end">
+<div *ngIf="debts.length >= 5" class="flex flex-row justify-content-center align-content-end">
   <p-paginator
     [rows]="rows"
     [totalRecords]="totalRecords"

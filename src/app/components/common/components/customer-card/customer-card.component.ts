@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {CustomerDTO} from "../../models/customer-dto";
+import { DebtDTO } from '../../models/debt-dto';
 
 @Component({
   selector: 'app-customer-card',
@@ -8,12 +9,12 @@ import {CustomerDTO} from "../../models/customer-dto";
 })
 export class CustomerCardComponent {
   @Input() type!: string;
-  @Input() customer: CustomerDTO = {};
+  @Input() debt: DebtDTO = {};
   @Input() customerIndex = 0;
-  @Output() details: EventEmitter<CustomerDTO> = new EventEmitter<CustomerDTO>();
+  @Output() details: EventEmitter<DebtDTO> = new EventEmitter<DebtDTO>();
 
   onDetails() {
-    this.details.emit(this.customer);
+    this.details.emit(this.debt);
   }
 
   get customerImage(): string {

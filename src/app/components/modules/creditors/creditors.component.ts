@@ -3,6 +3,9 @@ import { CustomerDTO } from '../../common/models/customer-dto';
 import { CustomerService } from '../../../services/customer.service';
 import { MessageService, PrimeNGConfig } from 'primeng/api';
 import { Page } from '../../common/models/page';
+import { DebtDTO } from '../../common/models/debt-dto';
+import { DebtService } from '../../../services/debt.service';
+import { JwtService } from '../../../services/auth/jwt.service';
 
 @Component({
   selector: 'app-creditors',
@@ -13,14 +16,15 @@ import { Page } from '../../common/models/page';
 export class CreditorsComponent implements OnInit {
   display: boolean = false;
   isMobileVisible = false;
-  customers: CustomerDTO[] = [];
+  debts: DebtDTO[] = [];
   totalRecords: number = 0;
   rows: number = 5;
 
   constructor(
-    private customerService: CustomerService,
+    private debtService: DebtService,
     private messageService: MessageService,
     private primengConfig: PrimeNGConfig,
+    private jwtService: JwtService,
   ) {
   }
 
@@ -32,13 +36,13 @@ export class CreditorsComponent implements OnInit {
   ngOnInit(): void {
     this.isMobileVisible = window.innerWidth <= 768;
     this.primengConfig.ripple = true;
-    this.loadCustomers(0, this.rows);
+    this.loadDebts(0, this.rows);
   }
 
-  loadCustomers(page: number, size: number) {
-    this.customerService.getDebtors(page, size).subscribe({
-      next: (page: Page<CustomerDTO>) => {
-        this.customers = page.content;
+  loadDebts(page: number, size: number) {
+    this.debtService.getDebtsForDebtor(page, size).subscribe({
+      next: (page: Page<DebtDTO>) => {
+        this.debts = page.content;
         this.totalRecords = page.totalElements;
         this.rows = page.size;
       },
@@ -50,7 +54,7 @@ export class CreditorsComponent implements OnInit {
   }
 
   onPageChange(event: any) {
-    this.loadCustomers(event.page, event.rows);
+    this.loadDebts(event.page, event.rows);
   }
 
   showIncorrectLogin() {
@@ -66,7 +70,7 @@ export class CreditorsComponent implements OnInit {
 
   protected readonly Component = Component;
 
-  deleteCustomer(customer: CustomerDTO) {
+  goToDetailsCustomer(customer: CustomerDTO) {
 
   }
 }

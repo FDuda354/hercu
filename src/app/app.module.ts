@@ -36,6 +36,7 @@ import { HttpInterceptorService } from './services/auth/http-interceptor.service
 import { CustomerCardComponent } from './components/common/components/customer-card/customer-card.component';
 import {CardModule} from "primeng/card";
 import { NgOptimizedImage } from '@angular/common';
+import { TransformDatePipe } from './pipes/transform-date.pipe';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { NgOptimizedImage } from '@angular/common';
     LoginComponent,
     LoginPageComponent,
     CustomerCardComponent,
+    TransformDatePipe,
   ],
   imports: [
     BrowserModule,

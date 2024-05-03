@@ -13,16 +13,15 @@
         [src]="customerImage"
        alt="customer-avatar">
     </div>
-    <h2 style="color: red">- 150 000 zł</h2>
-
+    <h2 style="color: red">{{debt.amount}}</h2>
 
   </ng-template>
 <div style="margin-top: -50px">
   <div>
-  do 10.11.2025r
-</div>
-  <h2>{{customer.firstName}} {{customer.surname}}</h2>
-  <p class="text-gray-600 font-light" style="font-size: 15px; margin-top: -15px; margin-bottom: 25px" >{{customer.email}}</p>
+  do {{debt.repaymentDate }}
+  </div>
+  <h2>{{debt.customer?.firstName}} {{debt.customer?.surname}}</h2>
+  <p class="text-gray-600 font-light" style="font-size: 15px; margin-top: -15px; margin-bottom: 25px" >{{debt.customer?.email}}</p>
   <button
     pButton
     label="Szczegóły"
