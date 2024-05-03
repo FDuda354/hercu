@@ -1,20 +1,23 @@
-<div class="flex justify-content-center flex-row" style="height: 100vh">
+<div class="flex flex-column" style="height: 100vh">
   <div class="block md:hidden flex flex-column align-items-center justify-content-center">
-    <div class="text-center">
+    <div class="text-center pt-5">
       <p-avatar image="assets/images/logo.png" styleClass="mr-2" size="xlarge" shape="circle"></p-avatar>
       <h1>Zalossasaguj się</h1>
     </div>
-    <app-login-page class="p-8"></app-login-page>
+    <app-login-page class="mr-8 pl-8"></app-login-page>
   </div>
-  <div class=" flex flex-column align-items-center justify-content-center">
-    <div class="hidden md:block text-center pt-5">
-      <p-avatar image="assets/images/logo.png" styleClass="mr-2" size="xlarge" shape="circle"></p-avatar>
-      <h1>Zaloguj się</h1>
-    </div>
-    <app-login-page class="hidden md:block mr-8 pl-8"></app-login-page>
-  </div>
-  <div class="hidden md:block" style="width: 500px">
-      <img src="assets/images/tapeta.png" alt="">
 
+  <div class="flex flex-row">
+    <div class=" flex flex-column align-items-center justify-content-center">
+      <div class="hidden md:block text-center pt-5">
+        <p-avatar image="assets/images/logo.png" styleClass="mr-2" size="xlarge" shape="circle"></p-avatar>
+        <h1>Zaloguj się</h1>
+      </div>
+      <app-login-page class="hidden md:block mr-8 pl-8"></app-login-page>
+    </div>
+    <div class="hidden md:block" style="width: 500px">
+      <img src="assets/images/tapeta.png" alt="">
+    </div>
   </div>
+
 </div>
