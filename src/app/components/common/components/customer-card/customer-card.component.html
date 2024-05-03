@@ -11,24 +11,25 @@
       <img
         class="customer-avatar"
         [src]="customerImage"
-       alt="customer-avatar">
+        alt="customer-avatar">
     </div>
-    <h2 style="color: red">{{debt.amount}}</h2>
-
+    <h2 style="color: #ff6d6d">{{ debt.amount }} PLN</h2>
+    <!--    #77DD77-->
   </ng-template>
-<div style="margin-top: -50px">
-  <div>
-  do {{debt.repaymentDate }}
-  </div>
-  <h2>{{debt.customer?.firstName}} {{debt.customer?.surname}}</h2>
-  <p class="text-gray-600 font-light" style="font-size: 15px; margin-top: -15px; margin-bottom: 25px" >{{debt.customer?.email}}</p>
-  <button
-    pButton
-    label="Szczegóły"
-    class="p-button-secondary p-button-outlined p-button-rounded"
-    (click)="onDetails()"
-  ></button>
+  <div style="margin-top: -50px">
+    <div>
+      do {{ debt.repaymentDate | transformDate }}
+    </div>
+    <h2>{{ debt.customer?.firstName }} {{ debt.customer?.surname }}</h2>
+    <p class="text-gray-600 font-light"
+       style="font-size: 15px; margin-top: -15px; margin-bottom: 25px">{{ debt.customer?.email }}</p>
+    <button
+      pButton
+      label="Szczegóły"
+      class="p-button-secondary p-button-outlined p-button-rounded"
+      (click)="onDetails()"
+    ></button>
 
-</div>
+  </div>
 
 </p-card>

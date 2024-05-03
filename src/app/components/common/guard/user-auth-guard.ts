@@ -1,5 +1,5 @@
-import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from "@angular/router";
-import {Injectable} from "@angular/core";
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { Injectable } from '@angular/core';
 import { JwtService } from '../../../services/auth/jwt.service';
 
 @Injectable()

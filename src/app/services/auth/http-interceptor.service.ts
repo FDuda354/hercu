@@ -10,7 +10,8 @@ export class HttpInterceptorService implements HttpInterceptor {
 
   constructor(
     private jwtService: JwtService,
-  ) {}
+  ) {
+  }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (this.jwtService.isLoggedIn()) {

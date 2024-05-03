@@ -34,7 +34,7 @@ import { UserAuthGuard } from './components/common/guard/user-auth-guard';
 import { PaginatorModule } from 'primeng/paginator';
 import { HttpInterceptorService } from './services/auth/http-interceptor.service';
 import { CustomerCardComponent } from './components/common/components/customer-card/customer-card.component';
-import {CardModule} from "primeng/card";
+import { CardModule } from 'primeng/card';
 import { NgOptimizedImage } from '@angular/common';
 import { TransformDatePipe } from './pipes/transform-date.pipe';
 

@@ -1,6 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { CustomerDTO } from '../../common/models/customer-dto';
-import { CustomerService } from '../../../services/customer.service';
 import { MessageService, PrimeNGConfig } from 'primeng/api';
 import { Page } from '../../common/models/page';
 import { DebtDTO } from '../../common/models/debt-dto';

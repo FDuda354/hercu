@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import { CustomerDTO } from '../../components/common/models/customer-dto';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
@@ -35,10 +35,9 @@ export class JwtService {
   isLoggedIn(): boolean {
     const token = this.getToken();
     const jwtHelper = new JwtHelperService();
-    return token != null  && !jwtHelper.isTokenExpired(token);
+    return token != null && !jwtHelper.isTokenExpired(token);
 
   }
-
 
 
 }

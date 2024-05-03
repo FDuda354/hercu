@@ -1,5 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {CustomerDTO} from "../../models/customer-dto";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { DebtDTO } from '../../models/debt-dto';
 
 @Component({

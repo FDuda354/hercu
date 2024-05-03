@@ -1,22 +1,18 @@
 import { Pipe, PipeTransform } from '@angular/core';
-
+import { format, isValid, parseISO } from 'date-fns';
 
 @Pipe({
   name: 'transformDate'
 })
 export class TransformDatePipe implements PipeTransform {
 
-  transform(value: Date | undefined): string {
+  transform(value: Date | string | undefined): string {
     if (!value) return '';
-
-    const formatter = new Intl.DateTimeFormat('pl-PL', {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit'
-    });
-
-    return formatter.format(value);
+    let date = value instanceof Date && isValid(value) ? value : null;
+    if (!date && typeof value === 'string') {
+      date = parseISO(value);
+    }
+    return date && isValid(date) ? format(date, 'dd.MM.yyyy') : '';
   }
-
 
 }

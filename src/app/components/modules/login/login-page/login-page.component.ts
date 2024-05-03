@@ -48,7 +48,7 @@ export class LoginPageComponent implements OnInit {
 
   showIncorrectLogin() {
     this.messageService.add({
-      key: 'bl',
+      key: 'bc',
       severity: 'error',
       summary: 'Niepoprawne logowanie',
       detail: 'Nieprawidłowy login lub hasło'
@@ -57,7 +57,7 @@ export class LoginPageComponent implements OnInit {
 
   showServerError() {
     this.messageService.add({
-      key: 'bl',
+      key: 'bc',
       severity: 'error',
       summary: 'Błąd',
       detail: 'Wystąpił błąd strony'

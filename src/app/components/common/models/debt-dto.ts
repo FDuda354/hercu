@@ -1,4 +1,4 @@
-import { CustomerDTO, Gender, Role } from './customer-dto';
+import { CustomerDTO } from './customer-dto';
 
 export interface DebtDTO {
   id?: number,
@@ -9,6 +9,7 @@ export interface DebtDTO {
   startDate?: Date,
   status?: DebtStatus,
 }
+
 export enum DebtStatus {
   ACTIVE = 'ACTIVE',
   FINISHED = 'FINISHED',

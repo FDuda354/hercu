@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 
 @Component({
@@ -7,7 +7,6 @@ import { MenuItem } from 'primeng/api';
   styleUrls: ['./default-component.scss']
 })
 export class DefaultComponent implements OnInit {
-
 
 
   ngOnInit(): void {
