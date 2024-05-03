@@ -3,8 +3,8 @@
   <div class="flex flex-row">
     <div class="block md:hidden">
       <button class="p-button-rounded p-button-secondary p-button-text mr-3" type="button" pButton icon="pi pi-bars"
-              (click)="menu.toggle($event)"></button>
-      <p-menu #menu
+              (click)="mainMenu.toggle($event)"></button>
+      <p-menu #mainMenu
               [popup]="true"
               [model]="menuItems"
               [showTransitionOptions]="'300ms'"
