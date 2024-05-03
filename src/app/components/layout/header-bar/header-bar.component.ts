@@ -40,6 +40,10 @@ export class HeaderBarComponent implements OnInit {
     {
       label: 'Wyloguj się',
       icon: 'pi pi-sign-out',
+      command: () => {
+        this.jwtService.removeCustomer();
+        this.jwtService.removeToken();
+      },
       routerLink: 'login',
     }
   ];
