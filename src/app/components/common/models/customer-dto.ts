@@ -1,12 +1,19 @@
 export interface CustomerDTO {
   id?: number,
-  name?: string,
+  firstName?: string,
+  surname?: string,
   email?: string,
   age?: number,
-  role?: Role
+  role?: Role,
+  gender?: Gender,
 }
 
 export enum Role {
   ROLE_ADMIN = 'ROLE_ADMIN',
   ROLE_USER = 'ROLE_USER'
+}
+export enum Gender {
+  MALE = 'MALE',
+  FEMALE = 'FEMALE',
+  HELICOPTER = 'HELICOPTER'
 }

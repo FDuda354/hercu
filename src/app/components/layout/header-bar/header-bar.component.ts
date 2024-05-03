@@ -1,12 +1,29 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { CustomerDTO } from '../../common/models/customer-dto';
+import { JwtService } from '../../../services/auth/jwt.service';
 
 @Component({
   selector: 'app-header-bar',
   templateUrl: './header-bar.component.html',
   styleUrls: ['./header-bar.component.scss']
 })
-export class HeaderBarComponent {
+export class HeaderBarComponent implements OnInit{
+
+  user!: CustomerDTO;
+
+  constructor(
+    private jwtService: JwtService,
+  ) {
+  }
+
+  ngOnInit(): void {
+    // this.user = this.jwtService.getCustomer()
+    // console.log(this.user.email)
+    // console.log(this.user)
+    // console.log(this.user.id)
+    // console.log(this.user.age)
+  }
 
   @Input() isMobileVisible!: boolean;
   @Input() menuItems!: Array<MenuItem>;
