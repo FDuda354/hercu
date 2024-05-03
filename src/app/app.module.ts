@@ -85,16 +85,4 @@ import { NgOptimizedImage } from '@angular/common';
   bootstrap: [AppComponent]
 })
 export class AppModule {
-
-
-  // get username(): string {
-  //   const storedUser = localStorage.getItem('user');
-  //   if (storedUser) {
-  //     const authResponse: AuthenticationResponse = JSON.parse(storedUser);
-  //     if (authResponse && authResponse.customerDTO && authResponse.customerDTO.username) {
-  //       return authResponse.customerDTO.username;
-  //     }
-  //   }
-  //   return '--';
-  // }
 }

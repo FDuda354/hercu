@@ -8,7 +8,7 @@ import { JwtService } from '../../../services/auth/jwt.service';
   templateUrl: './header-bar.component.html',
   styleUrls: ['./header-bar.component.scss']
 })
-export class HeaderBarComponent implements OnInit{
+export class HeaderBarComponent implements OnInit {
 
   user!: CustomerDTO;
 
@@ -18,11 +18,7 @@ export class HeaderBarComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    // this.user = this.jwtService.getCustomer()
-    // console.log(this.user.email)
-    // console.log(this.user)
-    // console.log(this.user.id)
-    // console.log(this.user.age)
+    this.user = JSON.parse(<string>this.jwtService.getCustomer());
   }
 
   @Input() isMobileVisible!: boolean;
