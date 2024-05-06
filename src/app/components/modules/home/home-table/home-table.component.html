@@ -1,6 +1,9 @@
 <ng-container *ngIf="!isMobileVisible; else mobileTable">
   <ng-container *ngIf="!isLoading; else loadingContent">
   <p-table [value]="transactions" styleClass="p-datatable-striped" [tableStyle]="{'min-width': '50rem'}">
+    <ng-template pTemplate="caption">
+      Ostatnie Transakcje
+    </ng-template>
     <ng-template pTemplate="header">
       <tr>
         <th>Wykonawca</th>
@@ -31,6 +34,9 @@
 <ng-template #mobileTable>
   <ng-container *ngIf="!isLoading; else loadingMobileContent">
   <p-table [value]="transactions" styleClass="p-datatable-striped">
+    <ng-template pTemplate="caption">
+      Ostatnie Transakcje
+    </ng-template>
     <ng-template pTemplate="header">
       <tr>
         <th>Wykonawca</th>
