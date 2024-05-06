@@ -18,6 +18,7 @@ export class CreditorsComponent implements OnInit {
   debts: DebtDTO[] = [];
   totalRecords: number = 0;
   rows: number = 5;
+  isLoading: boolean = true;
 
   constructor(
     private debtService: DebtService,
@@ -44,24 +45,28 @@ export class CreditorsComponent implements OnInit {
         this.debts = page.content;
         this.totalRecords = page.totalElements;
         this.rows = page.size;
+        this.isLoading = false;
+
       },
       error: error => {
         console.error('Error loading customers', error);
-        this.showIncorrectLogin()
+        this.showError('Błąd Servera', 'Nie udało się pobrać danych')
+        this.isLoading = false;
       }
     });
   }
 
   onPageChange(event: any) {
+    this.isLoading = true;
     this.loadDebts(event.page, event.rows);
   }
 
-  showIncorrectLogin() {
+  showError(title: string, content: string) {
     this.messageService.add({
       key: 'tr',
       severity: 'error',
-      summary: 'Błąd Servera',
-      detail: 'Nie udało się pobrać danych',
+      summary: title,
+      detail: content,
       life: 10000
 
     });
