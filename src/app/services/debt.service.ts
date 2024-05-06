@@ -20,6 +20,7 @@ export class DebtService {
   getDebtAmountSum(): Observable<number> {
     return this.http.get<number>(this.baseUrl + `/api/debt/summary/debt`)
   }
+
   getCreditorAmountSum(): Observable<number> {
     return this.http.get<number>(this.baseUrl + `/api/debt/summary/credit`)
   }

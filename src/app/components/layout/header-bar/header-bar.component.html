@@ -20,8 +20,9 @@
     </button>
     <p-avatar icon="pi pi-user" size="small" shape="circle" class="mr-2"></p-avatar>
     <div class="max-w-10rem md:max-w-16rem lg:max-w-23rem">
-      <p class="text-base mb-0 mt-1 text-gray-700 surface-overlay white-space-nowrap overflow-hidden text-overflow-ellipsis">{{ user.email }}</p>
-      <p class="text-sm mb-1 mt-0 text-gray-500">  {{ user.role === Role.ROLE_ADMIN ? 'Admin' : 'Użytkownik' }} </p>
+      <p
+        class="text-base mb-0 mt-1 text-gray-700 surface-overlay white-space-nowrap overflow-hidden text-overflow-ellipsis">{{ user.email }}</p>
+      <p class="text-sm mb-1 mt-0 text-gray-500"> {{ user.role === Role.ROLE_ADMIN ? 'Admin' : 'Użytkownik' }} </p>
     </div>
     <div class="pl-1">
       <button pButton pRipple type="button" icon="pi pi-angle-down"

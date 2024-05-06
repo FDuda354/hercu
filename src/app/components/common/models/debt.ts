@@ -1,7 +1,7 @@
 import { CustomerDTO } from './customer-dto';
 import { DebtStatus } from './debt-dto';
 
-export interface Debt{
+export interface Debt {
   id?: number,
   debtor?: CustomerDTO,
   amount?: number,

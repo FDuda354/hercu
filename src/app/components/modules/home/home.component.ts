@@ -1,8 +1,7 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Transaction } from '../../common/models/transaction';
 import { TransactionService } from '../../../services/transaction.service';
 import { Page } from '../../common/models/page';
-import { DebtDTO, DebtStatus } from '../../common/models/debt-dto';
 import { MessageService } from 'primeng/api';
 
 @Component({
