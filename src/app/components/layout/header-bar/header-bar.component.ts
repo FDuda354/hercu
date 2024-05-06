@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
-import { CustomerDTO } from '../../common/models/customer-dto';
+import { CustomerDTO, Role } from '../../common/models/customer-dto';
 import { JwtService } from '../../../services/auth/jwt.service';
 
 @Component({
@@ -48,4 +48,5 @@ export class HeaderBarComponent implements OnInit {
     }
   ];
 
+  protected readonly Role = Role;
 }
