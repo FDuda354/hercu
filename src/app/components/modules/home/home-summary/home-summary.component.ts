@@ -11,8 +11,9 @@ import { DebtService } from '../../../../services/debt.service';
 })
 export class HomeSummaryComponent implements OnInit {
     data: any;
-    debtSummary: number = 0;
-    creditSummary: number = 0;
+  isLoading: boolean = true;
+    debtSummary!: number;
+    creditSummary!: number;
 
     @ViewChild('chart') chart?: UIChart;
 
@@ -55,6 +56,7 @@ export class HomeSummaryComponent implements OnInit {
 
     updateChartData() {
         if (this.debtSummary !== undefined && this.creditSummary !== undefined) {
+          this.isLoading = false;
             this.data = {
                 labels: ['Długi', 'Wierzycielstwo'],
                 datasets: [

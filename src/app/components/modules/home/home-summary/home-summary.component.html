@@ -1,1 +1,7 @@
-<p-chart type="doughnut" [data]="data"></p-chart>
+<ng-container *ngIf="!isLoading; else loadingChart">
+  <p-chart type="doughnut" [data]="data"></p-chart>
+</ng-container>
+
+<ng-template #loadingChart>
+  <p-skeleton shape="circle" size="13rem"></p-skeleton>
+</ng-template>
