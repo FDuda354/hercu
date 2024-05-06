@@ -13,7 +13,7 @@ import { MessageService } from 'primeng/api';
 })
 export class HomeComponent implements OnInit {
   transactions: Transaction[] = [];
-  isMobileVisible = false;
+
 
   constructor(
     private transactionService: TransactionService,
@@ -21,13 +21,7 @@ export class HomeComponent implements OnInit {
   ) {
   }
 
-  @HostListener('window:resize', ['$event'])
-  onResize(event: Event) {
-    this.isMobileVisible = window.innerWidth <= 1050;
-  }
-
   ngOnInit(): void {
-    this.isMobileVisible = window.innerWidth <= 1050;
     this.loadTransaction()
   }
 
@@ -54,18 +48,4 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  getDebtStatus(status: DebtStatus): string {
-    switch (status) {
-      case DebtStatus.ACTIVE:
-        return 'AKTYWNY';
-      case DebtStatus.FINISHED:
-        return 'ZAKOŃCZONY';
-      case DebtStatus.CANCELLED:
-        return 'ANULUWANY';
-      case DebtStatus.ARCHIVED:
-        return 'ZARCHYWIZOWANY';
-      default:
-        return '';
-    }
-  }
 }

@@ -39,6 +39,7 @@ import { NgOptimizedImage } from '@angular/common';
 import { TransformDatePipe } from './pipes/transform-date.pipe';
 import { TableModule } from 'primeng/table';
 import { TransformDateWithHourPipe } from './pipes/transform-date-with-hour.pipe';
+import { HomeTableComponent } from './components/modules/home/home-table/home-table.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { TransformDateWithHourPipe } from './pipes/transform-date-with-hour.pipe
     DebtCardComponent,
     TransformDatePipe,
     TransformDateWithHourPipe,
+    HomeTableComponent,
   ],
   imports: [
     BrowserModule,
