@@ -14,6 +14,9 @@ import {Page} from "../../../common/models/page";
 export class HomeTableComponent implements OnInit {
   transactions: Transaction[] = [];
   isMobileVisible = false;
+  isLoading = true;
+  skeletonTransactions: any[] = [1,2,3,4,5];
+
 
   constructor(
     private transactionService: TransactionService,
@@ -33,16 +36,20 @@ export class HomeTableComponent implements OnInit {
   }
 
   private loadTransaction() {
+    this.isLoading = true;
     this.transactionService.getTransactionsByCustomerId(0, 5).subscribe({
       next: (page: Page<Transaction>) => {
         this.transactions = page.content;
+        this.isLoading = false;
       },
       error: error => {
-        console.error('Error loading customers', error);
-        this.showIncorrectLogin()
+        console.error('Error loading transactions', error);
+        this.isLoading = false;
+        this.showIncorrectLogin();
       }
     });
   }
+
 
   showIncorrectLogin() {
     this.messageService.add({
