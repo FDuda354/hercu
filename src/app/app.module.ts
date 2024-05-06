@@ -43,6 +43,7 @@ import { HomeTableComponent } from './components/modules/home/home-table/home-ta
 import { HomeSummaryComponent } from './components/modules/home/home-summary/home-summary.component';
 import { ChartModule } from 'primeng/chart';
 import { HomeDebtCountComponent } from './components/modules/home/home-debt-count/home-debt-count.component';
+import { ChipModule } from 'primeng/chip';
 
 @NgModule({
   declarations: [
@@ -91,6 +92,7 @@ import { HomeDebtCountComponent } from './components/modules/home/home-debt-coun
     NgOptimizedImage,
     TableModule,
     ChartModule,
+    ChipModule,
   ],
   providers: [
     UserAuthGuard,

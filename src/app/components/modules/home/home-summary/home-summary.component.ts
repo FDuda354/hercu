@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { HomeSummaryService } from '../../../../services/home-summary.service';
 import { MessageService } from 'primeng/api';
 import { UIChart } from 'primeng/chart';
+import { DebtService } from '../../../../services/debt.service';
 
 @Component({
   selector: 'app-home-summary',
@@ -17,7 +17,7 @@ export class HomeSummaryComponent implements OnInit {
   @ViewChild('chart') chart?: UIChart;
 
   constructor(
-    private homeSummaryService: HomeSummaryService,
+    private debtService: DebtService,
     private messageService: MessageService,
   ) {}
 
@@ -27,7 +27,7 @@ export class HomeSummaryComponent implements OnInit {
   }
 
   loadDebtSummary() {
-    this.homeSummaryService.getDebtAmountSum().subscribe({
+    this.debtService.getDebtAmountSum().subscribe({
       next: (debtSummary: number) => {
         this.debtSummary = debtSummary;
         this.updateChartData();
@@ -40,7 +40,7 @@ export class HomeSummaryComponent implements OnInit {
   }
 
   loadCreditSummary() {
-    this.homeSummaryService.getCreditorAmountSum().subscribe({
+    this.debtService.getCreditorAmountSum().subscribe({
       next: (creditSummary: number) => {
         this.creditSummary = creditSummary;
         this.updateChartData();

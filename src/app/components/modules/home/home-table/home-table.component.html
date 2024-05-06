@@ -11,8 +11,7 @@
     </ng-template>
     <ng-template pTemplate="body" let-transaction>
       <tr class="text-black-alpha-90 font-semibold">
-        <td>{{transaction.debt.debtor.firstName}} {{transaction.debt.debtor.surname}}</td>
-        <td>{{transaction.debt.debtor.firstName}} {{transaction.debt.debtor.surname}}</td>
+        <td><p-chip label="{{transaction.debt.debtor.firstName}} {{transaction.debt.debtor.surname}}" icon="pi pi-user"></p-chip></td>
         <td>{{transaction.amount}} PLN</td>
         <td>{{transaction.paymentDate | transformDateWithHour }}</td>
         <td>{{transaction.debt.description}}</td>
@@ -33,7 +32,7 @@
     </ng-template>
     <ng-template pTemplate="body" let-transaction>
       <tr class="text-black-alpha-90 font-semibold">
-        <td>{{transaction.debt.debtor.firstName}} {{transaction.debt.debtor.surname}}</td>
+        <td><p-chip label="{{transaction.debt.debtor.firstName}} {{transaction.debt.debtor.surname}}" icon="pi pi-user"></p-chip></td>
         <td>{{transaction.amount}} PLN</td>
         <td><span [class]="'status-' + (transaction.debt.status ? transaction.debt.status.toLowerCase() : '')">{{getDebtStatus(transaction.debt.status)}}</span></td>
       </tr>
