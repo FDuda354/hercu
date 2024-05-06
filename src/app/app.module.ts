@@ -21,7 +21,7 @@ import { CreditorsComponent } from './components/modules/creditors/creditors.com
 import { TransactionsComponent } from './components/modules/transactions/transactions.component';
 import { SettingsComponent } from './components/modules/settings/settings.component';
 import { RouterModule } from '@angular/router';
-import { MenagePersonComponent } from './components/common/components/menage-person/menage-person.component';
+import { MenageDebtComponent } from './components/common/components/menage-debt/menage-debt.component';
 import { CheckboxModule } from 'primeng/checkbox';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { CalendarModule } from 'primeng/calendar';
@@ -33,7 +33,7 @@ import { ToastModule } from 'primeng/toast';
 import { UserAuthGuard } from './components/common/guard/user-auth-guard';
 import { PaginatorModule } from 'primeng/paginator';
 import { HttpInterceptorService } from './services/auth/http-interceptor.service';
-import { CustomerCardComponent } from './components/common/components/customer-card/customer-card.component';
+import { DebtCardComponent } from './components/common/components/debt-card/debt-card.component';
 import { CardModule } from 'primeng/card';
 import { NgOptimizedImage } from '@angular/common';
 import { TransformDatePipe } from './pipes/transform-date.pipe';
@@ -50,10 +50,10 @@ import { TransformDatePipe } from './pipes/transform-date.pipe';
     CreditorsComponent,
     TransactionsComponent,
     SettingsComponent,
-    MenagePersonComponent,
+    MenageDebtComponent,
     LoginComponent,
     LoginPageComponent,
-    CustomerCardComponent,
+    DebtCardComponent,
     TransformDatePipe,
   ],
   imports: [

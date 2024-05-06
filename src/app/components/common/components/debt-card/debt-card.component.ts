@@ -2,11 +2,11 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { DebtDTO } from '../../models/debt-dto';
 
 @Component({
-  selector: 'app-customer-card',
-  templateUrl: './customer-card.component.html',
-  styleUrls: ['./customer-card.component.scss']
+  selector: 'app-debt-card',
+  templateUrl: './debt-card.component.html',
+  styleUrls: ['./debt-card.component.scss']
 })
-export class CustomerCardComponent {
+export class DebtCardComponent {
   @Input() type!: string;
   @Input() debt: DebtDTO = {};
   @Input() customerIndex = 0;

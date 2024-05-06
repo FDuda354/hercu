@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-menage-person',
-  templateUrl: './menage-person.component.html',
-  styleUrls: ['./menage-person.component.scss']
+  selector: 'app-menage-debt',
+  templateUrl: './menage-debt.component.html',
+  styleUrls: ['./menage-debt.component.scss']
 })
-export class MenagePersonComponent implements OnInit {
+export class MenageDebtComponent implements OnInit {
   email!: string;
   withEndDate: boolean = false;
   amount: number = 0;
