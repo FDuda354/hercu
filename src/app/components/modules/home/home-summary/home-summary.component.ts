@@ -35,6 +35,7 @@ export class HomeSummaryComponent implements OnInit {
                 this.updateChartData();
             },
             error: error => {
+              this.isLoading = false;
                 console.error('Error loading debt data', error);
                 this.showError('Błąd Servera', 'Nie udało się pobrać sumy długów');
             }
@@ -48,6 +49,7 @@ export class HomeSummaryComponent implements OnInit {
                 this.updateChartData();
             },
             error: error => {
+              this.isLoading = false;
                 console.error('Error loading credit data', error);
                 this.showError('Błąd Servera', 'Nie udało się pobrać sumy wierzycielstwa');
             }

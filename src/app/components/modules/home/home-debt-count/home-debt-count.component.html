@@ -1,8 +1,14 @@
-<div
-  class="flex flex-column text-gray-800 align-items-start justify-content-between shadow-5 m-3 surface-card text-center p-3 border-round-sm font-semibold"
-  style="min-width: 300px; min-height: 300px;">
-  <div class="text-6xl">Długi:</div>
-  <div class="text-6xl">{{ debtSummary }}</div>
-  <div class="text-4xl">Wierzytelności:</div>
-  <div class="text-6xl">{{ creditSummary }}</div>
-</div>
+<ng-container *ngIf="!isLoading; else loadingChart">
+  <div
+    class="flex flex-column text-gray-800 align-items-start justify-content-between shadow-5 m-3 surface-card text-center p-3 border-round-sm font-semibold"
+    style="min-width: 300px; min-height: 300px;">
+    <div class="text-6xl">Długi:</div>
+    <div class="text-6xl">{{ debtSummary }}</div>
+    <div class="text-4xl">Wierzytelności:</div>
+    <div class="text-6xl">{{ creditSummary }}</div>
+  </div>
+</ng-container>
+
+<ng-template #loadingChart>
+  <p-skeleton size="15rem"></p-skeleton>
+</ng-template>

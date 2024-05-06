@@ -11,6 +11,7 @@ import { MessageService } from 'primeng/api';
 export class HomeDebtCountComponent implements OnInit {
     debtSummary: number = 0;
     creditSummary: number = 0;
+  isLoading: boolean = true;
 
     constructor(
         private debtService: DebtService,
@@ -27,10 +28,12 @@ export class HomeDebtCountComponent implements OnInit {
         this.debtService.getDebtsCount().subscribe({
             next: (debtSummary: number) => {
                 this.debtSummary = debtSummary;
+                this.isLoading = false;
             },
             error: error => {
                 console.error('Error loading debt data', error);
                 this.showError('Błąd Servera', 'Nie udało się pobrać luczby długów');
+              this.isLoading = false;
             }
         });
     }
@@ -39,10 +42,12 @@ export class HomeDebtCountComponent implements OnInit {
         this.debtService.getCreditCount().subscribe({
             next: (creditSummary: number) => {
                 this.creditSummary = creditSummary;
+              this.isLoading = false;
             },
             error: error => {
                 console.error('Error loading credit data', error);
                 this.showError('Błąd Servera', 'Nie udało się pobrać liczby wierzycielstw');
+              this.isLoading = false;
             }
         });
     }
