@@ -37,6 +37,8 @@ import { DebtCardComponent } from './components/common/components/debt-card/debt
 import { CardModule } from 'primeng/card';
 import { NgOptimizedImage } from '@angular/common';
 import { TransformDatePipe } from './pipes/transform-date.pipe';
+import { TableModule } from 'primeng/table';
+import { TransformDateWithHourPipe } from './pipes/transform-date-with-hour.pipe';
 
 @NgModule({
   declarations: [
@@ -55,6 +57,7 @@ import { TransformDatePipe } from './pipes/transform-date.pipe';
     LoginPageComponent,
     DebtCardComponent,
     TransformDatePipe,
+    TransformDateWithHourPipe,
   ],
   imports: [
     BrowserModule,
@@ -79,6 +82,7 @@ import { TransformDatePipe } from './pipes/transform-date.pipe';
     PaginatorModule,
     CardModule,
     NgOptimizedImage,
+    TableModule,
   ],
   providers: [
     UserAuthGuard,

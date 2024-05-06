@@ -17,7 +17,5 @@ export class CustomerService {
   ) {
   }
 
-  getDebtors(page: number, size: number): Observable<Page<CustomerDTO>> {
-    return this.http.get<Page<CustomerDTO>>(this.baseUrl + `/api/customers?page=${page}&size=${size}`)
-  }
+
 }
