@@ -1,11 +1,11 @@
-<div class="flex flex-column">
+<div class="flex flex-column min-h-full">
   <div class="flex flex-row justify-content-evenly flex-wrap ">
     <div class="flex align-items-center justify-content-center bg-primary font-bold m-2 border-round" style="min-width: 250px; min-height: 100px">ilosc dlogow</div>
     <div class="flex align-items-center justify-content-center bg-primary font-bold m-2 border-round" style="min-width: 250px; min-height: 100px">saldo</div>
     <div class="flex align-items-center justify-content-center bg-primary font-bold m-2 border-round" style="min-width: 250px; min-height: 100px">powiadomienia</div>
   </div>
 
-  <div class="flex align-content-end flex-column p-2 mt-4 min-h-screen">
+  <div class="flex flex-column p-2 mt-auto">
     <ng-container *ngIf="!isMobileVisible; else simpleTable">
       <p-table [value]="transactions" styleClass="p-datatable-striped" [tableStyle]="{'min-width': '50rem'}">
         <ng-template pTemplate="header">
