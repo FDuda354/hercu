@@ -16,12 +16,12 @@
     <h2 style="color: #ff6d6d">{{ debt.amount }} PLN</h2>
     <!--    #77DD77-->
   </ng-template>
-  <div style="margin-top: -50px">
+  <div class="surface-overlay white-space-nowrap overflow-hidden " style="margin-top: -50px">
     <div>
       do {{ debt.repaymentDate | transformDate }}
     </div>
     <h2>{{ debt.customer?.firstName }} {{ debt.customer?.surname }}</h2>
-    <p class="text-gray-600 font-light"
+    <p class="text-gray-600 font-light text-overflow-ellipsis"
        style="font-size: 15px; margin-top: -15px; margin-bottom: 25px">{{ debt.customer?.email }}</p>
     <button
       pButton
