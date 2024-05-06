@@ -65,7 +65,7 @@ export class HomeSummaryComponent implements OnInit {
                     {
                         data: [this.debtSummary, this.creditSummary],
                         backgroundColor: ['#ff6d6d', '#77DD77'],
-                        hoverBackgroundColor: ['#ff6d6d', '#77DD77']
+                        hoverBackgroundColor: ['#ff6d0d', '#77DD07']
                     }
                 ]
             };
