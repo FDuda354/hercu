@@ -23,7 +23,7 @@ export class DebtorsComponent implements OnInit {
   constructor(
     private debtService: DebtService,
     private messageService: MessageService,
-    private primengConfig: PrimeNGConfig,
+    private primengConfig: PrimeNGConfig, //TODO do usuniecia
     private jwtService: JwtService,
   ) {
   }
@@ -48,7 +48,7 @@ export class DebtorsComponent implements OnInit {
       },
       error: error => {
         console.error('Error loading customers', error);
-        this.showIncorrectLogin()
+        this.showError() //TODO do przeobienia zeby przyjmowało
       }
     });
   }
@@ -57,7 +57,7 @@ export class DebtorsComponent implements OnInit {
     this.loadDebts(event.page, event.rows);
   }
 
-  showIncorrectLogin() {
+  showError() {
     this.messageService.add({
       key: 'tr',
       severity: 'error',

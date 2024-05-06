@@ -40,6 +40,9 @@ import { TransformDatePipe } from './pipes/transform-date.pipe';
 import { TableModule } from 'primeng/table';
 import { TransformDateWithHourPipe } from './pipes/transform-date-with-hour.pipe';
 import { HomeTableComponent } from './components/modules/home/home-table/home-table.component';
+import { HomeSummaryComponent } from './components/modules/home/home-summary/home-summary.component';
+import { ChartModule } from 'primeng/chart';
+import { HomeDebtCountComponent } from './components/modules/home/home-debt-count/home-debt-count.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +63,8 @@ import { HomeTableComponent } from './components/modules/home/home-table/home-ta
     TransformDatePipe,
     TransformDateWithHourPipe,
     HomeTableComponent,
+    HomeSummaryComponent,
+    HomeDebtCountComponent,
   ],
   imports: [
     BrowserModule,
@@ -85,6 +90,7 @@ import { HomeTableComponent } from './components/modules/home/home-table/home-ta
     CardModule,
     NgOptimizedImage,
     TableModule,
+    ChartModule,
   ],
   providers: [
     UserAuthGuard,

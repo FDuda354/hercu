@@ -12,6 +12,7 @@
     <ng-template pTemplate="body" let-transaction>
       <tr class="text-black-alpha-90 font-semibold">
         <td>{{transaction.debt.debtor.firstName}} {{transaction.debt.debtor.surname}}</td>
+        <td>{{transaction.debt.debtor.firstName}} {{transaction.debt.debtor.surname}}</td>
         <td>{{transaction.amount}} PLN</td>
         <td>{{transaction.paymentDate | transformDateWithHour }}</td>
         <td>{{transaction.debt.description}}</td>
