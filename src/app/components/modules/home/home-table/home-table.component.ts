@@ -45,18 +45,18 @@ export class HomeTableComponent implements OnInit {
       error: error => {
         console.error('Error loading transactions', error);
         this.isLoading = false;
-        this.showIncorrectLogin();
+        this.showError('Błąd Servera', 'Nie udało się pobrać ostatnich transakcji');
       }
     });
   }
 
 
-  showIncorrectLogin() {
+  showError(title: string, content: string){
     this.messageService.add({
       key: 'tr',
       severity: 'error',
-      summary: 'Błąd Servera',
-      detail: 'Nie udało się pobrać ostatnich transakcji',
+      summary: title,
+      detail: content,
       life: 10000
 
     });

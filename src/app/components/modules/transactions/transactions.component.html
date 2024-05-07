@@ -1,26 +1,38 @@
 <!--<div class="card">-->
-<!--  <h5>Session Storage</h5>-->
 <!--  <p-table #dt1 [value]="transactions" selectionMode="single" dataKey="id" [tableStyle]="{'min-width': '50rem'}"-->
-<!--           [rows]="10" [paginator]="true" stateStorage="session" stateKey="statedemo-session">-->
+
+<!--           stateStorage="session" stateKey="statedemo-session">-->
 <!--    <ng-template pTemplate="header">-->
 <!--      <tr>-->
-<!--        <th pSortableColumn="name" style="width:25%">Name <p-sortIcon field="name"></p-sortIcon></th>-->
-<!--        <th pSortableColumn="country.name" style="width:25%">Country <p-sortIcon field="country.name"></p-sortIcon></th>-->
-<!--        <th pSortableColumn="representative.name" style="width:25%">Representative <p-sortIcon field="representative.name"></p-sortIcon></th>-->
-<!--        <th pSortableColumn="status" style="width:25%">Status <p-sortIcon field="status"></p-sortIcon></th>-->
+<!--        <th pSortableColumn="debt.debtor.firstName" style="width:25%">Zleceniodawca <p-sortIcon field="debt.debtor.firstName"></p-sortIcon></th>-->
+<!--        <th pSortableColumn="amount" style="width:25%">kwota <p-sortIcon field="amount"></p-sortIcon></th>-->
+<!--        <th pSortableColumn="description" style="width:25%">Tytuł transakcji<p-sortIcon field="description"></p-sortIcon></th>-->
+<!--        <th pSortableColumn="balanceAfterTransaction" style="width:25%">Saldo po transakcji<p-sortIcon field="balanceAfterTransaction"></p-sortIcon></th>-->
+<!--        <th pSortableColumn="debt.description'" style="width:25%">dług <p-sortIcon field="debt.description'"></p-sortIcon></th>-->
+<!--        <th pSortableColumn="debt.status'" style="width:25%">status długu<p-sortIcon field="debt.status'"></p-sortIcon></th>-->
+<!--        <th pSortableColumn="paymentDate" style="width:25%">data wpłaty<p-sortIcon field="paymentDate"></p-sortIcon></th>-->
 <!--      </tr>-->
 <!--      <tr>-->
 <!--        <th>-->
-<!--          <input pInputText type="text" (input)="dt1.filter($event.target.value, 'name', 'contains')" [value]="dt1.filters['name']?.value" placeholder="Search by Name" class="w-full">-->
+<!--          <input pInputText type="text" (input)="dt1.filter($event.target, 'debt.debtor.firstName', 'contains')" [value]="dt1.filters['debt.debtor.firstName']" placeholder="Search by Name" class="w-full">-->
 <!--        </th>-->
 <!--        <th>-->
-<!--          <input pInputText type="text" (input)="dt1.filter($event.target.value, 'country.name', 'contains')" [value]="dt1.filters['country.name']?.value" placeholder="Search by Country" class="w-full">-->
+<!--          <input pInputText type="text" (input)="dt1.filter($event.target, 'amount', 'contains')" [value]="dt1.filters['amount']" placeholder="Kwota" class="w-full">-->
 <!--        </th>-->
 <!--        <th>-->
-<!--          <input pInputText type="text" (input)="dt1.filter($event.target.value, 'representative.name', 'contains')" [value]="dt1.filters['representative.name']?.value" placeholder="Search by Representative" class="w-full">-->
+<!--          <input pInputText type="text" (input)="dt1.filter($event.target, 'description', 'contains')" [value]="dt1.filters['description']" placeholder="Search by description" class="w-full">-->
 <!--        </th>-->
 <!--        <th>-->
-<!--          <input pInputText type="text" (input)="dt1.filter($event.target.value, 'status', 'contains')" [value]="dt1.filters['status']?.value" placeholder="Search by Status" class="w-full">-->
+<!--          <input pInputText type="text" (input)="dt1.filter($event.target, 'balanceAfterTransaction', 'contains')" [value]="dt1.filters['balanceAfterTransaction']" placeholder="Search by Status" class="w-full">-->
+<!--        </th>-->
+<!--        <th>-->
+<!--          <input pInputText type="text" (input)="dt1.filter($event.target, 'debt.description', 'contains')" [value]="dt1.filters['debt.description']" placeholder="Search by Status" class="w-full">-->
+<!--        </th>-->
+<!--        <th>-->
+<!--          <input pInputText type="text" (input)="dt1.filter($event.target, 'debt.status', 'contains')" [value]="dt1.filters['debt.status']" placeholder="Search by Status" class="w-full">-->
+<!--        </th>-->
+<!--        <th>-->
+<!--          <input pInputText type="text" (input)="dt1.filter($event.target, 'paymentDate', 'contains')" [value]="dt1.filters['paymentDate']" placeholder="Search by Status" class="w-full">-->
 <!--        </th>-->
 <!--      </tr>-->
 <!--    </ng-template>-->
@@ -28,13 +40,33 @@
 <!--      <tr >-->
 <!--        <td>-->
 <!--          <span class="p-column-title">Wykonawca</span>-->
-<!--          {{transaction.debt.debtor}}-->
+<!--          {{transaction.debt.debtor.firstName}} {{transaction.debt.debtor.surname}}-->
 <!--        </td>-->
 <!--        <td>-->
 <!--          <span class="p-column-title">Kwota</span>-->
 <!--          <span class="image-text">{{transaction.amount}} PLN</span>-->
 <!--        </td>-->
-<!--        -->
+<!--        <td>-->
+<!--          <span class="p-column-title">Tytuł transakcji</span>-->
+<!--          <span class="image-text">{{transaction.description}}</span>-->
+<!--        </td>-->
+<!--        <td>-->
+<!--          <span class="p-column-title">Saldo długu po transakcji</span>-->
+<!--          <span class="image-text">{{transaction.balanceAfterTransaction}} na razie null</span>-->
+<!--        </td>-->
+<!--        <td>-->
+<!--          <span class="p-column-title">Dług</span>-->
+<!--          <span class="image-text">{{transaction.debt.description}}</span>-->
+<!--        </td>-->
+<!--        <td>-->
+<!--          <span class="p-column-title">Status długu</span>-->
+<!--          <span class="image-text">{{getDebtStatus(transaction.debt.status)}}</span>-->
+<!--        </td>-->
+<!--        <td>-->
+<!--          <span class="p-column-title">Data Transakcji</span>-->
+<!--          <span class="image-text">{{transaction.paymentDate | transformDateWithHour}}</span>-->
+<!--        </td>-->
+
 <!--      </tr>-->
 <!--    </ng-template>-->
 <!--    <ng-template pTemplate="emptymessage">-->
@@ -43,4 +75,12 @@
 <!--      </tr>-->
 <!--    </ng-template>-->
 <!--  </p-table>-->
+<!--      <div *ngIf="totalRecords >= 10" class="flex flex-row justify-content-center align-content-end">-->
+<!--  <p-paginator-->
+<!--    [rows]="rows"-->
+<!--    [totalRecords]="totalRecords"-->
+<!--    (onPageChange)="onPageChange($event)"-->
+<!--    [rowsPerPageOptions]="[10, 20, 30]"-->
+<!--  ></p-paginator>-->
+<!--      </div>-->
 <!--</div>-->
