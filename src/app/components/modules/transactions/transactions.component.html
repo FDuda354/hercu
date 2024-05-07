@@ -17,8 +17,8 @@
 
       </mat-expansion-panel-header>
 
-      <div class="flex flex-grow-1 flex-row">
-        <mat-card class="flex flex-grow-1">
+      <div class="flex flex-grow-1 flex-row justify-content-evenly flex-wrap">
+        <mat-card class="flex flex-grow-1 m-1">
           <mat-card-header>
             <mat-card-subtitle>Saldo po Transakcji</mat-card-subtitle>
             <mat-card-title>
@@ -27,7 +27,7 @@
           </mat-card-header>
         </mat-card>
 
-        <mat-card class="flex flex-grow-1">
+        <mat-card class="flex flex-grow-1 m-1">
           <mat-card-header>
             <mat-card-subtitle>Dług</mat-card-subtitle>
             <mat-card-title>
@@ -36,7 +36,7 @@
           </mat-card-header>
         </mat-card>
 
-        <mat-card class="flex flex-grow-1">
+        <mat-card class="flex flex-grow-1 m-1">
 
             <div [class]="'status-' + (transaction.debt?.status ? transaction.debt?.status?.toLowerCase() : '')">
              Dług {{getDebtStatus(transaction.debt?.status)}}
@@ -44,7 +44,7 @@
 
         </mat-card>
 
-        <mat-card class="flex flex-grow-1">
+        <mat-card class="flex flex-grow-1 m-1">
           <mat-card-header>
             <mat-card-subtitle>Data transakcji</mat-card-subtitle>
             <mat-card-title>
@@ -53,12 +53,10 @@
           </mat-card-header>
         </mat-card>
 
-        <div class="flex flex-column">
-          <button mat-button>ZMIEŃ</button>
-          <button mat-button>USUŃ</button>
+        <div class="flex flex-row">
+          <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success m-1" (click)="editTransaction(transaction)"></button>
+          <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning m-1" (click)="deleteTransaction(transaction)"></button>
         </div>
-
-
       </div>
 
     </mat-expansion-panel>

@@ -92,4 +92,12 @@ export class TransactionsComponent implements OnInit{
    const user: CustomerDTO = JSON.parse(<string>this.jwtService.getCustomer());
    return id == user.id;
   }
+
+  editTransaction(transaction: Transaction) {
+
+  }
+
+  deleteTransaction(transaction: Transaction) {
+
+  }
 }
