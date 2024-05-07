@@ -57,7 +57,7 @@ export class HomeSummaryComponent implements OnInit {
   }
 
   updateChartData() {
-    if (this.debtSummary !== undefined && this.creditSummary !== undefined) {
+    if (this.debtSummary !== null && this.creditSummary !== null) {
       this.isLoading = false;
       this.data = {
         labels: ['Długi', 'Wierzycielstwo'],
@@ -65,7 +65,22 @@ export class HomeSummaryComponent implements OnInit {
           {
             data: [this.debtSummary, this.creditSummary],
             backgroundColor: ['#ff6d6d', '#77DD77'],
-            hoverBackgroundColor: ['#ff6d0d', '#77DD07']
+            hoverBackgroundColor: ['#ff6d5d', '#77DD07']
+          }
+        ]
+      };
+      if (this.chart) {
+        this.chart.reinit();
+      }
+    }else {
+
+      this.isLoading = false;
+      this.data = {
+        labels: ['Brak Danych'],
+        datasets: [
+          {
+            data: [1],
+            backgroundColor: ['grey']
           }
         ]
       };

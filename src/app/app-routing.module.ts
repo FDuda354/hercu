@@ -8,6 +8,7 @@ import { TransactionsComponent } from './components/modules/transactions/transac
 import { SettingsComponent } from './components/modules/settings/settings.component';
 import { LoginComponent } from './components/modules/login/login.component';
 import { UserAuthGuard } from './components/common/guard/user-auth-guard';
+import { RegistrationPageComponent } from './components/modules/registration-page/registration-page.component';
 
 
 const routes: Routes = [
@@ -23,6 +24,9 @@ const routes: Routes = [
   },
   {
     path: 'login', component: LoginComponent,
+  },
+  {
+    path: 'registration', component: RegistrationPageComponent,
   },
 ];
 

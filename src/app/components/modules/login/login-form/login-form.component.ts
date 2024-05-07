@@ -6,12 +6,12 @@ import { Router } from '@angular/router';
 import { JwtService } from '../../../../services/auth/jwt.service';
 
 @Component({
-  selector: 'app-login-page',
-  templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.scss'],
+  selector: 'app-login-form',
+  templateUrl: './login-form.component.html',
+  styleUrls: ['./login-form.component.scss'],
   providers: [MessageService]
 })
-export class LoginPageComponent implements OnInit {
+export class LoginFormComponent implements OnInit {
 
   authRequest: AuthRequest = {};
 
@@ -37,30 +37,23 @@ export class LoginPageComponent implements OnInit {
       },
       error: (err) => {
         if (err.error.status === 403) {
-          this.showIncorrectLogin()
+          console.log(err);
+          this.showError('Niepoprawne logowanie','Nieprawidłowy login lub hasło');
         } else {
-          this.showServerError()
+          console.log(err);
+          this.showError('Błąd','Wystąpił błąd serwera');
         }
 
       }
     })
   }
 
-  showIncorrectLogin() {
+  showError(title: string, content: string) {
     this.messageService.add({
       key: 'bc',
       severity: 'error',
-      summary: 'Niepoprawne logowanie',
-      detail: 'Nieprawidłowy login lub hasło'
-    });
-  }
-
-  showServerError() {
-    this.messageService.add({
-      key: 'bc',
-      severity: 'error',
-      summary: 'Błąd',
-      detail: 'Wystąpił błąd strony'
+      summary: title,
+      detail: content
     });
   }
 }

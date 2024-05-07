@@ -1,0 +1,110 @@
+<div class="flex flex-column overflow-hidden flex-grow-1 sm:ml-3 sm:mr-3 px-5">
+  <form [formGroup]="registerForm" (ngSubmit)="register()" class="flex flex-column">
+    <!-- Imię -->
+    <div class="p-inputgroup mt-5 flex-column">
+
+      <div class="flex flex-row">
+      <span class="p-float-label">
+        <input id="firstName" formControlName="firstName" type="text" pInputText>
+        <label for="firstName">Imię</label>
+      </span>
+      </div>
+
+      <div class="flex flex-row mt-1 justify-content-center">
+        <p-message *ngIf="registerForm.get('firstName')?.errors && registerForm.get('firstName')?.dirty"
+                   severity="error" text="Imię jest wymagane. (max 20 znaków)"></p-message>
+      </div>
+
+    </div>
+
+    <!-- Nazwisko -->
+    <div class="p-inputgroup mt-5 flex-column">
+
+      <div class="flex flex-row">
+      <span class="p-float-label">
+        <input id="surname" formControlName="surname" type="text" pInputText>
+        <label for="surname">Nazwisko</label>
+      </span>
+      </div>
+
+      <div class="flex flex-row mt-1 justify-content-center">
+        <p-message *ngIf="registerForm.get('surname')?.errors && registerForm.get('surname')?.dirty"
+                   severity="error" text="Nazwisko jest wymagane. (max 20 znaków)"></p-message>
+      </div>
+
+    </div>
+
+    <!-- Email -->
+    <div class="p-inputgroup mt-5 flex-column">
+      <div class="flex flex-row">
+        <span class="p-float-label">
+        <input id="email" formControlName="email" type="email" pInputText>
+        <label for="email">Email</label>
+      </span>
+      </div>
+
+      <div class="flex flex-row mt-1 justify-content-center">
+        <p-message *ngIf="registerForm.get('email')?.errors && registerForm.get('email')?.dirty"
+                   severity="error" text="Wymagany prawidłowy adres email. (max 20 znaków)"></p-message>
+      </div>
+    </div>
+
+    <!-- Wiek -->
+    <div class="p-inputgroup mt-5 flex-column">
+      <div class="flex flex-row">
+        <span class="p-float-label">
+        <input id="age" formControlName="age" type="number" pInputText>
+        <label for="age">Wiek</label>
+      </span>
+      </div>
+
+      <div class="flex flex-row mt-1 justify-content-center">
+        <p-message *ngIf="registerForm.get('age')?.errors && registerForm.get('age')?.dirty"
+                   severity="error" text="Wymagany wiek"></p-message>
+      </div>
+    </div>
+
+    <!-- Hasło i potwierdzenie hasła -->
+    <div class="p-inputgroup mt-5 flex-column">
+
+      <div class="flex flex-row">
+      <span class="p-float-label">
+        <input id="password" formControlName="password" type="password" pInputText>
+        <label for="password">Hasło</label>
+      </span>
+      </div>
+
+      <div class="flex flex-row mt-1 justify-content-center">
+        <p-message *ngIf="registerForm.get('password')?.errors && registerForm.get('password')?.dirty"
+                   severity="error" text="Hasło od 4 do 20 znaków."></p-message>
+      </div>
+
+    </div>
+
+    <div class="p-inputgroup mt-5 flex-column">
+
+      <div class="flex flex-row">
+      <span class="p-float-label">
+        <input id="confirmPassword" formControlName="confirmPassword" type="password" pInputText>
+        <label for="confirmPassword">Potwierdź hasło</label>
+      </span>
+      </div>
+
+      <div class="flex flex-row mt-1 justify-content-center">
+        <p-message *ngIf="registerForm.get('confirmPassword')?.errors && registerForm.get('confirmPassword')?.dirty"
+                   severity="error" text="Hasła muszą być takie same."></p-message>
+      </div>
+    </div>
+
+    <!-- Przyciski -->
+    <div class="flex flex-column">
+      <button pButton pRipple type="submit" label="Zarejestruj"
+              class="p-button-success flex-grow-1 p-button-text"></button>
+      <button pButton type="button" label="Masz już konto? Zaloguj się"
+              routerLink="/login"
+              class="w-full p-button-link text-center pl-0">
+      </button>
+    </div>
+  </form>
+  <p-toast position="bottom-center" key="bc"></p-toast>
+</div>

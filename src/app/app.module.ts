@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { SidebarModule } from 'primeng/sidebar';
 import { ButtonModule } from 'primeng/button';
@@ -26,7 +26,7 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { CalendarModule } from 'primeng/calendar';
 import { LoginComponent } from './components/modules/login/login.component';
-import { LoginPageComponent } from './components/modules/login/login-page/login-page.component';
+import { LoginFormComponent } from './components/modules/login/login-form/login-form.component';
 import { PasswordModule } from 'primeng/password';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ToastModule } from 'primeng/toast';
@@ -45,6 +45,9 @@ import { ChartModule } from 'primeng/chart';
 import { HomeDebtCountComponent } from './components/modules/home/home-debt-count/home-debt-count.component';
 import { ChipModule } from 'primeng/chip';
 import { SkeletonModule } from 'primeng/skeleton';
+import { RegistrationPageComponent } from './components/modules/registration-page/registration-page.component';
+import { MessageModule } from 'primeng/message';
+import { RegistrationFormComponent } from './components/modules/registration-page/registration-form/registration-form.component';
 
 @NgModule({
   declarations: [
@@ -60,13 +63,15 @@ import { SkeletonModule } from 'primeng/skeleton';
     SettingsComponent,
     MenageDebtComponent,
     LoginComponent,
-    LoginPageComponent,
+    LoginFormComponent,
     DebtCardComponent,
     TransformDatePipe,
     TransformDateWithHourPipe,
     HomeTableComponent,
     HomeSummaryComponent,
     HomeDebtCountComponent,
+    RegistrationPageComponent,
+    RegistrationFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -95,6 +100,8 @@ import { SkeletonModule } from 'primeng/skeleton';
     ChartModule,
     ChipModule,
     SkeletonModule,
+    MessageModule,
+    ReactiveFormsModule,
   ],
   providers: [
     UserAuthGuard,
