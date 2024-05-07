@@ -19,7 +19,7 @@ export class CustomerService {
   }
 
 
-  register(req: CustomerRegistrationRequest) : Observable<void> {
+  register(req: CustomerRegistrationRequest): Observable<void> {
     return this.http.post<void>(this.baseUrl + `/api/customers`, req);
   }
 }

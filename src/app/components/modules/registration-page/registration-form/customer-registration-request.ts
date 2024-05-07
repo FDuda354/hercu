@@ -1,6 +1,6 @@
 import { Gender } from '../../../common/models/customer-dto';
 
-export interface CustomerRegistrationRequest{
+export interface CustomerRegistrationRequest {
   firstName: string,
   surname: string,
   email: string,

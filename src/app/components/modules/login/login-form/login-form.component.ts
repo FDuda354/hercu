@@ -38,10 +38,10 @@ export class LoginFormComponent implements OnInit {
       error: (err) => {
         if (err.error.status === 403) {
           console.log(err);
-          this.showError('Niepoprawne logowanie','Nieprawidłowy login lub hasło');
+          this.showError('Niepoprawne logowanie', 'Nieprawidłowy login lub hasło');
         } else {
           console.log(err);
-          this.showError('Błąd','Wystąpił błąd serwera');
+          this.showError('Błąd', 'Wystąpił błąd serwera');
         }
 
       }

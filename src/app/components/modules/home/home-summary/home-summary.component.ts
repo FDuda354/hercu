@@ -72,7 +72,7 @@ export class HomeSummaryComponent implements OnInit {
       if (this.chart) {
         this.chart.reinit();
       }
-    }else {
+    } else {
 
       this.isLoading = false;
       this.data = {

@@ -57,7 +57,7 @@ export class RegistrationFormComponent implements OnInit {
               },
               error: (err) => {
                 console.log(err);
-                this.showError('Błąd','Wystąpił błąd zalogowania');
+                this.showError('Błąd', 'Wystąpił błąd zalogowania');
               }
             });
 
@@ -65,9 +65,9 @@ export class RegistrationFormComponent implements OnInit {
         error: err => {
           console.log(err);
           if (err.error.status === 409) {
-            this.showError('Błąd','Podany urzytkownik już istnieje');
-          }else {
-            this.showError('Błąd','Wystąpił błąd podczas rejestracji');
+            this.showError('Błąd', 'Podany urzytkownik już istnieje');
+          } else {
+            this.showError('Błąd', 'Wystąpił błąd podczas rejestracji');
 
           }
 
@@ -86,7 +86,7 @@ export class RegistrationFormComponent implements OnInit {
       }
 
       if (passwordControl.value !== confirmPasswordControl.value) {
-        confirmPasswordControl.setErrors({ mustMatch: true });
+        confirmPasswordControl.setErrors({mustMatch: true});
       } else {
         confirmPasswordControl.setErrors(null);
       }
