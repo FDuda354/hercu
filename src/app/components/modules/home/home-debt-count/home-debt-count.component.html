@@ -2,10 +2,12 @@
   <div
     class="flex flex-column text-gray-800 align-items-start justify-content-between shadow-5 m-3 surface-card text-center p-3 border-round-sm font-semibold"
     style="min-width: 300px; min-height: 300px;">
-    <div class="red-text text-6xl">Długi:</div>
-    <div class="red-text text-6xl">{{ debtSummary }}</div>
-    <div class="green-text  text-4xl">Wierzytelności:</div>
-    <div class="green-text text-6xl">{{ creditSummary }}</div>
+    <div class="red-text text-5xl">Długi: {{ debtCountSummary }}</div>
+    <div class="red-text text-4xl">{{ debtSummary }} PLN</div>
+    <div class="green-text  text-3xl">Wierzytelności: {{ creditCountSummary }}</div>
+    <div class="green-text text-4xl">{{ creditSummary }} PLN</div>
+    <div class=" text-3xl">Suma:</div>
+    <div class=" text-3xl">{{ balance }} PLN</div>
   </div>
 </ng-container>
 

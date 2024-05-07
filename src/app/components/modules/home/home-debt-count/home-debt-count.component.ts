@@ -12,6 +12,9 @@ export class HomeDebtCountComponent implements OnInit {
   debtSummary: number = 0;
   creditSummary: number = 0;
   isLoading: boolean = true;
+  debtCountSummary: number = 0;
+  creditCountSummary: number = 0;
+  balance: number = 0;
 
   constructor(
     private debtService: DebtService,
@@ -22,12 +25,42 @@ export class HomeDebtCountComponent implements OnInit {
   ngOnInit() {
     this.loadDebtCountSummary();
     this.loadCreditCountSummary();
+    this.loadDebtSummary();
+    this.loadCreditSummary();
+  }
+
+  loadDebtSummary() {
+    this.debtService.getDebtAmountSum().subscribe({
+      next: (debtSummary: number) => {
+        this.debtSummary = debtSummary;
+        this.balance -= this.debtSummary;
+      },
+      error: error => {
+        this.isLoading = false;
+        console.error('Error loading debt data', error);
+        this.showError('Błąd Servera', 'Nie udało się pobrać sumy długów');
+      }
+    });
+  }
+
+  loadCreditSummary() {
+    this.debtService.getCreditorAmountSum().subscribe({
+      next: (creditSummary: number) => {
+        this.creditSummary = creditSummary;
+        this.balance += this.creditSummary
+      },
+      error: error => {
+        this.isLoading = false;
+        console.error('Error loading credit data', error);
+        this.showError('Błąd Servera', 'Nie udało się pobrać sumy wierzycielstwa');
+      }
+    });
   }
 
   loadDebtCountSummary() {
     this.debtService.getDebtsCount().subscribe({
-      next: (debtSummary: number) => {
-        this.debtSummary = debtSummary;
+      next: (debtCountSummary: number) => {
+        this.debtCountSummary = debtCountSummary;
         this.isLoading = false;
       },
       error: error => {
@@ -40,8 +73,8 @@ export class HomeDebtCountComponent implements OnInit {
 
   loadCreditCountSummary() {
     this.debtService.getCreditCount().subscribe({
-      next: (creditSummary: number) => {
-        this.creditSummary = creditSummary;
+      next: (creditCountSummary: number) => {
+        this.creditCountSummary = creditCountSummary;
         this.isLoading = false;
       },
       error: error => {
