@@ -4,6 +4,8 @@ import {TransactionService} from "../../../services/transaction.service";
 import {MessageService} from "primeng/api";
 import {Page} from "../../common/models/page";
 import {DebtStatus} from "../../common/models/debt-dto";
+import { JwtService } from '../../../services/auth/jwt.service';
+import { CustomerDTO } from '../../common/models/customer-dto';
 
 @Component({
   selector: 'app-transactions',
@@ -23,6 +25,7 @@ export class TransactionsComponent implements OnInit{
   constructor(
     private transactionService: TransactionService,
     private messageService: MessageService,
+    private jwtService: JwtService,
   ) {
   }
 
@@ -33,7 +36,7 @@ export class TransactionsComponent implements OnInit{
 
   ngOnInit(): void {
     this.isMobileVisible = window.innerWidth <= 1050;
-    this.loadTransaction(0, 10)
+    this.loadTransaction(0, 15)
 
   }
 
@@ -65,7 +68,7 @@ export class TransactionsComponent implements OnInit{
     });
   }
 
-  getDebtStatus(status: DebtStatus): string {
+  getDebtStatus(status: DebtStatus | undefined): string {
     switch (status) {
       case DebtStatus.ACTIVE:
         return 'AKTYWNY';
@@ -83,5 +86,10 @@ export class TransactionsComponent implements OnInit{
   onPageChange(event: any) {
     this.isLoading = true;
     this.loadTransaction(event.page, event.rows);
+  }
+
+  isOwner(id: number | undefined) {
+   const user: CustomerDTO = JSON.parse(<string>this.jwtService.getCustomer());
+   return id == user.id;
   }
 }

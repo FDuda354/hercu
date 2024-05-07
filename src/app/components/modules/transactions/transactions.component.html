@@ -1,63 +1,75 @@
-<div class="card">
-  <p-table #dt1 [value]="transactions" selectionMode="single" dataKey="id" [tableStyle]="{'min-width': '50rem'}"
+<mat-accordion>
+  <div *ngFor="let transaction of transactions">
+    <mat-expansion-panel hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{transaction.debt?.debtor?.firstName}} {{transaction.debt?.debtor?.surname}}
+        </mat-panel-title>
+        <mat-panel-title *ngIf="!isOwner(transaction.debt?.debtor?.id)" style="color: #77DD07">
+          {{transaction.amount}} PLN
+        </mat-panel-title>
+        <mat-panel-title *ngIf="isOwner(transaction.debt?.debtor?.id)" style="color: #ff6d0d">
+          - {{transaction.amount}} PLN
+        </mat-panel-title>
+        <mat-panel-title>
+          {{transaction.description}}
+        </mat-panel-title>
 
-           stateStorage="session" stateKey="statedemo-session">
-    <ng-template pTemplate="header">
-      <tr>
-        <th pSortableColumn="debt.debtor.firstName" style="width:25%">Zleceniodawca <p-sortIcon field="debt.debtor.firstName"></p-sortIcon></th>
-        <th pSortableColumn="amount" style="width:25%">kwota <p-sortIcon field="amount"></p-sortIcon></th>
-        <th pSortableColumn="description" style="width:25%">Tytuł transakcji<p-sortIcon field="description"></p-sortIcon></th>
-        <th pSortableColumn="balanceAfterTransaction" style="width:25%">Saldo po transakcji<p-sortIcon field="balanceAfterTransaction"></p-sortIcon></th>
-        <th pSortableColumn="debt.description'" style="width:25%">dług <p-sortIcon field="debt.description'"></p-sortIcon></th>
-        <th pSortableColumn="debt.status'" style="width:25%">status długu<p-sortIcon field="debt.status'"></p-sortIcon></th>
-        <th pSortableColumn="paymentDate" style="width:25%">data wpłaty<p-sortIcon field="paymentDate"></p-sortIcon></th>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-transaction>
-      <tr >
-        <td>
-          <span class="p-column-title">Wykonawca</span>
-          {{transaction.debt.debtor.firstName}} {{transaction.debt.debtor.surname}}
-        </td>
-        <td>
-          <span class="p-column-title">Kwota</span>
-          <span class="image-text">{{transaction.amount}} PLN</span>
-        </td>
-        <td>
-          <span class="p-column-title">Tytuł transakcji</span>
-          <span class="image-text">{{transaction.description}}</span>
-        </td>
-        <td>
-          <span class="p-column-title">Saldo długu po transakcji</span>
-          <span class="image-text">{{transaction.balanceAfterTransaction}} na razie null</span>
-        </td>
-        <td>
-          <span class="p-column-title">Dług</span>
-          <span class="image-text">{{transaction.debt.description}}</span>
-        </td>
-        <td>
-          <span class="p-column-title">Status długu</span>
-          <span class="image-text">{{getDebtStatus(transaction.debt.status)}}</span>
-        </td>
-        <td>
-          <span class="p-column-title">Data Transakcji</span>
-          <span class="image-text">{{transaction.paymentDate | transformDateWithHour}}</span>
-        </td>
+      </mat-expansion-panel-header>
 
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="emptymessage">
-      <tr>
-        <td colspan="4">No transaction found.</td>
-      </tr>
-    </ng-template>
-  </p-table>
-      <div *ngIf="totalRecords >= 10" class="flex flex-row justify-content-center align-content-end">
-  <p-paginator
-    [rows]="rows"
-    [totalRecords]="totalRecords"
-    (onPageChange)="onPageChange($event)"
-    [rowsPerPageOptions]="[10, 20, 30]"
-  ></p-paginator>
+      <div class="flex flex-grow-1 flex-row">
+        <mat-card class="flex flex-grow-1">
+          <mat-card-header>
+            <mat-card-subtitle>Saldo po Transakcji</mat-card-subtitle>
+            <mat-card-title>
+              {{transaction.balanceAfterTransaction}} PLN
+            </mat-card-title>
+          </mat-card-header>
+        </mat-card>
+
+        <mat-card class="flex flex-grow-1">
+          <mat-card-header>
+            <mat-card-subtitle>Dług</mat-card-subtitle>
+            <mat-card-title>
+              {{transaction.debt?.description}}
+            </mat-card-title>
+          </mat-card-header>
+        </mat-card>
+
+        <mat-card class="flex flex-grow-1">
+
+            <div [class]="'status-' + (transaction.debt?.status ? transaction.debt?.status?.toLowerCase() : '')">
+             Dług {{getDebtStatus(transaction.debt?.status)}}
+            </div>
+
+        </mat-card>
+
+        <mat-card class="flex flex-grow-1">
+          <mat-card-header>
+            <mat-card-subtitle>Data transakcji</mat-card-subtitle>
+            <mat-card-title>
+              {{transaction.paymentDate | transformDateWithHour}}
+            </mat-card-title>
+          </mat-card-header>
+        </mat-card>
+
+        <div class="flex flex-column">
+          <button mat-button>ZMIEŃ</button>
+          <button mat-button>USUŃ</button>
+        </div>
+
+
       </div>
-</div>
+
+    </mat-expansion-panel>
+
+  </div>
+
+
+</mat-accordion>
+<p-paginator
+  [rows]="rows"
+  [totalRecords]="totalRecords"
+  (onPageChange)="onPageChange($event)"
+  [rowsPerPageOptions]="[15, 25, 30]"
+></p-paginator>
