@@ -56,14 +56,12 @@ export class RegistrationFormComponent implements OnInit {
                 this.router.navigate(['/']);
               },
               error: (err) => {
-                console.log(err);
                 this.showError('Błąd', 'Wystąpił błąd zalogowania');
               }
             });
 
         },
         error: err => {
-          console.log(err);
           if (err.error.status === 409) {
             this.showError('Błąd', 'Podany urzytkownik już istnieje');
           } else {

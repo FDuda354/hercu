@@ -36,11 +36,9 @@ export class LoginFormComponent implements OnInit {
         this.router.navigate([''])
       },
       error: (err) => {
-        if (err.error.status === 403) {
-          console.log(err);
+        if (err.error.status === 401) {
           this.showError('Niepoprawne logowanie', 'Nieprawidłowy login lub hasło');
         } else {
-          console.log(err);
           this.showError('Błąd', 'Wystąpił błąd serwera');
         }
 
