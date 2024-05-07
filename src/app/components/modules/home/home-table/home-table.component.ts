@@ -1,9 +1,9 @@
-import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Transaction } from '../../../common/models/transaction';
 import { DebtStatus } from '../../../common/models/debt-dto';
-import {TransactionService} from "../../../../services/transaction.service";
-import {MessageService} from "primeng/api";
-import {Page} from "../../../common/models/page";
+import { TransactionService } from '../../../../services/transaction.service';
+import { MessageService } from 'primeng/api';
+import { Page } from '../../../common/models/page';
 
 @Component({
   selector: 'app-home-table',
@@ -15,7 +15,7 @@ export class HomeTableComponent implements OnInit {
   transactions: Transaction[] = [];
   isMobileVisible = false;
   isLoading = true;
-  skeletonTransactions: any[] = [1,2,3,4,5];
+  skeletonTransactions: any[] = [1, 2, 3, 4, 5];
 
 
   constructor(

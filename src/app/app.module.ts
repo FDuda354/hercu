@@ -44,30 +44,30 @@ import { HomeSummaryComponent } from './components/modules/home/home-summary/hom
 import { ChartModule } from 'primeng/chart';
 import { HomeDebtCountComponent } from './components/modules/home/home-debt-count/home-debt-count.component';
 import { ChipModule } from 'primeng/chip';
-import {SkeletonModule} from "primeng/skeleton";
+import { SkeletonModule } from 'primeng/skeleton';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        DefaultComponent,
-        MenuBarComponent,
-        MenuItemComponent,
-        HeaderBarComponent,
-        HomeComponent,
-        DebtorsComponent,
-        CreditorsComponent,
-        TransactionsComponent,
-        SettingsComponent,
-        MenageDebtComponent,
-        LoginComponent,
-        LoginPageComponent,
-        DebtCardComponent,
-        TransformDatePipe,
-        TransformDateWithHourPipe,
-        HomeTableComponent,
-        HomeSummaryComponent,
-        HomeDebtCountComponent,
-    ],
+  declarations: [
+    AppComponent,
+    DefaultComponent,
+    MenuBarComponent,
+    MenuItemComponent,
+    HeaderBarComponent,
+    HomeComponent,
+    DebtorsComponent,
+    CreditorsComponent,
+    TransactionsComponent,
+    SettingsComponent,
+    MenageDebtComponent,
+    LoginComponent,
+    LoginPageComponent,
+    DebtCardComponent,
+    TransformDatePipe,
+    TransformDateWithHourPipe,
+    HomeTableComponent,
+    HomeSummaryComponent,
+    HomeDebtCountComponent,
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -96,11 +96,11 @@ import {SkeletonModule} from "primeng/skeleton";
     ChipModule,
     SkeletonModule,
   ],
-    providers: [
-        UserAuthGuard,
-        {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true},
-    ],
-    bootstrap: [AppComponent]
+  providers: [
+    UserAuthGuard,
+    {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true},
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
 }
