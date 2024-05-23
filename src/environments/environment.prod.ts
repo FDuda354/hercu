@@ -1,6 +1,6 @@
 export const environment = {
   api: {
-    baseUrl: 'http://51.83.135.197:8001',
+    baseUrl: 'https://backend-dluznik-test.dudios.pl',
     authUrl: 'api/auth/login',
   }
 };
