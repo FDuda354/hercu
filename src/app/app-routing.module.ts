@@ -9,6 +9,7 @@ import { SettingsComponent } from './components/modules/settings/settings.compon
 import { LoginComponent } from './components/modules/login/login.component';
 import { UserAuthGuard } from './components/common/guard/user-auth-guard';
 import { RegistrationPageComponent } from './components/modules/registration-page/registration-page.component';
+import { DebtDetailsComponent } from './components/common/components/debt-details/debt-details.component';
 
 
 const routes: Routes = [
@@ -21,6 +22,9 @@ const routes: Routes = [
       {path: 'settings', component: SettingsComponent, canActivate: [UserAuthGuard]},
 
     ]
+  },
+  {
+    path: 'debt/:id', component: DebtDetailsComponent,
   },
   {
     path: 'login', component: LoginComponent,

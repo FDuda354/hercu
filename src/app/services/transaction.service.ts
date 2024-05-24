@@ -20,4 +20,8 @@ export class TransactionService {
   getTransactionsByCustomerId(page: number, size: number): Observable<Page<Transaction>> {
     return this.http.get<Page<Transaction>>(this.baseUrl + `/api/transaction/all?page=${page}&size=${size}`)
   }
+
+  getTransactionsByDebtId(id: string, page: number, size: number) {
+    return this.http.get<Page<Transaction>>(this.baseUrl + `/api/transaction?debtId=${id}&page=${page}&size=${size}`)
+  }
 }

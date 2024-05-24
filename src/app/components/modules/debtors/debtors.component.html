@@ -41,7 +41,7 @@
         [debt]="debt"
         [type]="'debtor'"
         [customerIndex]="index"
-        (details)="goToDetailsCustomer($event)"
+        (details)="goToDetails(debt.id)"
       ></app-debt-card>
     </div>
     <p-toast position="top-right" key="tr"></p-toast>

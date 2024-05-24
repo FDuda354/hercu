@@ -5,6 +5,7 @@ import { MessageService, PrimeNGConfig } from 'primeng/api';
 import { DebtService } from '../../../services/debt.service';
 import { DebtDTO } from '../../common/models/debt-dto';
 import { JwtService } from '../../../services/auth/jwt.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-debtors',
@@ -27,6 +28,7 @@ export class DebtorsComponent implements OnInit {
     private messageService: MessageService,
     private primengConfig: PrimeNGConfig, //TODO do usuniecia
     private jwtService: JwtService,
+    private router: Router,
   ) {
   }
 
@@ -75,7 +77,8 @@ export class DebtorsComponent implements OnInit {
 
   protected readonly Component = Component;
 
-  goToDetailsCustomer(customer: CustomerDTO) {
-
+  goToDetails(debtId: number | undefined) {
+    this.router.navigate(['/debt', debtId]);
   }
+
 }

@@ -21,7 +21,7 @@ import { CreditorsComponent } from './components/modules/creditors/creditors.com
 import { TransactionsComponent } from './components/modules/transactions/transactions.component';
 import { SettingsComponent } from './components/modules/settings/settings.component';
 import { RouterModule } from '@angular/router';
-import { MenageDebtComponent } from './components/common/components/menage-debt/menage-debt.component';
+import { MenageDebtComponent } from './components/common/components/add-debt/menage-debt.component';
 import { CheckboxModule } from 'primeng/checkbox';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { CalendarModule } from 'primeng/calendar';
@@ -51,6 +51,7 @@ import { RegistrationFormComponent } from './components/modules/registration-pag
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { DebtDetailsComponent } from './components/common/components/debt-details/debt-details.component';
 
 @NgModule({
   declarations: [
@@ -75,6 +76,7 @@ import { MatButtonModule } from '@angular/material/button';
     HomeDebtCountComponent,
     RegistrationPageComponent,
     RegistrationFormComponent,
+    DebtDetailsComponent,
   ],
   imports: [
     BrowserModule,

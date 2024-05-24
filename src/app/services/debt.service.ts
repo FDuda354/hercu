@@ -17,6 +17,10 @@ export class DebtService {
   ) {
   }
 
+  getDebtById(debtId: string | null): Observable<DebtDTO> {
+    return this.http.get<DebtDTO>(this.baseUrl+`/api/debt?debtId=${debtId}`);
+  }
+
   getDebtAmountSum(): Observable<number> {
     return this.http.get<number>(this.baseUrl + `/api/debt/summary/debt`)
   }
