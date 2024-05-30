@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Page } from '../components/common/models/page';
 import { DebtDTO } from '../components/common/models/debt-dto';
+import { DebtRequest } from '../components/common/components/add-debt/debt-request';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class DebtService {
   }
 
   getDebtById(debtId: string | null): Observable<DebtDTO> {
-    return this.http.get<DebtDTO>(this.baseUrl+`/api/debt?debtId=${debtId}`);
+    return this.http.get<DebtDTO>(this.baseUrl + `/api/debt?debtId=${debtId}`);
   }
 
   getDebtAmountSum(): Observable<number> {
@@ -43,5 +44,9 @@ export class DebtService {
 
   getCreditCount(): Observable<number> {
     return this.http.get<number>(this.baseUrl + `/api/debt/summary/credit/count`)
+  }
+
+  addDebt(debtRequest: DebtRequest): Observable<void> {
+    return this.http.post<void>(this.baseUrl + `/api/debt`, debtRequest)
   }
 }

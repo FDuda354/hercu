@@ -47,7 +47,9 @@ import { ChipModule } from 'primeng/chip';
 import { SkeletonModule } from 'primeng/skeleton';
 import { RegistrationPageComponent } from './components/modules/registration-page/registration-page.component';
 import { MessageModule } from 'primeng/message';
-import { RegistrationFormComponent } from './components/modules/registration-page/registration-form/registration-form.component';
+import {
+  RegistrationFormComponent
+} from './components/modules/registration-page/registration-form/registration-form.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';

@@ -38,6 +38,7 @@ export class DebtDetailsComponent implements OnInit {
     }
 
   }
+
   private loadDebt(id: string) {
     this.debtService.getDebtById(id).subscribe({
       next: (debtDTO: DebtDTO) => {

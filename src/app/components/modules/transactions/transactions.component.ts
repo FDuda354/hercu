@@ -1,9 +1,9 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Transaction } from '../../common/models/transaction';
-import {TransactionService} from "../../../services/transaction.service";
-import {MessageService} from "primeng/api";
-import {Page} from "../../common/models/page";
-import {DebtStatus} from "../../common/models/debt-dto";
+import { TransactionService } from '../../../services/transaction.service';
+import { MessageService } from 'primeng/api';
+import { Page } from '../../common/models/page';
+import { DebtStatus } from '../../common/models/debt-dto';
 import { JwtService } from '../../../services/auth/jwt.service';
 import { CustomerDTO } from '../../common/models/customer-dto';
 
@@ -13,7 +13,7 @@ import { CustomerDTO } from '../../common/models/customer-dto';
   styleUrls: ['./transactions.component.scss'],
   providers: [MessageService]
 })
-export class TransactionsComponent implements OnInit{
+export class TransactionsComponent implements OnInit {
   transactions: Transaction[] = [];
   isMobileVisible = false;
   isLoading = true;
@@ -89,8 +89,8 @@ export class TransactionsComponent implements OnInit{
   }
 
   isOwner(id: number | undefined) {
-   const user: CustomerDTO = JSON.parse(<string>this.jwtService.getCustomer());
-   return id == user.id;
+    const user: CustomerDTO = JSON.parse(<string>this.jwtService.getCustomer());
+    return id == user.id;
   }
 
   editTransaction(transaction: Transaction) {

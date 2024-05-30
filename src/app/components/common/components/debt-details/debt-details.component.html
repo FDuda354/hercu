@@ -1,12 +1,12 @@
 <!-- debt-details.component.html -->
 
-  <h1>Debt Details</h1>
-  <p><strong>ID:</strong> {{ debt.id }}</p>
-  <p><strong>Amount:</strong> {{ debt.amount | currency }}</p>
-  <p><strong>Description:</strong> {{ debt.description }}</p>
-  <p><strong>Repayment Date:</strong> {{ debt.repaymentDate | date }}</p>
-  <p><strong>Start Date:</strong> {{ debt.startDate | date }}</p>
-  <p><strong>Status:</strong> {{ debt.status }}</p>
+<h1>Debt Details</h1>
+<p><strong>ID:</strong> {{ debt.id }}</p>
+<p><strong>Amount:</strong> {{ debt.amount | currency }}</p>
+<p><strong>Description:</strong> {{ debt.description }}</p>
+<p><strong>Repayment Date:</strong> {{ debt.repaymentDate | date }}</p>
+<p><strong>Start Date:</strong> {{ debt.startDate | date }}</p>
+<p><strong>Status:</strong> {{ debt.status }}</p>
 
 
 <ng-container *ngIf="!isMobileVisible; else mobileTable">

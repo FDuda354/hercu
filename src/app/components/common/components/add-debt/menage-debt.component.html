@@ -9,6 +9,14 @@
   </div>
 
   <div class="p-inputgroup max-w-30rem mb-4">
+    <span class="p-inputgroup-addon"><i class="pi pi-comment"></i></span>
+    <span class="p-float-label">
+    <input id="desc" type="text" pInputText [(ngModel)]="desc">
+    <label for="desc">Opis</label>
+    </span>
+  </div>
+
+  <div class="p-inputgroup max-w-30rem mb-4">
     <span class="p-inputgroup-addon"><i class="pi pi-dollar"></i></span>
     <p-inputNumber [(ngModel)]="amount" mode="currency" currency="PLN" locale="en-US"></p-inputNumber>
   </div>
@@ -29,14 +37,13 @@
   </div>
 
 
-  <div class="flex flex-row mr-4 max-w-30rem stick-to-bottom">
+  <div class="flex flex-row stick-to-bottom ml-4 mr-4">
     <button pButton pRipple type="button" label="Zatwierdź"
-            class="p-button-outlined p-button-rounded p-button-success" style="flex: 1 1 48%;">
+            class="p-button-outlined p-button-rounded p-button-success " style="flex: 1 1 48%;"
+            [ngClass]="{'p-disabled' : isWorking}" (click)="onSubmit()">
     </button>
-    <div class="mr-6 ml-6"></div>
-    <button pButton pRipple type="button" label="Anuluj"
-            class="p-button-outlined p-button-rounded p-button-danger" style="flex: 1 1 48%;">
-    </button>
+
   </div>
 
 </div>
+<p-toast position="bottom-center" key="bc"></p-toast>

@@ -99,7 +99,7 @@
     <!-- Przyciski -->
     <div class="flex flex-column">
       <button pButton pRipple type="submit" label="Zarejestruj"
-              class="p-button-success flex-grow-1 p-button-text"></button>
+              class="p-button-success flex-grow-1 p-button-text" [ngClass]="{'p-disabled' : isWorking}"></button>
       <button pButton type="button" label="Masz już konto? Zaloguj się"
               routerLink="/login"
               class="w-full p-button-link text-center pl-0">

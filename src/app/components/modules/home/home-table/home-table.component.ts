@@ -51,7 +51,7 @@ export class HomeTableComponent implements OnInit {
   }
 
 
-  showError(title: string, content: string){
+  showError(title: string, content: string) {
     this.messageService.add({
       key: 'tr',
       severity: 'error',

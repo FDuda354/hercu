@@ -16,6 +16,7 @@ import { MessageService } from 'primeng/api';
 export class RegistrationFormComponent implements OnInit {
 
   registerForm!: FormGroup;
+  protected isWorking: boolean = false;
 
   constructor(
     private customerService: CustomerService,
@@ -31,7 +32,7 @@ export class RegistrationFormComponent implements OnInit {
     this.registerForm = this.formBuilder.group({
       firstName: ['', [Validators.required, Validators.maxLength(20)]],
       surname: ['', [Validators.required, Validators.maxLength(20)]],
-      email: ['', [Validators.required, Validators.email, Validators.maxLength(20)]],
+      email: ['', [Validators.required, Validators.email, Validators.maxLength(30)]],
       age: ['', [Validators.required, Validators.maxLength(20)]],
       password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]],
       confirmPassword: ['', [Validators.required, Validators.maxLength(20)]],
@@ -41,6 +42,10 @@ export class RegistrationFormComponent implements OnInit {
   }
 
   register() {
+    if (this.isWorking) {
+      return
+    }
+    this.isWorking = true;
     if (this.registerForm.valid) {
       this.customerService.register(this.registerForm.value).subscribe({
         next: () => {
@@ -54,9 +59,11 @@ export class RegistrationFormComponent implements OnInit {
                 this.jwtService.setToken(authenticationResponse.token);
                 this.jwtService.setCustomer(authenticationResponse.customerDTO);
                 this.router.navigate(['/']);
+                this.isWorking = false;
               },
               error: (err) => {
                 this.showError('Błąd', 'Wystąpił błąd zalogowania');
+                this.isWorking = false;
               }
             });
 
@@ -66,9 +73,8 @@ export class RegistrationFormComponent implements OnInit {
             this.showError('Błąd', 'Podany urzytkownik już istnieje');
           } else {
             this.showError('Błąd', 'Wystąpił błąd podczas rejestracji');
-
           }
-
+          this.isWorking = false;
         }
       });
     }

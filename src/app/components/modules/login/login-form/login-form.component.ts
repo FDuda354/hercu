@@ -14,6 +14,7 @@ import { JwtService } from '../../../../services/auth/jwt.service';
 export class LoginFormComponent implements OnInit {
 
   authRequest: AuthRequest = {};
+  isWorking: boolean = false;
 
   ngOnInit() {
     this.primengConfig.ripple = true;
@@ -29,11 +30,16 @@ export class LoginFormComponent implements OnInit {
   }
 
   login() {
+    if (this.isWorking) {
+      return
+    }
+    this.isWorking = true;
     this.authenticationService.login(this.authRequest).subscribe({
       next: (response) => {
         this.jwtService.setToken(response.token)
         this.jwtService.setCustomer(response.customerDTO)
         this.router.navigate([''])
+        this.isWorking = false;
       },
       error: (err) => {
         if (err.error.status === 401) {
@@ -41,7 +47,7 @@ export class LoginFormComponent implements OnInit {
         } else {
           this.showError('Błąd', 'Wystąpił błąd serwera');
         }
-
+        this.isWorking = false;
       }
     })
   }
