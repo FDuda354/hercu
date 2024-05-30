@@ -5,6 +5,7 @@ import { Page } from '../../common/models/page';
 import { DebtDTO } from '../../common/models/debt-dto';
 import { DebtService } from '../../../services/debt.service';
 import { JwtService } from '../../../services/auth/jwt.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-creditors',
@@ -13,18 +14,21 @@ import { JwtService } from '../../../services/auth/jwt.service';
   providers: [MessageService]
 })
 export class CreditorsComponent implements OnInit {
+  protected readonly Component = Component;
   display: boolean = false;
   isMobileVisible = false;
   debts: DebtDTO[] = [];
   totalRecords: number = 0;
   rows: number = 5;
   isLoading: boolean = true;
+  loadError: boolean = false;
 
   constructor(
     private debtService: DebtService,
     private messageService: MessageService,
-    private primengConfig: PrimeNGConfig,
-    private jwtService: JwtService,
+    private primengConfig: PrimeNGConfig, //TODO do usuniecia
+    private jwtService: JwtService,//TODO do usuniecia
+    private router: Router,
   ) {
   }
 
@@ -51,6 +55,7 @@ export class CreditorsComponent implements OnInit {
       error: error => {
         console.error('Error loading customers', error);
         this.showError('Błąd Servera', 'Nie udało się pobrać danych')
+        this.loadError = true;
         this.isLoading = false;
       }
     });
@@ -72,10 +77,26 @@ export class CreditorsComponent implements OnInit {
     });
   }
 
-  protected readonly Component = Component;
 
-  goToDetailsCustomer(customer: CustomerDTO) {
+  goToDetails(debtId: number | undefined) {
+    this.router.navigate(['/debt', debtId]);
+  }
 
+  creditAdded($event: void) {
+    this.isLoading = true;
+    this.display = false;
+    this.loadDebts(0, 5);
+    this.showSuccess('Sukces', 'Udało się dodać Wierzyciela!');
+
+  }
+  showSuccess(title: string, content: string) {
+    this.messageService.add({
+      key: 'bc',
+      severity: 'success',
+      summary: title,
+      detail: content,
+      life: 5000
+    });
   }
 }
 

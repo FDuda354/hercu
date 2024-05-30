@@ -22,4 +22,8 @@ export class CustomerService {
   register(req: CustomerRegistrationRequest): Observable<void> {
     return this.http.post<void>(this.baseUrl + `/api/customers`, req);
   }
+
+  getCustomerImage(customerImage: string): Observable<Blob> {
+    return this.http.get(this.baseUrl + `/api/customers/image?customerImage=${customerImage}`, { responseType: 'blob' });
+  }
 }

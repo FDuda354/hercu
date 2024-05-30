@@ -20,13 +20,13 @@ export class DebtorsComponent implements OnInit {
   totalRecords: number = 0;
   rows: number = 5;
   isLoading: boolean = true;
-
+  loadError: boolean = false;
 
   constructor(
     private debtService: DebtService,
     private messageService: MessageService,
     private primengConfig: PrimeNGConfig, //TODO do usuniecia
-    private jwtService: JwtService,
+    private jwtService: JwtService,//TODO do usuniecia
     private router: Router,
   ) {
   }
@@ -53,6 +53,7 @@ export class DebtorsComponent implements OnInit {
       error: error => {
         console.error('Error loading customers', error);
         this.showError('Błąd Servera', 'Nie udało się pobrać danych')
+        this.loadError = true;
         this.isLoading = false;
       }
     });
@@ -75,6 +76,7 @@ export class DebtorsComponent implements OnInit {
   }
 
   protected readonly Component = Component;
+
 
   goToDetails(debtId: number | undefined) {
     this.router.navigate(['/debt', debtId]);

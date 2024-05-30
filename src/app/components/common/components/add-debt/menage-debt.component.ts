@@ -4,13 +4,13 @@ import { MessageService } from 'primeng/api';
 import { JwtService } from '../../../../services/auth/jwt.service';
 import { CustomerDTO } from '../../models/customer-dto';
 import { DebtService } from '../../../../services/debt.service';
-import { Router } from '@angular/router';
 
 interface ValidateResp {
-  isValid :boolean,
-  isEmailValid :boolean,
-  isDescValid :boolean,
-  isAmountValid :boolean,
+  isValid: boolean,
+  isEmailTheSame: boolean,
+  isEmailValid: boolean,
+  isDescValid: boolean,
+  isAmountValid: boolean,
 }
 
 @Component({
@@ -75,13 +75,16 @@ export class MenageDebtComponent implements OnInit {
     }
     let validateResp = this.requestValidated(debtRequest);
     if (!validateResp.isValid) {
-      if (!validateResp.isEmailValid){
+      if (validateResp.isEmailTheSame) {
+        this.showWarn('Błąd', 'Nie możesz założyć długu sam na siebie');
+      }
+      if (!validateResp.isEmailValid) {
         this.showWarn('Błąd', 'Niepoprawny Email');
       }
-      if (!validateResp.isAmountValid){
+      if (!validateResp.isAmountValid) {
         this.showWarn('Błąd', 'Niepoprawna wartośc długu');
       }
-      if (!validateResp.isDescValid){
+      if (!validateResp.isDescValid) {
         this.showWarn('Błąd', 'Za długi opis (max 100 znaków)');
       }
       this.isWorking = false;
@@ -111,11 +114,15 @@ export class MenageDebtComponent implements OnInit {
     let validateResponse: ValidateResp = {
       isValid: false,
       isEmailValid: true,
+      isEmailTheSame: false,
       isAmountValid: true,
       isDescValid: true,
     }
     if (email == undefined || !this.isEmailValid(email)) {
       validateResponse.isEmailValid = false;
+    }
+    if (debtRequest.debtorEmail === debtRequest.creditorEmail) {
+      validateResponse.isEmailTheSame = true;
     }
     if (debtRequest.amount == undefined || debtRequest.amount <= 0 || debtRequest.amount > 1_000_000_000) {
       validateResponse.isAmountValid = false;
@@ -124,8 +131,8 @@ export class MenageDebtComponent implements OnInit {
       validateResponse.isDescValid = false;
     }
 
-    if(validateResponse.isEmailValid && validateResponse.isAmountValid &&validateResponse.isDescValid ){
-    validateResponse.isValid = true;
+    if (validateResponse.isEmailValid && validateResponse.isAmountValid && validateResponse.isDescValid && !validateResponse.isEmailTheSame) {
+      validateResponse.isValid = true;
     }
 
     return validateResponse;

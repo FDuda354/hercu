@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { DebtDTO } from '../../models/debt-dto';
 import { ActivatedRoute } from '@angular/router';
 import { DebtService } from '../../../../services/debt.service';
@@ -6,6 +6,7 @@ import { Page } from '../../models/page';
 import { Transaction } from '../../models/transaction';
 import { TransactionService } from '../../../../services/transaction.service';
 import { MessageService } from 'primeng/api';
+import { Debt } from '../../models/debt';
 
 @Component({
   selector: 'app-debt-details',
@@ -30,8 +31,15 @@ export class DebtDetailsComponent implements OnInit {
   ) {
   }
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
+    this.isMobileVisible = window.innerWidth <= 768;
+  }
+
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
+    this.isMobileVisible = window.innerWidth <= 768;
+
     if (this.id) {
       this.loadDebt(this.id)
       this.loadTransaction(this.id, 0, 10)
@@ -41,9 +49,8 @@ export class DebtDetailsComponent implements OnInit {
 
   private loadDebt(id: string) {
     this.debtService.getDebtById(id).subscribe({
-      next: (debtDTO: DebtDTO) => {
-        this.debt = debtDTO
-        console.log(this.debt)
+      next: (debt: Debt) => {
+        this.debt = debt
       },
       error: error => {
         console.error('Error loading customers', error);
@@ -60,7 +67,6 @@ export class DebtDetailsComponent implements OnInit {
         this.totalRecords = page.totalElements;
         this.rows = page.size;
         this.isLoading = false;
-        console.log(this.transactions)
       },
       error: error => {
         console.error('Error loading transactions', error);

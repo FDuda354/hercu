@@ -1,8 +1,8 @@
-import { Debt } from './debt';
+import { DebtDTO } from './debt-dto';
 
 export interface Transaction {
   id?: number,
-  debt?: Debt,
+  debt?: DebtDTO,
   amount?: number,
   balanceBeforeTransaction?: number,
   balanceAfterTransaction?: number,

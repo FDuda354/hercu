@@ -20,6 +20,7 @@ export class TransactionsComponent implements OnInit {
   skeletonTransactions: any[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   totalRecords: number = 0;
   rows: number = 10;
+  loadError: boolean = false;
 
 
   constructor(
@@ -51,6 +52,7 @@ export class TransactionsComponent implements OnInit {
       },
       error: error => {
         console.error('Error loading transactions', error);
+        this.loadError = true;
         this.isLoading = false;
         this.showError('Błąd Servera', 'Nie udało się pobrać transakcji');
       }

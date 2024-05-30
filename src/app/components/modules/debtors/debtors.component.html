@@ -1,3 +1,52 @@
+<p-toast position="top-right" key="tr"></p-toast>
+<p-toast position="bottom-center" key="bc"></p-toast>
+
+<ng-container *ngIf="!isLoading; else loadingChart">
+  <ng-container *ngIf="!loadError; else errorState">
+    <div class="min-h-full">
+      <button pButton pRipple type="button"
+              icon="pi pi-plus"
+              label="Dodaj Dług"
+              class="p-button-outlined p-button-rounded p-button-success"
+              (click)="display = true">
+      </button>
+      <div *ngIf="isMobileVisible" class="block md:hidden">
+        <p-sidebar [(visible)]="display" position="right" [style]="{width:'100%'}"
+                   [transitionOptions]="'300ms cubic-bezier(0, 0, 0.2, 1)'">
+          <app-menage-debt (debtAdded)="debtAdded($event)" [isDebt]="true"></app-menage-debt>
+        </p-sidebar>
+      </div>
+      <p-sidebar [(visible)]="display" position="right" [style]="{width:'70%',  maxWidth: '800px' }"
+                 [transitionOptions]="'300ms cubic-bezier(0, 0, 0.2, 1)'">
+        <app-menage-debt (debtAdded)="debtAdded($event)" [isDebt]="true"></app-menage-debt>
+      </p-sidebar>
+      <ng-container *ngIf="debts.length > 0; else emptyState">
+
+        <div class="flex justify-content-center align-items-center flex-wrap gap-5 mt-4 pb-2">
+          <app-debt-card
+            *ngFor="let debt of debts; let index = index"
+            [debt]="debt"
+            [type]="'debtor'"
+            [customerIndex]="index"
+            (details)="goToDetails(debt.id)"
+          ></app-debt-card>
+        </div>
+
+
+      </ng-container>
+    </div>
+    <div *ngIf="totalRecords >= 5" class="flex flex-row justify-content-center align-content-end">
+      <p-paginator
+        [rows]="rows"
+        [totalRecords]="totalRecords"
+        (onPageChange)="onPageChange($event)"
+        [rowsPerPageOptions]="[5, 10, 20]"
+      ></p-paginator>
+    </div>
+  </ng-container>
+</ng-container>
+
+<!--loadingState-->
 <ng-template #loadingChart>
   <div class="custom-skeleton p-4">
     <div class="flex mb-3">
@@ -16,50 +65,6 @@
   </div>
 </ng-template>
 
-
-<ng-container *ngIf="!isLoading; else loadingChart">
-
-  <div class="min-h-full">
-    <button pButton pRipple type="button"
-            icon="pi pi-plus"
-            label="Dodaj Dług"
-            class="p-button-outlined p-button-rounded p-button-success"
-            (click)="display = true">
-    </button>
-    <div *ngIf="isMobileVisible" class="block md:hidden">
-      <p-sidebar [(visible)]="display" position="right" [style]="{width:'100%'}"
-                 [transitionOptions]="'300ms cubic-bezier(0, 0, 0.2, 1)'">
-        <app-menage-debt (debtAdded)="debtAdded($event)" [isDebt]="true"></app-menage-debt>
-      </p-sidebar>
-    </div>
-    <p-sidebar [(visible)]="display" position="right" [style]="{width:'70%',  maxWidth: '800px' }"
-               [transitionOptions]="'300ms cubic-bezier(0, 0, 0.2, 1)'">
-      <app-menage-debt (debtAdded)="debtAdded($event)" [isDebt]="true"></app-menage-debt>
-    </p-sidebar>
-    <ng-container  *ngIf="debts.length > 0; else emptyState">
-
-      <div class="flex justify-content-center align-items-center flex-wrap gap-5 mt-4 pb-2">
-        <app-debt-card
-          *ngFor="let debt of debts; let index = index"
-          [debt]="debt"
-          [type]="'debtor'"
-          [customerIndex]="index"
-          (details)="goToDetails(debt.id)"
-        ></app-debt-card>
-      </div>
-      <p-toast position="top-right" key="tr"></p-toast>
-      <div *ngIf="totalRecords >= 5" class="flex flex-row justify-content-center align-content-end">
-        <p-paginator
-          [rows]="rows"
-          [totalRecords]="totalRecords"
-          (onPageChange)="onPageChange($event)"
-          [rowsPerPageOptions]="[5, 10, 20]"
-        ></p-paginator>
-      </div>
-    </ng-container>
-  </div>
-</ng-container>
-
 <!--emptyState-->
 <ng-template #emptyState>
   <div class="flex justify-content-center align-items-center mt-8">
@@ -69,4 +74,13 @@
     </div>
   </div>
 </ng-template>
-<p-toast position="bottom-center" key="bc"></p-toast>
+
+<!--errorState-->
+<ng-template #errorState>
+  <div class="flex justify-content-center align-items-center mt-8">
+    <div class="text-center">
+      <img src="assets/images/error-state.png" alt="Empty State Icon" class="empty-state-icon"/>
+      <h4 [ngStyle]="{color:'var(--bluegray-700)'}">Błąd pobierania dancyh :(</h4>
+    </div>
+  </div>
+</ng-template>

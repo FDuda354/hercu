@@ -8,11 +8,13 @@
       >
     </div>
     <div class="flex justify-content-center" style="margin-top: -50px">
-      <img
-        class="customer-avatar"
-        [src]="customerImage"
-        alt="customer-avatar">
-    </div>
+      <div class="avatar-container">
+        <img
+          class="customer-avatar"
+          [src]="profileImage"
+          alt="customer-avatar">
+      </div>
+      </div>
     <h2 style="color: #ff6d6d">{{ debt.amount }} PLN</h2>
     <!--    #77DD77-->
   </ng-template>

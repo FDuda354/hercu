@@ -4,6 +4,7 @@ import { DebtStatus } from './debt-dto';
 export interface Debt {
   id?: number,
   debtor?: CustomerDTO,
+  creditor?: CustomerDTO,
   amount?: number,
   description?: string,
   repaymentDate?: Date,
