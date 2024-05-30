@@ -57,7 +57,7 @@ export class HomeSummaryComponent implements OnInit {
   }
 
   updateChartData() {
-    if (this.debtSummary !== null && this.creditSummary !== null) {
+    if (this.debtSummary !== null || this.creditSummary !== null) {
       this.isLoading = false;
       this.data = {
         labels: ['Długi', 'Wierzycielstwo'],

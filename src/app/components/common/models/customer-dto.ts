@@ -6,6 +6,7 @@ export interface CustomerDTO {
   age?: number,
   role?: Role,
   gender?: Gender,
+  profileImage?: string,
 }
 
 export enum Role {
