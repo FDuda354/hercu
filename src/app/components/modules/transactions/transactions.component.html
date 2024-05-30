@@ -1,73 +1,130 @@
 <mat-accordion>
+  <ng-container *ngIf="!isLoading; else loadingContent">
+    <ng-container *ngIf="transactions.length > 0; else emptyState">
+      <ng-container *ngTemplateOutlet="transactionListTemplate; context: { transactions: transactions }"></ng-container>
+    </ng-container>
+  </ng-container>
+</mat-accordion>
+
+<div *ngIf="totalRecords >= 15" class="flex flex-row justify-content-center align-content-end">
+  <p-paginator
+    [rows]="rows"
+    [totalRecords]="totalRecords"
+    (onPageChange)="onPageChange($event)"
+    [rowsPerPageOptions]="[15, 25, 30]"
+  ></p-paginator>
+</div>
+
+<!--transaction list-->
+<ng-template #transactionListTemplate let-transactions="transactions">
   <div *ngFor="let transaction of transactions">
-    <mat-expansion-panel hideToggle>
+    <mat-expansion-panel hideToggle class="mb-2">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          {{transaction.debt?.debtor?.firstName}} {{transaction.debt?.debtor?.surname}}
+          {{ transaction.debt?.debtor?.firstName }} {{ transaction.debt?.debtor?.surname }}
         </mat-panel-title>
         <mat-panel-title *ngIf="!isOwner(transaction.debt?.debtor?.id)" style="color: #77DD07">
-          {{transaction.amount}} PLN
+          {{ transaction.amount }} PLN
         </mat-panel-title>
         <mat-panel-title *ngIf="isOwner(transaction.debt?.debtor?.id)" style="color: #ff6d0d">
-          - {{transaction.amount}} PLN
+          - {{ transaction.amount }} PLN
         </mat-panel-title>
         <mat-panel-title>
-          {{transaction.description}}
+          {{ transaction.description }}
         </mat-panel-title>
-
       </mat-expansion-panel-header>
-
-      <div class="flex flex-grow-1 flex-row justify-content-evenly flex-wrap">
-        <mat-card class="flex flex-grow-1 m-1">
-          <mat-card-header>
-            <mat-card-subtitle>Saldo po Transakcji</mat-card-subtitle>
-            <mat-card-title>
-              {{transaction.balanceAfterTransaction}} PLN
-            </mat-card-title>
-          </mat-card-header>
-        </mat-card>
-
-        <mat-card class="flex flex-grow-1 m-1">
-          <mat-card-header>
-            <mat-card-subtitle>Dług</mat-card-subtitle>
-            <mat-card-title>
-              {{transaction.debt?.description}}
-            </mat-card-title>
-          </mat-card-header>
-        </mat-card>
-
-        <mat-card class="flex flex-grow-1 m-1">
-
-            <div [class]="'status-' + (transaction.debt?.status ? transaction.debt?.status?.toLowerCase() : '')">
-             Dług {{getDebtStatus(transaction.debt?.status)}}
-            </div>
-
-        </mat-card>
-
-        <mat-card class="flex flex-grow-1 m-1">
-          <mat-card-header>
-            <mat-card-subtitle>Data transakcji</mat-card-subtitle>
-            <mat-card-title>
-              {{transaction.paymentDate | transformDateWithHour}}
-            </mat-card-title>
-          </mat-card-header>
-        </mat-card>
-
-        <div class="flex flex-row">
-          <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success m-1" (click)="editTransaction(transaction)"></button>
-          <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning m-1" (click)="deleteTransaction(transaction)"></button>
-        </div>
-      </div>
+      <ng-container
+        *ngTemplateOutlet="transactionDetailsTemplate; context: { transaction: transaction }"></ng-container>
 
     </mat-expansion-panel>
 
   </div>
+</ng-template>
 
+<!--transaction details-->
+<ng-template #transactionDetailsTemplate let-transaction="transaction">
+  <div class="flex flex-grow-1 flex-row justify-content-evenly flex-wrap">
+    <mat-card class="flex flex-grow-1 m-1">
+      <mat-card-header>
+        <mat-card-subtitle>Saldo po Transakcji</mat-card-subtitle>
+        <mat-card-title>
+          {{ transaction.balanceAfterTransaction }} PLN
+        </mat-card-title>
+      </mat-card-header>
+    </mat-card>
 
-</mat-accordion>
-<p-paginator
-  [rows]="rows"
-  [totalRecords]="totalRecords"
-  (onPageChange)="onPageChange($event)"
-  [rowsPerPageOptions]="[15, 25, 30]"
-></p-paginator>
+    <mat-card class="flex flex-grow-1 m-1">
+      <mat-card-header>
+        <mat-card-subtitle>Dług</mat-card-subtitle>
+        <mat-card-title>
+          {{ transaction.debt?.description }}
+        </mat-card-title>
+      </mat-card-header>
+    </mat-card>
+
+    <mat-card class="flex flex-grow-1 m-1">
+      <mat-card-header>
+        <mat-card-subtitle>Data transakcji</mat-card-subtitle>
+        <mat-card-title>
+          {{ transaction.paymentDate | transformDateWithHour }}
+        </mat-card-title>
+      </mat-card-header>
+    </mat-card>
+
+    <mat-card class="flex align-self-center flex-grow-1 m-1">
+      <div [class]="'status-' + (transaction.debt?.status ? transaction.debt?.status?.toLowerCase() : '')">
+        Dług {{ getDebtStatus(transaction.debt?.status) }}
+      </div>
+    </mat-card>
+
+    <div class="flex flex-row">
+      <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success m-1"
+              (click)="editTransaction(transaction)"></button>
+      <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning m-1"
+              (click)="deleteTransaction(transaction)"></button>
+    </div>
+  </div>
+</ng-template>
+
+<!--loader-->
+<ng-template #loadingContent>
+  <p-table [value]="skeletonTransactions" styleClass="p-datatable-striped">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>
+          <p-skeleton></p-skeleton>
+        </th>
+        <th>
+          <p-skeleton></p-skeleton>
+        </th>
+        <th>
+          <p-skeleton></p-skeleton>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body">
+      <tr>
+        <td>
+          <p-skeleton></p-skeleton>
+        </td>
+        <td>
+          <p-skeleton></p-skeleton>
+        </td>
+        <td>
+          <p-skeleton></p-skeleton>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</ng-template>
+
+<!--emptyState-->
+<ng-template #emptyState>
+  <div class="flex justify-content-center align-items-center mt-8">
+    <div class="text-center">
+      <img src="assets/images/empty-state.png" alt="Empty State Icon" class="empty-state-icon" />
+      <h4 [ngStyle]="{color:'var(--bluegray-700)'}">Nic tu nie ma :(</h4>
+    </div>
+  </div>
+</ng-template>
+
