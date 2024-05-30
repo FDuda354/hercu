@@ -1,10 +1,17 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DebtRequest } from './debt-request';
 import { MessageService } from 'primeng/api';
 import { JwtService } from '../../../../services/auth/jwt.service';
 import { CustomerDTO } from '../../models/customer-dto';
 import { DebtService } from '../../../../services/debt.service';
 import { Router } from '@angular/router';
+
+interface ValidateResp {
+  isValid :boolean,
+  isEmailValid :boolean,
+  isDescValid :boolean,
+  isAmountValid :boolean,
+}
 
 @Component({
   selector: 'app-menage-debt',
@@ -14,13 +21,15 @@ import { Router } from '@angular/router';
 })
 export class MenageDebtComponent implements OnInit {
 
+  @Input() isDebt!: boolean;
+  @Output() debtAdded = new EventEmitter<void>();
+
   email!: string;
   withEndDate: boolean = false;
   date: Date = new Date();
   minDate!: Date;
   pl!: any;
   invalidDates!: Array<Date>
-  @Input() isDebt!: boolean;
   amount!: number;
   desc!: string;
   isWorking: boolean = false;
@@ -29,7 +38,6 @@ export class MenageDebtComponent implements OnInit {
     private messageService: MessageService,
     private debtService: DebtService,
     private jwtService: JwtService,
-    private router: Router,
   ) {
   }
 
@@ -62,11 +70,20 @@ export class MenageDebtComponent implements OnInit {
       debtorEmail: this.isDebt ? this.email : user.email,
       creditorEmail: this.isDebt ? user.email : this.email,
       amount: this.amount,
-      description: this.desc,
+      description: this.desc == undefined ? '' : this.desc,
       repaymentDate: this.withEndDate ? this.date : null,
     }
-    if (!this.requestValidated(debtRequest)) {
-      this.showWarn('Błąd', 'Sprawdź poprawność danych');
+    let validateResp = this.requestValidated(debtRequest);
+    if (!validateResp.isValid) {
+      if (!validateResp.isEmailValid){
+        this.showWarn('Błąd', 'Niepoprawny Email');
+      }
+      if (!validateResp.isAmountValid){
+        this.showWarn('Błąd', 'Niepoprawna wartośc długu');
+      }
+      if (!validateResp.isDescValid){
+        this.showWarn('Błąd', 'Za długi opis (max 100 znaków)');
+      }
       this.isWorking = false;
       return;
     }
@@ -74,12 +91,10 @@ export class MenageDebtComponent implements OnInit {
     this.debtService.addDebt(debtRequest).subscribe({
       next: () => {
         this.isWorking = false;
-        this.showSuccess('Sukces', 'Udało się dodać dług!');
-        this.router.navigate(['/login']);
+        this.debtAdded.emit();
       },
       error: error => {
-        console.log(error.status)
-        if (error.status == 404) {
+        if (error.status == 404 || error.status == 400) {
           this.isWorking = false;
           this.showWarn('DANE', 'Podany użytkownik nie istnieje');
         } else {
@@ -91,17 +106,29 @@ export class MenageDebtComponent implements OnInit {
     });
   }
 
-  private requestValidated(debtRequest: DebtRequest) {
+  private requestValidated(debtRequest: DebtRequest): ValidateResp {
     const email = this.isDebt ? debtRequest.debtorEmail : debtRequest.creditorEmail
-
+    let validateResponse: ValidateResp = {
+      isValid: false,
+      isEmailValid: true,
+      isAmountValid: true,
+      isDescValid: true,
+    }
     if (email == undefined || !this.isEmailValid(email)) {
-      return false;
+      validateResponse.isEmailValid = false;
     }
-    if (debtRequest.amount == undefined || debtRequest.amount <= 0) {
-      return false
+    if (debtRequest.amount == undefined || debtRequest.amount <= 0 || debtRequest.amount > 1_000_000_000) {
+      validateResponse.isAmountValid = false;
+    }
+    if (debtRequest.description == undefined || debtRequest.description.length > 100) {
+      validateResponse.isDescValid = false;
     }
 
-    return true;
+    if(validateResponse.isEmailValid && validateResponse.isAmountValid &&validateResponse.isDescValid ){
+    validateResponse.isValid = true;
+    }
+
+    return validateResponse;
   }
 
   private isEmailValid(email: string): boolean {
@@ -128,16 +155,5 @@ export class MenageDebtComponent implements OnInit {
       life: 5000
     });
   }
-
-  showSuccess(title: string, content: string) {
-    this.messageService.add({
-      key: 'bc',
-      severity: 'success',
-      summary: title,
-      detail: content,
-      life: 5000
-    });
-  }
-
 
 }

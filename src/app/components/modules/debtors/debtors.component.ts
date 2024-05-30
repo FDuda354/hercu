@@ -80,4 +80,21 @@ export class DebtorsComponent implements OnInit {
     this.router.navigate(['/debt', debtId]);
   }
 
+  debtAdded($event: void) {
+    this.isLoading = true;
+    this.display = false;
+    this.loadDebts(0, 5);
+    this.showSuccess('Sukces', 'Udało się dodać dług!');
+
+  }
+
+  showSuccess(title: string, content: string) {
+    this.messageService.add({
+      key: 'bc',
+      severity: 'success',
+      summary: title,
+      detail: content,
+      life: 5000
+    });
+  }
 }

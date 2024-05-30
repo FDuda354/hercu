@@ -54,6 +54,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { DebtDetailsComponent } from './components/common/components/debt-details/debt-details.component';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 
 @NgModule({
   declarations: [
@@ -112,6 +113,7 @@ import { DebtDetailsComponent } from './components/common/components/debt-detail
     MatExpansionModule,
     MatCardModule,
     MatButtonModule,
+    InputTextareaModule,
   ],
   providers: [
     UserAuthGuard,

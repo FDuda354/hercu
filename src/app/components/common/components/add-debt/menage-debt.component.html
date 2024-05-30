@@ -9,18 +9,14 @@
   </div>
 
   <div class="p-inputgroup max-w-30rem mb-4">
-    <span class="p-inputgroup-addon"><i class="pi pi-comment"></i></span>
-    <span class="p-float-label">
-    <input id="desc" type="text" pInputText [(ngModel)]="desc">
-    <label for="desc">Opis</label>
-    </span>
-  </div>
-
-  <div class="p-inputgroup max-w-30rem mb-4">
     <span class="p-inputgroup-addon"><i class="pi pi-dollar"></i></span>
     <p-inputNumber [(ngModel)]="amount" mode="currency" currency="PLN" locale="en-US"></p-inputNumber>
   </div>
 
+  <span class="p-float-label max-w-30rem mb-4">
+    <textarea id="float-input" rows="6" cols="46" pInputTextarea [(ngModel)]="desc"></textarea>
+    <label for="float-input">Opis</label>
+</span>
 
   <div class="field-checkbox mb-4">
     <p-checkbox [(ngModel)]="withEndDate" [binary]="true" inputId="binary"></p-checkbox>
