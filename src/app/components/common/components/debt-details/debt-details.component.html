@@ -1,44 +1,50 @@
 <p-toast position="top-right" key="tr"></p-toast>
-<h1>Debt Details</h1>
-<p><strong>ID:</strong> {{ debt.id }}</p>
-<p><strong>Amount:</strong> {{ debt.amount | currency }}</p>
-<p><strong>Description:</strong> {{ debt.description }}</p>
-<p><strong>Repayment Date:</strong> {{ debt.repaymentDate | date }}</p>
-<p><strong>Start Date:</strong> {{ debt.startDate | date }}</p>
-<p><strong>Status:</strong> {{ debt.status }}</p>
+<div class="p-1">
+
+  <h1>{{ debt.description }}</h1>
+  <div class="flex justify-content-center align-items-center flex-wrap gap-5 mt-4 pb-2">
+    <p-card header="Kwota długu" [style]="{'width': '20rem', 'margin-bottom': '1em'}">{{ debt.amount }} PLN</p-card>
+    <p-card header="Dług rozpoczęto" [style]="{'width': '20rem', 'margin-bottom': '1em'}">{{ debt.startDate | date  }}</p-card>
+    <p-card header="Data spłaty" [style]="{'width': '20rem', 'margin-bottom': '1em'}">{{ debt.repaymentDate | date }}</p-card>
+    <p-card header="Status" [style]="{'width': '20rem', 'margin-bottom': '1em'}"><span
+      [class]="'status-' + (debt.status ? debt.status.toLowerCase() : '')">{{ getDebtStatus(debt.status) }}</span></p-card>
+  </div>
 
 
-<ng-container *ngIf="!isMobileVisible; else mobileTable">
-  <ng-container *ngIf="!isLoading; else loadingContent">
-    <p-table [value]="transactions" styleClass="p-datatable-striped" [tableStyle]="{'min-width': '50rem'}">
-      <ng-template pTemplate="caption">
-        Ostatnie Transakcje
-      </ng-template>
-      <ng-template pTemplate="header">
-        <tr>
-          <th>Wykonawca</th>
-          <th>Kwota</th>
-          <th>Data</th>
-          <th>Dług</th>
-          <th>Status długu</th>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-transaction>
-        <tr class="text-black-alpha-90 font-semibold">
-          <td>
-            <p-chip label="{{transaction.debt.debtor.firstName}} {{transaction.debt.debtor.surname}}"
-                    icon="pi pi-user"></p-chip>
-          </td>
-          <td>{{ transaction.amount }} PLN</td>
-          <td>{{ transaction.paymentDate | transformDateWithHour }}</td>
-          <td>{{ transaction.debt.description }}</td>
-          <td>{{ transaction.debt.status}}</td>
-
-        </tr>
-      </ng-template>
-    </p-table>
+</div>
+  <ng-container *ngIf="!isMobileVisible; else mobileTable">
+    <ng-container *ngIf="!isLoading; else loadingContent">
+      <p-table [value]="transactions"  [tableStyle]="{'min-width': '50rem'}">
+        <ng-template pTemplate="caption">
+          Ostatnie Transakcje
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Wykonawca</th>
+            <th>Kwota</th>
+            <th>Data</th>
+            <th>Dług</th>
+            <th>Status długu</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-transaction>
+          <tr class="text-black-alpha-90 font-semibold">
+            <td>
+              <p-chip label="{{transaction.debt.debtor.firstName}} {{transaction.debt.debtor.surname}}" [image]="profileImage" styleClass="mr-2"></p-chip>
+            </td>
+            <td>{{ transaction.amount }} PLN</td>
+            <td>{{ transaction.paymentDate | transformDateWithHour }}</td>
+            <td>{{ transaction.debt.description }}</td>
+            <td><span
+              [class]="'status-' + (transaction.debt.status ? transaction.debt.status.toLowerCase() : '')">{{ getDebtStatus(transaction.debt.status) }}</span>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </ng-container>
   </ng-container>
-</ng-container>
+
+
 
 <ng-template #mobileTable>
   <ng-container *ngIf="!isLoading; else loadingMobileContent">
@@ -48,18 +54,24 @@
       </ng-template>
       <ng-template pTemplate="header">
         <tr>
-          <th>Wykonawca</th>
+          <th>Data/Wykonawca</th>
           <th>Kwota</th>
-          <th>Status długu</th>
+          <th>Dług/Status</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-transaction>
         <tr class="text-black-alpha-90 font-semibold">
           <td>
-            <p-chip label="{{transaction.debt.debtor.firstName}} {{transaction.debt.debtor.surname}}"
-                    icon="pi pi-user"></p-chip>
+            <p>{{ transaction.paymentDate | transformDateWithHour }}</p>
+            <p-chip label="{{transaction.debt.debtor.firstName}} {{transaction.debt.debtor.surname}}" [image]="profileImage" styleClass="mr-2"></p-chip>
           </td>
           <td>{{ transaction.amount }} PLN</td>
+          <td>
+            {{ transaction.debt.description }}
+          <span
+            [class]="'status-' + (transaction.debt.status ? transaction.debt.status.toLowerCase() : '')">{{ getDebtStatus(transaction.debt.status) }}</span>
+
+          </td>
         </tr>
       </ng-template>
     </p-table>

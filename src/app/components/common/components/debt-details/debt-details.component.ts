@@ -1,5 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { DebtDTO } from '../../models/debt-dto';
+import { DebtDTO, DebtStatus } from '../../models/debt-dto';
 import { ActivatedRoute } from '@angular/router';
 import { DebtService } from '../../../../services/debt.service';
 import { Page } from '../../models/page';
@@ -7,6 +7,7 @@ import { Transaction } from '../../models/transaction';
 import { TransactionService } from '../../../../services/transaction.service';
 import { MessageService } from 'primeng/api';
 import { Debt } from '../../models/debt';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-debt-details',
@@ -23,11 +24,13 @@ export class DebtDetailsComponent implements OnInit {
   isLoading: boolean = true;
   isMobileVisible = false;
   skeletonTransactions: any[] = [1, 2, 3, 4, 5];
+  profileImage = 'assets/images/user.png';
 
   constructor(
     private route: ActivatedRoute,
     private debtService: DebtService,
     private transactionService: TransactionService,
+    private messageService: MessageService,
   ) {
   }
 
@@ -71,9 +74,34 @@ export class DebtDetailsComponent implements OnInit {
       error: error => {
         console.error('Error loading transactions', error);
         this.isLoading = false;
-        // this.showError('Błąd Servera', 'Nie udało się pobrać transakcji');
+         this.showError('Błąd Servera', 'Nie udało się pobrać transakcji');
       }
     });
   }
 
+  getDebtStatus(status: DebtStatus | undefined): string {
+    switch (status) {
+      case DebtStatus.ACTIVE:
+        return 'AKTYWNY';
+      case DebtStatus.FINISHED:
+        return 'ZAKOŃCZONY';
+      case DebtStatus.CANCELLED:
+        return 'ANULUWANY';
+      case DebtStatus.ARCHIVED:
+        return 'ZARCHYWIZOWANY';
+      default:
+        return '';
+    }
+  }
+
+  showError(title: string, content: string) {
+    this.messageService.add({
+      key: 'tr',
+      severity: 'error',
+      summary: title,
+      detail: content,
+      life: 10000
+
+    });
+  }
 }
