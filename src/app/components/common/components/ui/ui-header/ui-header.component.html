@@ -9,6 +9,6 @@
     </div>
   </div>
   <div class="ml-4 mt-4">
-    <div class="header__text">{{ text }}</div>
+    <div *ngIf="text != undefined && text !== ''" class="header__text">{{ text  }}</div>
   </div>
 </div>

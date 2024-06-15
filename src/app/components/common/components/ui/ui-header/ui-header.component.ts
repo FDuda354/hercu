@@ -9,5 +9,5 @@ export class UiHeaderComponent {
   @Input() backButton!: string;
   @Input() closeButton!: string;
   @Input() showCloseButton: boolean = false;
-  @Input() text: string = '';
+  @Input() text: string | undefined;
 }

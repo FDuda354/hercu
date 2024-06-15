@@ -29,6 +29,7 @@ export class DebtDetailsComponent implements OnInit {
   profileImage = 'assets/images/user.png';
   user: CustomerDTO = {}
   pay: boolean = false;
+  loadError: boolean = false;
 
 
   constructor(
@@ -64,6 +65,7 @@ export class DebtDetailsComponent implements OnInit {
         this.debt = debt
       },
       error: error => {
+        this.loadError =true
         console.error('Error loading customers', error);
 
       }
