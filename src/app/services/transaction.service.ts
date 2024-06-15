@@ -31,7 +31,7 @@ export class TransactionService {
   }
 
   rollBackTransaction(id: number | undefined): Observable<void> {
-    return this.http.delete<void>(this.baseUrl + `/api/transaction/rolback?transactionId=${id}`)
+    return this.http.delete<void>(this.baseUrl + `/api/transaction?transactionId=${id}`)
 
   }
 }

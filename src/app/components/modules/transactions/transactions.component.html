@@ -81,7 +81,7 @@
     </mat-card>
 
 
-    <div class="flex flex-row">
+    <div *ngIf="isOwner(transaction.debt?.debtor?.id)" class="flex flex-row">
       <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning m-1"
               (click)="deleteTransaction(transaction)"></button>
     </div>
