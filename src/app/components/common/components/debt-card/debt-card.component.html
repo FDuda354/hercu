@@ -1,4 +1,4 @@
-<p-card [style]="{width: '250px', height:'400px'}" styleClass="p-card-shadow text-center">
+<p-card [style]="{width: '250px', height:'430px'}" styleClass="p-card-shadow text-center">
   <ng-template pTemplate="header">
     <div>
       <img class="border-round-top cover"
@@ -15,14 +15,19 @@
           alt="customer-avatar">
       </div>
       </div>
-    <h2 style="color: #ff6d6d">{{ debt.amount }} PLN</h2>
-    <!--    #77DD77-->
+    <h2 style="color: #77DD77">{{ debt.amount }} PLN</h2>
   </ng-template>
   <div class="surface-overlay white-space-nowrap overflow-hidden " style="margin-top: -50px">
-    <div>
+    <div *ngIf="debt.repaymentDate == null">
+      Brak terminu
+    </div>
+    <div *ngIf="debt.repaymentDate != null">
       do {{ debt.repaymentDate | transformDate }}
     </div>
-    <h2>{{ debt.customer?.firstName }} {{ debt.customer?.surname }}</h2>
+    <div style="margin-top: 15px;">
+     <span [class]="'status-' + (debt.status ? debt.status.toLowerCase() : '')" >{{ getDebtStatus(debt.status) }}</span>
+    </div>
+    <h3>{{ debt.customer?.firstName }} {{ debt.customer?.surname }}</h3>
     <p class="text-gray-600 font-light text-overflow-ellipsis"
        style="font-size: 15px; margin-top: -15px; margin-bottom: 25px">{{ debt.customer?.email }}</p>
     <button

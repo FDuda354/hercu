@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { DebtDTO } from '../../models/debt-dto';
+import { DebtDTO, DebtStatus } from '../../models/debt-dto';
 import { CustomerService } from '../../../../services/customer.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Page } from '../../models/page';
@@ -54,7 +54,19 @@ export class DebtCardComponent implements OnInit{
     this.details.emit(this.debt);
   }
 
-
-
+  getDebtStatus(status: DebtStatus | undefined): string {
+    switch (status) {
+      case DebtStatus.ACTIVE:
+        return 'AKTYWNY';
+      case DebtStatus.FINISHED:
+        return 'ZAKOŃCZONY';
+      case DebtStatus.CANCELLED:
+        return 'ANULUWANY';
+      case DebtStatus.ARCHIVED:
+        return 'ZARCHYWIZOWANY';
+      default:
+        return '';
+    }
+  }
 
 }
