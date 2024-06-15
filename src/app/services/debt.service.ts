@@ -30,12 +30,12 @@ export class DebtService {
     return this.http.get<number>(this.baseUrl + `/api/debt/summary/credit`)
   }
 
-  getDebtsForCreditor(page: number, size: number): Observable<Page<DebtDTO>> {
-    return this.http.get<Page<DebtDTO>>(this.baseUrl + `/api/debt/creditors?page=${page}&size=${size}`)
+  getDebtsForCreditor(page: number, size: number, onlyActive: boolean): Observable<Page<DebtDTO>> {
+    return this.http.get<Page<DebtDTO>>(this.baseUrl + `/api/debt/creditors?page=${page}&size=${size}&onlyActive=${onlyActive}`)
   }
 
-  getDebtsForDebtor(page: number, size: number): Observable<Page<DebtDTO>> {
-    return this.http.get<Page<DebtDTO>>(this.baseUrl + `/api/debt/debtors?page=${page}&size=${size}`)
+  getDebtsForDebtor(page: number, size: number, onlyActive: boolean): Observable<Page<DebtDTO>> {
+    return this.http.get<Page<DebtDTO>>(this.baseUrl + `/api/debt/debtors?page=${page}&size=${size}&onlyActive=${onlyActive}`)
   }
 
   getDebtsCount(): Observable<number> {

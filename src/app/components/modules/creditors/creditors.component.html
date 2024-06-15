@@ -5,12 +5,20 @@
   <ng-container *ngIf="!loadError; else errorState">
 
     <div class="min-h-full">
-      <button pButton pRipple type="button"
-              icon="pi pi-plus"
-              label="Dodaj Wierzycielstwo"
-              class="p-button-outlined p-button-rounded p-button-success"
-              (click)="display = true">
-      </button>
+      <div class="flex flex-row">
+        <div class="flex">
+          <button pButton pRipple type="button"
+                  icon="pi pi-plus"
+                  label="Dodaj Wierzycielstwo"
+                  class="p-button-outlined p-button-rounded p-button-success"
+                  (click)="display = true">
+          </button>
+        </div>
+        <div class="flex field-checkbox ml-4 mt-3">
+          <p-checkbox (onChange)="loadDebts(0,5)" [(ngModel)]="onlyActive" [binary]="true" inputId="binary"></p-checkbox>
+          <label> Tylko aktywne</label>
+        </div>
+      </div>
       <div *ngIf="isMobileVisible" class="block md:hidden">
         <p-sidebar [(visible)]="display" position="right" [style]="{width:'100%'}"
                    [transitionOptions]="'300ms cubic-bezier(0, 0, 0.2, 1)'">
@@ -26,7 +34,7 @@
           <app-debt-card
             *ngFor="let debt of debts; let index = index"
             [debt]="debt"
-            [type]="'debtor'"
+            [isDebt]="true"
             [customerIndex]="index"
             (details)="goToDetails(debt.id)"
           ></app-debt-card>

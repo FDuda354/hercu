@@ -6,6 +6,7 @@ export interface Debt {
   debtor?: CustomerDTO,
   creditor?: CustomerDTO,
   amount?: number,
+  staredAmount?: number,
   description?: string,
   repaymentDate?: Date,
   startDate?: Date,

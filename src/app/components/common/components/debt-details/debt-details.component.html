@@ -20,7 +20,8 @@
 
     <div class="p-1 flex flex-column">
       <div class="flex justify-content-center align-items-center flex-wrap gap-5 mt-4 pb-2">
-        <p-card header="Kwota długu" [style]="{'width': '20rem', 'margin-bottom': '1em'}">{{ debt.amount }} PLN</p-card>
+        <p-card header="Aktyalny dług" [style]="{'width': '20rem', 'margin-bottom': '1em'}">{{ debt.amount }} PLN</p-card>
+        <p-card header="Kwota długu" [style]="{'width': '20rem', 'margin-bottom': '1em'}">{{ debt.staredAmount }} PLN</p-card>
         <p-card header="Dług rozpoczęto"
                 [style]="{'width': '20rem', 'margin-bottom': '1em'}">{{ debt.startDate | date }}
         </p-card>

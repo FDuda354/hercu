@@ -23,6 +23,7 @@ export class CreditorsComponent implements OnInit {
   currentPage = 0;
   isLoading: boolean = true;
   loadError: boolean = false;
+  onlyActive: boolean = true;
 
   constructor(
     private debtService: DebtService,
@@ -45,7 +46,7 @@ export class CreditorsComponent implements OnInit {
   }
 
   loadDebts(page: number, size: number) {
-    this.debtService.getDebtsForDebtor(page, size).subscribe({
+    this.debtService.getDebtsForDebtor(page, size, this.onlyActive).subscribe({
       next: (page: Page<DebtDTO>) => {
         this.debts = page.content;
         this.totalRecords = page.totalElements;

@@ -11,7 +11,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./debt-card.component.scss']
 })
 export class DebtCardComponent implements OnInit{
-  @Input() type!: string;
+  @Input() isDebt: boolean = true;
   @Input() debt: DebtDTO = {};
   @Input() customerIndex = 0;
   @Output() details: EventEmitter<DebtDTO> = new EventEmitter<DebtDTO>();

@@ -15,7 +15,8 @@
           alt="customer-avatar">
       </div>
       </div>
-    <h2 style="color: #77DD77">{{ debt.amount }} PLN</h2>
+    <h2 [ngStyle]="{'color': isDebt ? '#ff6d6d' : '#77DD77'}">{{ debt.amount }} PLN</h2>
+    <!--    #77DD77-->
   </ng-template>
   <div class="surface-overlay white-space-nowrap overflow-hidden " style="margin-top: -50px">
     <div *ngIf="debt.repaymentDate == null">
