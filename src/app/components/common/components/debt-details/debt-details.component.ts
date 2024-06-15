@@ -21,10 +21,12 @@ export class DebtDetailsComponent implements OnInit {
   transactions!: Transaction[]
   totalRecords: number = 0;
   rows: number = 5;
+  currentPage = 0;
   isLoading: boolean = true;
   isMobileVisible = false;
   skeletonTransactions: any[] = [1, 2, 3, 4, 5];
   profileImage = 'assets/images/user.png';
+
 
   constructor(
     private route: ActivatedRoute,
@@ -77,6 +79,14 @@ export class DebtDetailsComponent implements OnInit {
          this.showError('Błąd Servera', 'Nie udało się pobrać transakcji');
       }
     });
+  }
+
+  onPageChange(event: any) {
+    if (this.id) {
+      this.isLoading = true;
+      this.currentPage = event.page;
+      this.loadTransaction(this.id, event.page, event.rows);
+    }
   }
 
   getDebtStatus(status: DebtStatus | undefined): string {

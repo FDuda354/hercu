@@ -20,6 +20,7 @@ export class TransactionsComponent implements OnInit {
   skeletonTransactions: any[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   totalRecords: number = 0;
   rows: number = 10;
+  currentPage = 0;
   loadError: boolean = false;
 
 
@@ -88,6 +89,7 @@ export class TransactionsComponent implements OnInit {
   onPageChange(event: any) {
     this.isLoading = true;
     this.loadTransaction(event.page, event.rows);
+    this.currentPage = event.page;
   }
 
   isOwner(id: number | undefined) {

@@ -20,6 +20,7 @@ export class CreditorsComponent implements OnInit {
   debts: DebtDTO[] = [];
   totalRecords: number = 0;
   rows: number = 5;
+  currentPage = 0;
   isLoading: boolean = true;
   loadError: boolean = false;
 
@@ -63,6 +64,7 @@ export class CreditorsComponent implements OnInit {
 
   onPageChange(event: any) {
     this.isLoading = true;
+    this.currentPage = event.page;
     this.loadDebts(event.page, event.rows);
   }
 

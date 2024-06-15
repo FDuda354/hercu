@@ -41,6 +41,8 @@
         [totalRecords]="totalRecords"
         (onPageChange)="onPageChange($event)"
         [rowsPerPageOptions]="[5, 10, 20]"
+        [first]="currentPage * rows"
+        [currentPageReportTemplate]="'({currentPage} of {totalPages})'"
       ></p-paginator>
     </div>
   </ng-container>

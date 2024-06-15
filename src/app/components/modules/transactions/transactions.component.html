@@ -17,6 +17,8 @@
     [totalRecords]="totalRecords"
     (onPageChange)="onPageChange($event)"
     [rowsPerPageOptions]="[15, 25, 30]"
+    [first]="currentPage * rows"
+    [currentPageReportTemplate]="'({currentPage} of {totalPages})'"
   ></p-paginator>
 </div>
 
