@@ -1,0 +1,12 @@
+<div class="setting__item" (click)="navigateTo(link)">
+  <p-card header="" [style]="getCardStyle()" >
+    <ng-template pTemplate="header">
+      <i class="pi {{icon}} setting__item__header ml-3 mt-3"></i>
+    </ng-template>
+    <ng-template pTemplate="footer">
+      <div class="setting__item__content">
+        {{ text }}
+      </div>
+    </ng-template>
+  </p-card>
+</div>

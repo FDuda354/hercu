@@ -10,6 +10,7 @@ import { LoginComponent } from './components/modules/login/login.component';
 import { UserAuthGuard } from './components/common/guard/user-auth-guard';
 import { RegistrationPageComponent } from './components/modules/registration-page/registration-page.component';
 import { DebtDetailsComponent } from './components/common/components/debt-details/debt-details.component';
+import { PasswordChangeComponent } from './components/modules/settings/password-change/password-change.component';
 
 
 const routes: Routes = [
@@ -20,11 +21,12 @@ const routes: Routes = [
       {path: 'creditors', component: CreditorsComponent, canActivate: [UserAuthGuard]},
       {path: 'transactions', component: TransactionsComponent, canActivate: [UserAuthGuard]},
       {path: 'settings', component: SettingsComponent, canActivate: [UserAuthGuard]},
+      {path: 'password-change', component: PasswordChangeComponent, canActivate: [UserAuthGuard]},
 
     ]
   },
   {
-    path: 'debt/:id', component: DebtDetailsComponent,
+    path: 'debt/:id', component: DebtDetailsComponent, canActivate: [UserAuthGuard],
   },
   {
     path: 'login', component: LoginComponent,

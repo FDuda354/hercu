@@ -1,1 +1,14 @@
-<p>settings works!</p>
+<div class="flex flex-wrap gap-5 mt-4 pb-2" [ngClass]="{'justify-content-center align-items-center': isMobileVisible}" >
+<app-setting-item
+[text]="'Zmiana hasła'"
+[icon]="'pi-lock'"
+[link]="'/password-change'"
+></app-setting-item>
+<app-setting-item
+[text]="'Zdjęcie Profilowe (TBA)'"
+[icon]="'pi-upload'"
+[link]="''"
+[enabled]="false"
+></app-setting-item>
+</div>
+

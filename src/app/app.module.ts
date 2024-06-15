@@ -57,6 +57,8 @@ import { DebtDetailsComponent } from './components/common/components/debt-detail
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { UiHeaderComponent } from './components/common/components/ui/ui-header/ui-header.component';
 import { PayFormComponent } from './components/common/components/debt-details/pay-form/pay-form.component';
+import { SettingItemComponent } from './components/modules/settings/setting-item/setting-item.component';
+import { PasswordChangeComponent } from './components/modules/settings/password-change/password-change.component';
 
 @NgModule({
   declarations: [
@@ -84,6 +86,8 @@ import { PayFormComponent } from './components/common/components/debt-details/pa
     DebtDetailsComponent,
     UiHeaderComponent,
     PayFormComponent,
+    SettingItemComponent,
+    PasswordChangeComponent,
   ],
   imports: [
     BrowserModule,
