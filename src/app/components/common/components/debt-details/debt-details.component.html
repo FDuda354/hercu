@@ -1,63 +1,86 @@
-<p-toast position="top-right" key="tr"></p-toast>
 <ui-header
-  [backButton]="'/debtors'"
-  [text]="user.id === debt.debtor?.id ? 'Dług: ' : 'Wierzycielstwo: ' + debt.description "
+  [backButton]="user.id === debt.debtor?.id ? '/creditors' : '/debtors'"
+  [text]="user.id === debt.debtor?.id ? 'Dług: ' + debt.description : 'Wierzycielstwo: ' + debt.description"
 ></ui-header>
+
+<p-toast position="top-right" key="tr"></p-toast>
+<div class="flex justify-content-center align-items-center">
+  <button
+    *ngIf="user.id === debt.debtor?.id"
+    pButton pRipple type="button"
+    icon="pi pi-plus"
+    label="Spłacaj"
+    class="p-button-outlined p-button-rounded p-button-success"
+    (click)="pay = true">
+  </button>
+</div>
+
 
 <div class="p-1 flex flex-column">
   <div class="flex justify-content-center align-items-center flex-wrap gap-5 mt-4 pb-2">
     <p-card header="Kwota długu" [style]="{'width': '20rem', 'margin-bottom': '1em'}">{{ debt.amount }} PLN</p-card>
-    <p-card header="Dług rozpoczęto" [style]="{'width': '20rem', 'margin-bottom': '1em'}">{{ debt.startDate | date  }}</p-card>
-    <p-card header="Data spłaty" [style]="{'width': '20rem', 'margin-bottom': '1em'}">{{ debt.repaymentDate | date }}</p-card>
+    <p-card header="Dług rozpoczęto" [style]="{'width': '20rem', 'margin-bottom': '1em'}">{{ debt.startDate | date }}
+    </p-card>
+    <p-card header="Data spłaty" [style]="{'width': '20rem', 'margin-bottom': '1em'}">{{ debt.repaymentDate == null ? 'Brak daty' : debt.repaymentDate | date }}
+    </p-card>
     <p-card header="Status" [style]="{'width': '20rem', 'margin-bottom': '1em'}"><span
-      [class]="'status-' + (debt.status ? debt.status.toLowerCase() : '')">{{ getDebtStatus(debt.status) }}</span></p-card>
+      [class]="'status-' + (debt.status ? debt.status.toLowerCase() : '')">{{ getDebtStatus(debt.status) }}</span>
+    </p-card>
   </div>
-
 </div>
-  <ng-container *ngIf="!isMobileVisible; else mobileTable">
-    <ng-container *ngIf="!isLoading; else loadingContent">
-      <p-table [value]="transactions"  [tableStyle]="{'min-width': '50rem'}">
-        <ng-template pTemplate="caption">
-          Transakcje
-        </ng-template>
-        <ng-template pTemplate="header">
-          <tr>
-            <th>Wykonawca</th>
-            <th>Kwota</th>
-            <th>Data</th>
-            <th>Dług</th>
-            <th>Status długu</th>
-          </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-transaction>
-          <tr class="text-black-alpha-90 font-semibold">
-            <td>
-              <p-chip label="{{transaction.debt.debtor.firstName}} {{transaction.debt.debtor.surname}}" [image]="profileImage" styleClass="mr-2"></p-chip>
-            </td>
-            <td>{{ transaction.amount }} PLN</td>
-            <td>{{ transaction.paymentDate | transformDateWithHour }}</td>
-            <td>{{ transaction.debt.description }}</td>
-            <td><span
-              [class]="'status-' + (transaction.debt.status ? transaction.debt.status.toLowerCase() : '')">{{ getDebtStatus(transaction.debt.status) }}</span>
-            </td>
-          </tr>
-        </ng-template>
-      </p-table>
-      <div *ngIf="totalRecords >= 5" class="flex flex-row justify-content-center align-content-end">
-        <p-paginator
-          [rows]="rows"
-          [totalRecords]="totalRecords"
-          (onPageChange)="onPageChange($event)"
-          [rowsPerPageOptions]="[5, 10, 20]"
-          [first]="currentPage * rows"
-          [currentPageReportTemplate]="'({currentPage} of {totalPages})'"
-        ></p-paginator>
-      </div>
-    </ng-container>
+
+<div *ngIf="isMobileVisible" class="block md:hidden">
+  <p-sidebar [(visible)]="pay" position="right" [style]="{width:'100%'}"
+             [transitionOptions]="'300ms cubic-bezier(0, 0, 0.2, 1)'">
+    <app-pay-form (paymentAdded)="paymentAdded($event)" [debt]="debt"></app-pay-form>
+  </p-sidebar>
+</div>
+<p-sidebar [(visible)]="pay" position="right" [style]="{width:'70%',  maxWidth: '800px' }"
+           [transitionOptions]="'300ms cubic-bezier(0, 0, 0.2, 1)'">
+  <app-pay-form (paymentAdded)="paymentAdded($event)" [debt]="debt"></app-pay-form>
+</p-sidebar>
+
+<!--table-->
+<ng-container *ngIf="!isMobileVisible; else mobileTable">
+  <ng-container *ngIf="!isLoading; else loadingContent">
+    <p-table [value]="transactions" [tableStyle]="{'min-width': '50rem'}">
+      <ng-template pTemplate="caption">
+        Transakcje
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Wykonawca</th>
+          <th>Opis</th>
+          <th>Kwota</th>
+          <th>Data</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-transaction>
+        <tr class="text-black-alpha-90 font-semibold">
+          <td>
+            <p-chip label="{{transaction.debt.debtor.firstName}} {{transaction.debt.debtor.surname}}"
+                    [image]="profileImage" styleClass="mr-2"></p-chip>
+          </td>
+          <td>{{ transaction.description == '' ? '-' : transaction.description }}</td>
+          <td>{{ transaction.amount }} PLN</td>
+          <td>{{ transaction.paymentDate | transformDateWithHour }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+    <div *ngIf="totalRecords > 5" class="flex flex-row justify-content-center align-content-end">
+      <p-paginator
+        [rows]="rows"
+        [totalRecords]="totalRecords"
+        (onPageChange)="onPageChange($event)"
+        [rowsPerPageOptions]="[5, 10, 20]"
+        [first]="currentPage * rows"
+        [currentPageReportTemplate]="'({currentPage} of {totalPages})'"
+      ></p-paginator>
+    </div>
   </ng-container>
+</ng-container>
 
-
-<!--mobile-->
+<!--table mobile-->
 <ng-template #mobileTable>
   <ng-container *ngIf="!isLoading; else loadingMobileContent">
     <p-table [value]="transactions" styleClass="p-datatable-striped">
@@ -67,26 +90,32 @@
       <ng-template pTemplate="header">
         <tr>
           <th>Data/Wykonawca</th>
+          <th>Opis</th>
           <th>Kwota</th>
-          <th>Dług/Status</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-transaction>
         <tr class="text-black-alpha-90 font-semibold">
           <td>
             <p>{{ transaction.paymentDate | transformDateWithHour }}</p>
-            <p-chip label="{{transaction.debt.debtor.firstName}} {{transaction.debt.debtor.surname}}" [image]="profileImage" styleClass="mr-2"></p-chip>
+            <p-chip label="{{transaction.debt.debtor.firstName}} {{transaction.debt.debtor.surname}}"
+                    [image]="profileImage" styleClass="mr-2"></p-chip>
           </td>
+          <td>{{ transaction.description == '' ? '-' : transaction.description }}</td>
           <td>{{ transaction.amount }} PLN</td>
-          <td>
-            {{ transaction.debt.description }}
-          <span
-            [class]="'status-' + (transaction.debt.status ? transaction.debt.status.toLowerCase() : '')">{{ getDebtStatus(transaction.debt.status) }}</span>
-
-          </td>
         </tr>
       </ng-template>
     </p-table>
+    <div *ngIf="totalRecords > 5" class="flex flex-row justify-content-center align-content-end">
+      <p-paginator
+        [rows]="rows"
+        [totalRecords]="totalRecords"
+        (onPageChange)="onPageChange($event)"
+        [rowsPerPageOptions]="[5, 10, 20]"
+        [first]="currentPage * rows"
+        [currentPageReportTemplate]="'({currentPage} of {totalPages})'"
+      ></p-paginator>
+    </div>
   </ng-container>
 
 </ng-template>

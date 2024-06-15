@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Page } from '../components/common/models/page';
 import { Transaction } from '../components/common/models/transaction';
+import { DebtRequest } from '../components/common/components/add-debt/debt-request';
+import { TransactionRequest } from '../components/common/components/debt-details/pay-form/pay-form.component';
 
 @Injectable({
   providedIn: 'root'
@@ -23,5 +25,9 @@ export class TransactionService {
 
   getTransactionsByDebtId(id: string, page: number, size: number) {
     return this.http.get<Page<Transaction>>(this.baseUrl + `/api/transaction?debtId=${id}&page=${page}&size=${size}`)
+  }
+
+  addTransaction(transactionRequest: TransactionRequest): Observable<void> {
+    return this.http.post<void>(this.baseUrl + `/api/transaction`, transactionRequest)
   }
 }

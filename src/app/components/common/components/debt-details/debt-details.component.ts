@@ -1,5 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { DebtDTO, DebtStatus } from '../../models/debt-dto';
+import { DebtStatus } from '../../models/debt-dto';
 import { ActivatedRoute } from '@angular/router';
 import { DebtService } from '../../../../services/debt.service';
 import { Page } from '../../models/page';
@@ -7,7 +7,6 @@ import { Transaction } from '../../models/transaction';
 import { TransactionService } from '../../../../services/transaction.service';
 import { MessageService } from 'primeng/api';
 import { Debt } from '../../models/debt';
-import { HttpErrorResponse } from '@angular/common/http';
 import { CustomerDTO } from '../../models/customer-dto';
 import { JwtService } from '../../../../services/auth/jwt.service';
 
@@ -29,6 +28,7 @@ export class DebtDetailsComponent implements OnInit {
   skeletonTransactions: any[] = [1, 2, 3, 4, 5];
   profileImage = 'assets/images/user.png';
   user: CustomerDTO = {}
+  pay: boolean = false;
 
 
   constructor(
@@ -37,7 +37,6 @@ export class DebtDetailsComponent implements OnInit {
     private transactionService: TransactionService,
     private messageService: MessageService,
     private jwtService: JwtService,
-
   ) {
   }
 
@@ -52,7 +51,6 @@ export class DebtDetailsComponent implements OnInit {
     this.user = JSON.parse(<string>this.jwtService.getCustomer());
 
 
-
     if (this.id) {
       this.loadDebt(this.id)
       this.loadTransaction(this.id, 0, 10)
@@ -63,9 +61,7 @@ export class DebtDetailsComponent implements OnInit {
   private loadDebt(id: string) {
     this.debtService.getDebtById(id).subscribe({
       next: (debt: Debt) => {
-        console.log(debt)
         this.debt = debt
-        console.log(this.debt)
       },
       error: error => {
         console.error('Error loading customers', error);
@@ -86,7 +82,7 @@ export class DebtDetailsComponent implements OnInit {
       error: error => {
         console.error('Error loading transactions', error);
         this.isLoading = false;
-         this.showError('Błąd Servera', 'Nie udało się pobrać transakcji');
+        this.showError('Błąd Servera', 'Nie udało się pobrać transakcji');
       }
     });
   }
@@ -114,6 +110,16 @@ export class DebtDetailsComponent implements OnInit {
     }
   }
 
+  paymentAdded($event: void) {
+    this.isLoading = true;
+    this.pay = false;
+    if (this.id) {
+      this.loadDebt(this.id)
+      this.loadTransaction(this.id, 0, 10)
+    }
+    this.showSuccess('Sukces', 'Udało się dodać transakcje')
+  }
+
   showError(title: string, content: string) {
     this.messageService.add({
       key: 'tr',
@@ -124,4 +130,16 @@ export class DebtDetailsComponent implements OnInit {
 
     });
   }
+
+  showSuccess(title: string, content: string) {
+    this.messageService.add({
+      key: 'tr',
+      severity: 'success',
+      summary: title,
+      detail: content,
+      life: 5000
+    });
+  }
+
+
 }

@@ -11,7 +11,7 @@
   </ng-container>
 </mat-accordion>
 <p-toast position="top-right" key="tr"></p-toast>
-<div *ngIf="totalRecords >= 15" class="flex flex-row justify-content-center align-content-end">
+<div *ngIf="totalRecords > 15" class="flex flex-row justify-content-center align-content-end">
   <p-paginator
     [rows]="rows"
     [totalRecords]="totalRecords"

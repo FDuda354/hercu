@@ -4,14 +4,7 @@ import { MessageService } from 'primeng/api';
 import { JwtService } from '../../../../services/auth/jwt.service';
 import { CustomerDTO } from '../../models/customer-dto';
 import { DebtService } from '../../../../services/debt.service';
-
-interface ValidateResp {
-  isValid: boolean,
-  isEmailTheSame: boolean,
-  isEmailValid: boolean,
-  isDescValid: boolean,
-  isAmountValid: boolean,
-}
+import { ValidateResp } from '../../models/ValidateResp';
 
 @Component({
   selector: 'app-menage-debt',

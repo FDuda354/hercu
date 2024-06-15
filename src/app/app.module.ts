@@ -56,6 +56,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { DebtDetailsComponent } from './components/common/components/debt-details/debt-details.component';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { UiHeaderComponent } from './components/common/components/ui/ui-header/ui-header.component';
+import { PayFormComponent } from './components/common/components/debt-details/pay-form/pay-form.component';
 
 @NgModule({
   declarations: [
@@ -82,6 +83,7 @@ import { UiHeaderComponent } from './components/common/components/ui/ui-header/u
     RegistrationFormComponent,
     DebtDetailsComponent,
     UiHeaderComponent,
+    PayFormComponent,
   ],
   imports: [
     BrowserModule,

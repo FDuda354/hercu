@@ -35,7 +35,7 @@
       </ng-container>
     </div>
 
-    <div *ngIf="totalRecords >= 5" class="flex flex-row justify-content-center align-content-end">
+    <div *ngIf="totalRecords > 5" class="flex flex-row justify-content-center align-content-end">
       <p-paginator
         [rows]="rows"
         [totalRecords]="totalRecords"
