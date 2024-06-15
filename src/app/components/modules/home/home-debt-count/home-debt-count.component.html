@@ -3,14 +3,14 @@
     class="flex flex-column text-gray-800 align-items-start justify-content-between shadow-5 m-3 surface-card text-center p-3 border-round-sm font-semibold"
     style="min-width: 300px; min-height: 300px;">
     <div class="red-text text-5xl">Długi: {{ debtCountSummary }}</div>
-    <div class="red-text text-4xl">{{ debtSummary }} PLN</div>
+    <div class="red-text text-4xl">{{ debtSummary | number:'1.0-2'}} PLN</div>
     <div class="green-text  text-3xl">Wierzytelności: {{ creditCountSummary }}</div>
-    <div class="green-text text-4xl">{{ creditSummary }} PLN</div>
+    <div class="green-text text-4xl">{{ creditSummary | number:'1.0-2'}} PLN</div>
     <div class=" text-3xl">Suma:</div>
     <div [ngStyle]="{
     'color': balance < 0 ? '#ff6d0d' :
              balance == 0 ? '#FFD700' : '#77DD07'
-}" class="text-3xl">{{ balance }} PLN
+}" class="text-3xl">{{ balance | number:'1.0-2'}} PLN
     </div>
   </div>
 </ng-container>
