@@ -1,11 +1,10 @@
 <p-toast position="top-right" key="tr"></p-toast>
 <ui-header
   [backButton]="'/debtors'"
-  [text]="user.id === debt.debtor?.id ? 'Dług:' : 'Wierzycielstwo:' + debt.description "
+  [text]="user.id === debt.debtor?.id ? 'Dług: ' : 'Wierzycielstwo: ' + debt.description "
 ></ui-header>
+
 <div class="p-1 flex flex-column">
-
-
   <div class="flex justify-content-center align-items-center flex-wrap gap-5 mt-4 pb-2">
     <p-card header="Kwota długu" [style]="{'width': '20rem', 'margin-bottom': '1em'}">{{ debt.amount }} PLN</p-card>
     <p-card header="Dług rozpoczęto" [style]="{'width': '20rem', 'margin-bottom': '1em'}">{{ debt.startDate | date  }}</p-card>
@@ -13,7 +12,6 @@
     <p-card header="Status" [style]="{'width': '20rem', 'margin-bottom': '1em'}"><span
       [class]="'status-' + (debt.status ? debt.status.toLowerCase() : '')">{{ getDebtStatus(debt.status) }}</span></p-card>
   </div>
-
 
 </div>
   <ng-container *ngIf="!isMobileVisible; else mobileTable">
