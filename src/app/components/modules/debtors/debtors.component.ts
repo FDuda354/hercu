@@ -1,9 +1,8 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Page } from '../../common/models/page';
-import { MessageService, PrimeNGConfig } from 'primeng/api';
+import { MessageService } from 'primeng/api';
 import { DebtService } from '../../../services/debt.service';
 import { DebtDTO } from '../../common/models/debt-dto';
-import { JwtService } from '../../../services/auth/jwt.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -27,8 +26,6 @@ export class DebtorsComponent implements OnInit {
   constructor(
     private debtService: DebtService,
     private messageService: MessageService,
-    private primengConfig: PrimeNGConfig, //TODO do usuniecia
-    private jwtService: JwtService,//TODO do usuniecia
     private router: Router,
   ) {
   }
@@ -40,7 +37,6 @@ export class DebtorsComponent implements OnInit {
 
   ngOnInit(): void {
     this.isMobileVisible = window.innerWidth <= 768;
-    this.primengConfig.ripple = true;
     this.loadDebts(0, this.rows);
   }
 

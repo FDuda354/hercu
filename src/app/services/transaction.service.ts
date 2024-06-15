@@ -4,7 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Page } from '../components/common/models/page';
 import { Transaction } from '../components/common/models/transaction';
-import { DebtRequest } from '../components/common/components/add-debt/debt-request';
 import { TransactionRequest } from '../components/common/components/debt-details/pay-form/pay-form.component';
 
 @Injectable({

@@ -1,8 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DebtDTO, DebtStatus } from '../../models/debt-dto';
 import { CustomerService } from '../../../../services/customer.service';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { Page } from '../../models/page';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
@@ -10,7 +8,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   templateUrl: './debt-card.component.html',
   styleUrls: ['./debt-card.component.scss']
 })
-export class DebtCardComponent implements OnInit{
+export class DebtCardComponent implements OnInit {
   @Input() isDebt: boolean = true;
   @Input() debt: DebtDTO = {};
   @Input() customerIndex = 0;
@@ -30,7 +28,7 @@ export class DebtCardComponent implements OnInit{
   }
 
   loadCustomerImage(customerImage: string | undefined): Promise<string> {
-    if(customerImage == undefined){
+    if (customerImage == undefined) {
       return Promise.resolve('assets/images/user.png');
     }
     return new Promise((resolve, reject) => {

@@ -1,10 +1,8 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { CustomerDTO } from '../../common/models/customer-dto';
-import { MessageService, PrimeNGConfig } from 'primeng/api';
+import { MessageService } from 'primeng/api';
 import { Page } from '../../common/models/page';
 import { DebtDTO } from '../../common/models/debt-dto';
 import { DebtService } from '../../../services/debt.service';
-import { JwtService } from '../../../services/auth/jwt.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -28,8 +26,6 @@ export class CreditorsComponent implements OnInit {
   constructor(
     private debtService: DebtService,
     private messageService: MessageService,
-    private primengConfig: PrimeNGConfig, //TODO do usuniecia
-    private jwtService: JwtService,//TODO do usuniecia
     private router: Router,
   ) {
   }
@@ -41,7 +37,6 @@ export class CreditorsComponent implements OnInit {
 
   ngOnInit(): void {
     this.isMobileVisible = window.innerWidth <= 768;
-    this.primengConfig.ripple = true;
     this.loadDebts(0, this.rows);
   }
 
@@ -92,6 +87,7 @@ export class CreditorsComponent implements OnInit {
     this.showSuccess('Sukces', 'Udało się dodać Wierzyciela!');
 
   }
+
   showSuccess(title: string, content: string) {
     this.messageService.add({
       key: 'bc',

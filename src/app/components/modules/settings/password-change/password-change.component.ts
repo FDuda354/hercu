@@ -59,7 +59,7 @@ export class PasswordChangeComponent implements OnInit {
           this.isWorking = false;
         },
         error: err => {
-            this.showError('Błąd', 'Wystąpił błąd podczas zmiany hasła');
+          this.showError('Błąd', 'Wystąpił błąd podczas zmiany hasła');
 
         }
       });

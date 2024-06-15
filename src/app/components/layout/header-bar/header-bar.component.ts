@@ -59,7 +59,7 @@ export class HeaderBarComponent implements OnInit {
   protected readonly Role = Role;
 
   loadCustomerImage(customerImage: string | undefined): Promise<string> {
-    if(customerImage == undefined){
+    if (customerImage == undefined) {
       return Promise.resolve('assets/images/user.png');
     }
     return new Promise((resolve, reject) => {

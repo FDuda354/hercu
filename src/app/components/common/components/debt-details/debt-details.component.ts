@@ -65,7 +65,7 @@ export class DebtDetailsComponent implements OnInit {
         this.debt = debt
       },
       error: error => {
-        this.loadError =true
+        this.loadError = true
         console.error('Error loading customers', error);
 
       }

@@ -18,7 +18,7 @@ export class SettingItemComponent {
   }
 
   navigateTo(link: string) {
-    if(this.enabled){
+    if (this.enabled) {
       this.router.navigate([link])
     }
   }

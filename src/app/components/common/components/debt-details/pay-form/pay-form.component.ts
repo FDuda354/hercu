@@ -1,6 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Debt } from '../../../models/debt';
-import { DebtRequest } from '../../add-debt/debt-request';
 import { ValidateResp } from '../../../models/ValidateResp';
 import { MessageService } from 'primeng/api';
 import { TransactionService } from '../../../../../services/transaction.service';
@@ -22,7 +21,6 @@ export class PayFormComponent {
   constructor(
     private messageService: MessageService,
     private transactionService: TransactionService
-
   ) {
   }
 
@@ -55,8 +53,8 @@ export class PayFormComponent {
         this.paymentAdded.emit();
       },
       error: error => {
-          this.isWorking = false;
-          this.showError('Błąd servera', 'Wystąpił błąd serwera');
+        this.isWorking = false;
+        this.showError('Błąd servera', 'Wystąpił błąd serwera');
 
       }
     });
@@ -79,7 +77,7 @@ export class PayFormComponent {
       validateResponse.isDescValid = false;
     }
 
-    if (validateResponse.isAmountValid && validateResponse.isDescValid ) {
+    if (validateResponse.isAmountValid && validateResponse.isDescValid) {
       validateResponse.isValid = true;
     }
 
