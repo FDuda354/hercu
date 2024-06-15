@@ -1,6 +1,6 @@
 export const environment = {
   api: {
-    baseUrl: 'https://backend-dluznik-test.dudios.pl',
+    baseUrl: 'https://backend-dluznik.dudios.pl',
     authUrl: 'api/auth/login',
   }
 };
