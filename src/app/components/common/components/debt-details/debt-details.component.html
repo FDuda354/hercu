@@ -6,16 +6,34 @@
 <p-toast position="top-right" key="tr"></p-toast>
 <ng-container *ngIf="!isLoading; else loadingChart">
   <ng-container *ngIf="!loadError; else errorState">
+    <p-confirmDialog [style]="getConfirmStyle()" key="deleteConfirmDialog" [position]="'bottom-center'" [baseZIndex]="10000" rejectButtonStyleClass="p-button-outlined"></p-confirmDialog>
 
     <div class="flex justify-content-center align-items-center">
       <button
-        *ngIf="user.id === debt.debtor?.id"
+        *ngIf="debt.status === DebtStatus.ACTIVE"
+        pButton pRipple type="button"
+        icon="pi pi-times-circle"
+        label="Anuluj dług"
+        class=" p-button-outlined p-button-rounded p-button-warning"
+        (click)="cancelDebt(debt.id)">
+      </button>
+      <button
+        *ngIf="debt.status === DebtStatus.CANCELLED"
+        pButton pRipple type="button"
+        icon="pi pi-times-circle"
+        label="Przywróć dług"
+        class=" p-button-outlined p-button-rounded p-button-primary"
+        (click)="reactiveDebt(debt.id)">
+      </button>
+      <button
+        *ngIf="user.id === debt.debtor?.id && debt.status === DebtStatus.ACTIVE"
         pButton pRipple type="button"
         icon="pi pi-plus"
         label="Spłacaj"
-        class="p-button-outlined p-button-rounded p-button-success"
+        class="ml-5 p-button-outlined p-button-rounded p-button-success"
         (click)="pay = true">
       </button>
+
     </div>
 
     <div class="p-1 flex flex-column">

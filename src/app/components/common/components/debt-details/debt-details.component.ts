@@ -5,7 +5,7 @@ import { DebtService } from '../../../../services/debt.service';
 import { Page } from '../../models/page';
 import { Transaction } from '../../models/transaction';
 import { TransactionService } from '../../../../services/transaction.service';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { Debt } from '../../models/debt';
 import { CustomerDTO } from '../../models/customer-dto';
 import { JwtService } from '../../../../services/auth/jwt.service';
@@ -15,7 +15,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   selector: 'app-debt-details',
   templateUrl: './debt-details.component.html',
   styleUrls: ['./debt-details.component.scss'],
-  providers: [MessageService]
+  providers: [ConfirmationService, MessageService]
 })
 export class DebtDetailsComponent implements OnInit {
   id: string | null = null;
@@ -31,7 +31,8 @@ export class DebtDetailsComponent implements OnInit {
   user: CustomerDTO = {}
   pay: boolean = false;
   loadError: boolean = false;
-
+  inDialog: boolean = false;
+  protected readonly DebtStatus = DebtStatus;
 
   constructor(
     private route: ActivatedRoute,
@@ -39,6 +40,8 @@ export class DebtDetailsComponent implements OnInit {
     private transactionService: TransactionService,
     private messageService: MessageService,
     private jwtService: JwtService,
+    private confirmationService: ConfirmationService
+
   ) {
   }
 
@@ -127,6 +130,88 @@ export class DebtDetailsComponent implements OnInit {
     this.showSuccess('Sukces', 'Udało się dodać transakcje')
   }
 
+  cancelDebt(id: number | undefined) {
+    if(id == null)
+      return
+    if (this.inDialog){
+      return
+    }
+    this.inDialog = true;
+    this.confirmationService.confirm({
+      message: 'Czy na pewno chcesz anulować dług?',
+      header: 'Anulowanie Długu',
+      icon: 'pi pi-info-circle',
+      acceptLabel: 'Tak',
+      rejectLabel: 'Nie',
+      accept: () => {
+        this.debtService.cancelDebtById(id).subscribe({
+          next: () => {
+            this.loadDebt(String(id));
+            this.showSuccess('Sukces', 'Anulowano dług')
+            this.inDialog = false;
+          },
+          error: (error: HttpErrorResponse) => {
+            this.loadError = true
+            console.error('Error loading customers', error);
+            this.showError('Błąd servera', 'Nie udało się anulować długu')
+
+            if (error.status == 403){
+              window.location.href = 'https://pl.redtube.com';
+            }
+            this.inDialog = false;
+          }
+        });
+      },
+      reject: () => {
+        this.inDialog = false;
+      },
+      key: "deleteConfirmDialog"
+    });
+    this.inDialog = false;
+
+  }
+
+  reactiveDebt(id: number | undefined) {
+    if(id == null)
+      return
+    if (this.inDialog){
+      return
+    }
+    this.inDialog = true;
+    this.confirmationService.confirm({
+      message: 'Czy na pewno chcesz przywrócić dług?',
+      header: 'Przywrócenie Długu',
+      icon: 'pi pi-info-circle',
+      acceptLabel: 'Tak',
+      rejectLabel: 'Nie',
+      accept: () => {
+        this.debtService.reactiveDebtById(id).subscribe({
+          next: () => {
+            this.loadDebt(String(id));
+            this.showSuccess('Sukces', 'Przywrócono dług')
+            this.inDialog = false;
+          },
+          error: (error: HttpErrorResponse) => {
+            this.loadError = true
+            console.error('Error loading customers', error);
+            this.showError('Błąd servera', 'Nie udało się przywrócić długu')
+
+            if (error.status == 403){
+              window.location.href = 'https://pl.redtube.com';
+            }
+            this.inDialog = false;
+          }
+        });
+      },
+      reject: () => {
+        this.inDialog = false;
+      },
+      key: "deleteConfirmDialog"
+    });
+    this.inDialog = false;
+
+  }
+
   showError(title: string, content: string) {
     this.messageService.add({
       key: 'tr',
@@ -148,5 +233,9 @@ export class DebtDetailsComponent implements OnInit {
     });
   }
 
-
+  getConfirmStyle() {
+    return {
+      'width': this.isMobileVisible ? '95vw' : '50vw',
+    };
+  }
 }

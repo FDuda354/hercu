@@ -49,4 +49,14 @@ export class DebtService {
   addDebt(debtRequest: DebtRequest): Observable<void> {
     return this.http.post<void>(this.baseUrl + `/api/debt`, debtRequest)
   }
+
+  cancelDebtById(id: number) {
+    return this.http.put<void>(this.baseUrl + `/api/debt/cancel?debtId=${id}`, null)
+
+  }
+
+  reactiveDebtById(id: number) {
+    return this.http.put<void>(this.baseUrl + `/api/debt/reactive?debtId=${id}`, null)
+
+  }
 }

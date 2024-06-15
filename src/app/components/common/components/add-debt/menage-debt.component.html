@@ -1,4 +1,4 @@
-<div class="flex flex-column " style="height: 85vh;">
+<div class="flex flex-column" style="height: 85vh;">
 
   <div class="p-inputgroup max-w-30rem mb-4">
     <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
@@ -14,7 +14,7 @@
   </div>
 
   <span class="p-float-label max-w-30rem mb-4">
-    <textarea id="float-input" rows="6" cols="46" pInputTextarea [(ngModel)]="desc"></textarea>
+    <textarea id="float-input" rows="6" cols="44" pInputTextarea [(ngModel)]="desc"></textarea>
     <label for="float-input">Opis</label>
 </span>
 
@@ -33,7 +33,7 @@
   </div>
 
 
-  <div class="flex flex-row stick-to-bottom ml-4 mr-4">
+  <div class="flex flex-row mt-2 ml-4 mr-4">
     <button pButton pRipple type="button" label="Zatwierdź"
             class="p-button-outlined p-button-rounded p-button-success " style="flex: 1 1 48%;"
             [ngClass]="{'p-disabled' : isWorking}" (click)="onSubmit()">
