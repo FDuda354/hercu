@@ -55,6 +55,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { DebtDetailsComponent } from './components/common/components/debt-details/debt-details.component';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { UiHeaderComponent } from './components/common/components/ui/ui-header/ui-header.component';
 
 @NgModule({
   declarations: [
@@ -80,6 +81,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
     RegistrationPageComponent,
     RegistrationFormComponent,
     DebtDetailsComponent,
+    UiHeaderComponent,
   ],
   imports: [
     BrowserModule,

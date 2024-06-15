@@ -8,6 +8,8 @@ import { TransactionService } from '../../../../services/transaction.service';
 import { MessageService } from 'primeng/api';
 import { Debt } from '../../models/debt';
 import { HttpErrorResponse } from '@angular/common/http';
+import { CustomerDTO } from '../../models/customer-dto';
+import { JwtService } from '../../../../services/auth/jwt.service';
 
 @Component({
   selector: 'app-debt-details',
@@ -17,7 +19,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class DebtDetailsComponent implements OnInit {
   id: string | null = null;
-  debt!: DebtDTO
+  debt: Debt = {}
   transactions!: Transaction[]
   totalRecords: number = 0;
   rows: number = 5;
@@ -26,6 +28,7 @@ export class DebtDetailsComponent implements OnInit {
   isMobileVisible = false;
   skeletonTransactions: any[] = [1, 2, 3, 4, 5];
   profileImage = 'assets/images/user.png';
+  user: CustomerDTO = {}
 
 
   constructor(
@@ -33,6 +36,8 @@ export class DebtDetailsComponent implements OnInit {
     private debtService: DebtService,
     private transactionService: TransactionService,
     private messageService: MessageService,
+    private jwtService: JwtService,
+
   ) {
   }
 
@@ -44,6 +49,9 @@ export class DebtDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
     this.isMobileVisible = window.innerWidth <= 768;
+    this.user = JSON.parse(<string>this.jwtService.getCustomer());
+
+
 
     if (this.id) {
       this.loadDebt(this.id)
@@ -55,7 +63,9 @@ export class DebtDetailsComponent implements OnInit {
   private loadDebt(id: string) {
     this.debtService.getDebtById(id).subscribe({
       next: (debt: Debt) => {
+        console.log(debt)
         this.debt = debt
+        console.log(this.debt)
       },
       error: error => {
         console.error('Error loading customers', error);

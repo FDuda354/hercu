@@ -1,7 +1,11 @@
 <p-toast position="top-right" key="tr"></p-toast>
-<div class="p-1">
+<ui-header
+  [backButton]="'/debtors'"
+  [text]="user.id === debt.debtor?.id ? 'Dług:' : 'Wierzycielstwo:' + debt.description "
+></ui-header>
+<div class="p-1 flex flex-column">
 
-  <h1>{{ debt.description }}</h1>
+
   <div class="flex justify-content-center align-items-center flex-wrap gap-5 mt-4 pb-2">
     <p-card header="Kwota długu" [style]="{'width': '20rem', 'margin-bottom': '1em'}">{{ debt.amount }} PLN</p-card>
     <p-card header="Dług rozpoczęto" [style]="{'width': '20rem', 'margin-bottom': '1em'}">{{ debt.startDate | date  }}</p-card>

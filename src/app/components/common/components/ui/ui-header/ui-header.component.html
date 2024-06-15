@@ -1,0 +1,14 @@
+
+<div class="mr-3 ml-3 mt-1 mb-4">
+  <div class="flex flex-row align-items-center justify-content-between pt-3 pb-3">
+    <div [routerLink]="backButton" class="">
+      <button pButton pRipple type="button" icon="pi pi-angle-left" class="p-button-rounded p-button-outlined"></button>
+    </div>
+    <div *ngIf="showCloseButton" [routerLink]="closeButton" class="">
+      <button pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded p-button-outlined" ></button>
+    </div>
+  </div>
+  <div class="ml-5 mt-4">
+    <div class="header__text">{{ text }}</div>
+  </div>
+</div>
