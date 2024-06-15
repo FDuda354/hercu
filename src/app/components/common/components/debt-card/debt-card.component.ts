@@ -41,7 +41,6 @@ export class DebtCardComponent implements OnInit {
           reader.readAsDataURL(imageBlob);
         },
         error: (error: HttpErrorResponse) => {
-          console.error('Error loading image:', error);
           resolve('assets/images/user.png');
         }
       });

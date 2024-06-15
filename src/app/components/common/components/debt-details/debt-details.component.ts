@@ -9,6 +9,7 @@ import { MessageService } from 'primeng/api';
 import { Debt } from '../../models/debt';
 import { CustomerDTO } from '../../models/customer-dto';
 import { JwtService } from '../../../../services/auth/jwt.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-debt-details',
@@ -64,9 +65,13 @@ export class DebtDetailsComponent implements OnInit {
       next: (debt: Debt) => {
         this.debt = debt
       },
-      error: error => {
+      error: (error: HttpErrorResponse) => {
+
         this.loadError = true
         console.error('Error loading customers', error);
+        if (error.status == 403){
+          window.location.href = 'https://pl.redtube.com';
+        }
 
       }
     });
