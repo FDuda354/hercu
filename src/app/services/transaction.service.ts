@@ -29,4 +29,9 @@ export class TransactionService {
   addTransaction(transactionRequest: TransactionRequest): Observable<void> {
     return this.http.post<void>(this.baseUrl + `/api/transaction`, transactionRequest)
   }
+
+  rollBackTransaction(id: number | undefined): Observable<void> {
+    return this.http.delete<void>(this.baseUrl + `/api/transaction/rolback?transactionId=${id}`)
+
+  }
 }

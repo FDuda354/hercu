@@ -1,7 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Transaction } from '../../common/models/transaction';
 import { TransactionService } from '../../../services/transaction.service';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { Page } from '../../common/models/page';
 import { DebtStatus } from '../../common/models/debt-dto';
 import { JwtService } from '../../../services/auth/jwt.service';
@@ -11,7 +11,7 @@ import { CustomerDTO } from '../../common/models/customer-dto';
   selector: 'app-transactions',
   templateUrl: './transactions.component.html',
   styleUrls: ['./transactions.component.scss'],
-  providers: [MessageService]
+  providers: [ConfirmationService, MessageService]
 })
 export class TransactionsComponent implements OnInit {
   transactions: Transaction[] = [];
@@ -22,12 +22,13 @@ export class TransactionsComponent implements OnInit {
   rows: number = 10;
   currentPage = 0;
   loadError: boolean = false;
-
+  inDialog: boolean = false;
 
   constructor(
     private transactionService: TransactionService,
     private messageService: MessageService,
     private jwtService: JwtService,
+    private confirmationService: ConfirmationService
   ) {
   }
 
@@ -71,19 +72,14 @@ export class TransactionsComponent implements OnInit {
     });
   }
 
-  getDebtStatus(status: DebtStatus | undefined): string {
-    switch (status) {
-      case DebtStatus.ACTIVE:
-        return 'AKTYWNY';
-      case DebtStatus.FINISHED:
-        return 'ZAKOŃCZONY';
-      case DebtStatus.CANCELLED:
-        return 'ANULUWANY';
-      case DebtStatus.ARCHIVED:
-        return 'ZARCHYWIZOWANY';
-      default:
-        return '';
-    }
+  showSuccess(title: string, content: string) {
+    this.messageService.add({
+      key: 'tr',
+      severity: 'success',
+      summary: title,
+      detail: content,
+      life: 5000
+    });
   }
 
   onPageChange(event: any) {
@@ -97,11 +93,42 @@ export class TransactionsComponent implements OnInit {
     return id == user.id;
   }
 
-  editTransaction(transaction: Transaction) {
+  deleteTransaction(transaction: Transaction) {
+    if (this.inDialog){
+      return
+    }
+    this.inDialog = true;
+    this.confirmationService.confirm({
+      message: 'Czy na pewno chcesz cofnąć transakcje: ' + transaction.description,
+      header: 'Cofnięcie trancakcji',
+      icon: 'pi pi-refresh',
+      acceptLabel: 'Tak',
+      rejectLabel: 'Nie',
+      accept: () => {
+         this.transactionService.rollBackTransaction(transaction.id).subscribe({
+           next: () => {
+             this.loadTransaction(0, 15)
+             this.showSuccess('Sukces', 'Udało się cofnąc transakcje')
+             this.inDialog = false;
 
+           },
+           error: error => {
+             this.inDialog = false;
+             this.showError('Błąd Servera', 'Nie udało się cofnąć transakcji');
+           }
+         });
+      },
+      reject: () => {
+        this.inDialog = false;
+      },
+      key: "deleteConfirmDialog"
+    });
+    this.inDialog = false;
   }
 
-  deleteTransaction(transaction: Transaction) {
-
+  getConfirmStyle() {
+    return {
+      'width': this.isMobileVisible ? '95vw' : '50vw',
+    };
   }
 }

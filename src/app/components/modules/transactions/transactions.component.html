@@ -10,7 +10,6 @@
 
   </ng-container>
 </mat-accordion>
-<p-toast position="top-right" key="tr"></p-toast>
 <div *ngIf="totalRecords > 15" class="flex flex-row justify-content-center align-content-end">
   <p-paginator
     [rows]="rows"
@@ -24,6 +23,8 @@
 
 <!--transaction list-->
 <ng-template #transactionListTemplate let-transactions="transactions">
+  <p-toast position="top-right" key="tr"></p-toast>
+  <p-confirmDialog [style]="getConfirmStyle()" key="deleteConfirmDialog" [position]="'bottom-center'" [baseZIndex]="10000" rejectButtonStyleClass="p-button-outlined"></p-confirmDialog>
   <div *ngFor="let transaction of transactions">
     <mat-expansion-panel hideToggle class="mb-2">
       <mat-expansion-panel-header>
@@ -69,6 +70,7 @@
       </mat-card-header>
     </mat-card>
 
+
     <mat-card class="flex flex-grow-1 m-1">
       <mat-card-header>
         <mat-card-subtitle>Data transakcji</mat-card-subtitle>
@@ -78,15 +80,8 @@
       </mat-card-header>
     </mat-card>
 
-    <mat-card class="flex align-self-center flex-grow-1 m-1">
-      <div [class]="'status-' + (transaction.debt?.status ? transaction.debt?.status?.toLowerCase() : '')">
-        Dług {{ getDebtStatus(transaction.debt?.status) }}
-      </div>
-    </mat-card>
 
     <div class="flex flex-row">
-      <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success m-1"
-              (click)="editTransaction(transaction)"></button>
       <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning m-1"
               (click)="deleteTransaction(transaction)"></button>
     </div>

@@ -59,6 +59,7 @@ import { UiHeaderComponent } from './components/common/components/ui/ui-header/u
 import { PayFormComponent } from './components/common/components/debt-details/pay-form/pay-form.component';
 import { SettingItemComponent } from './components/modules/settings/setting-item/setting-item.component';
 import { PasswordChangeComponent } from './components/modules/settings/password-change/password-change.component';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @NgModule({
   declarations: [
@@ -122,6 +123,7 @@ import { PasswordChangeComponent } from './components/modules/settings/password-
     MatCardModule,
     MatButtonModule,
     InputTextareaModule,
+    ConfirmDialogModule,
   ],
   providers: [
     UserAuthGuard,
