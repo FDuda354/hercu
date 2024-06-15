@@ -11,6 +11,7 @@ import { UserAuthGuard } from './components/common/guard/user-auth-guard';
 import { RegistrationPageComponent } from './components/modules/registration-page/registration-page.component';
 import { DebtDetailsComponent } from './components/common/components/debt-details/debt-details.component';
 import { PasswordChangeComponent } from './components/modules/settings/password-change/password-change.component';
+import { FriendsComponent } from './components/modules/friends/friends.component';
 
 
 const routes: Routes = [
@@ -22,6 +23,7 @@ const routes: Routes = [
       {path: 'transactions', component: TransactionsComponent, canActivate: [UserAuthGuard]},
       {path: 'settings', component: SettingsComponent, canActivate: [UserAuthGuard]},
       {path: 'password-change', component: PasswordChangeComponent, canActivate: [UserAuthGuard]},
+      {path: 'friends', component: FriendsComponent, canActivate: [UserAuthGuard]},
 
     ]
   },

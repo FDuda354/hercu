@@ -60,6 +60,7 @@ import { PayFormComponent } from './components/common/components/debt-details/pa
 import { SettingItemComponent } from './components/modules/settings/setting-item/setting-item.component';
 import { PasswordChangeComponent } from './components/modules/settings/password-change/password-change.component';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { FriendsComponent } from './components/modules/friends/friends.component';
 
 @NgModule({
   declarations: [
@@ -89,6 +90,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     PayFormComponent,
     SettingItemComponent,
     PasswordChangeComponent,
+    FriendsComponent,
   ],
   imports: [
     BrowserModule,

@@ -33,9 +33,9 @@ export class HeaderBarComponent implements OnInit {
   @Input() menuItems!: Array<MenuItem>;
   items: Array<MenuItem> = [
     {
-      label: 'Profil',
-      icon: 'pi pi-user',
-      routerLink: '',
+      label: 'Znajomi',
+      icon: 'pi pi-users',
+      routerLink: 'friends',
     },
     {
       label: 'Ustawienia',
