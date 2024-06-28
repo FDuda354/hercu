@@ -123,7 +123,6 @@ export class TransactionsComponent implements OnInit {
       },
       key: "deleteConfirmDialog"
     });
-    this.inDialog = false;
   }
 
   getConfirmStyle() {

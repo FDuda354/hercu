@@ -42,11 +42,10 @@ export class RegistrationFormComponent implements OnInit {
   }
 
   register() {
-    if (this.isWorking) {
+    if (this.isWorking || this.registerForm.invalid) {
       return
     }
     this.isWorking = true;
-    if (this.registerForm.valid) {
       this.customerService.register(this.registerForm.value).subscribe({
         next: () => {
           const authReq: AuthRequest = {
@@ -77,7 +76,7 @@ export class RegistrationFormComponent implements OnInit {
           this.isWorking = false;
         }
       });
-    }
+
   }
 
   private mustMatch(password: string, confirmPassword: string) {

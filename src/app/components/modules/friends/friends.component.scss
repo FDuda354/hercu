@@ -1,0 +1,15 @@
+.empty-state-icon {
+  width: 300px;
+
+  @media (max-width: 1200px) {
+    width: 240px;
+  }
+
+  @media (max-width: 768px) {
+    width: 180px;
+  }
+
+  @media (max-width: 576px) {
+    width: 120px;
+  }
+}

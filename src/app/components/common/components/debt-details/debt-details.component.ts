@@ -28,7 +28,7 @@ export class DebtDetailsComponent implements OnInit {
   isMobileVisible = false;
   skeletonTransactions: any[] = [1, 2, 3, 4, 5];
   profileImage = 'assets/images/user.png';
-  user: CustomerDTO = {}
+  user!: CustomerDTO;
   pay: boolean = false;
   loadError: boolean = false;
   inDialog: boolean = false;
@@ -167,7 +167,7 @@ export class DebtDetailsComponent implements OnInit {
       },
       key: "deleteConfirmDialog"
     });
-    this.inDialog = false;
+
 
   }
 
@@ -208,7 +208,7 @@ export class DebtDetailsComponent implements OnInit {
       },
       key: "deleteConfirmDialog"
     });
-    this.inDialog = false;
+
 
   }
 
