@@ -54,7 +54,7 @@ export class MenageDebtComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadFriends(0, 5);
+    this.loadFriends();
     this.isMobileVisible = window.innerWidth <= 768;
 
     this.pl = {
@@ -82,12 +82,15 @@ export class MenageDebtComponent implements OnInit {
     this.isWorking = true;
     const user: CustomerDTO = JSON.parse(<string>this.jwtService.getCustomer());
     const debtRequest: DebtRequest = {
-      debtorEmail: this.isDebt ? (this.addByFriend && this.canAddByFriend)? this.friend.email : this.email : user.email,
-      creditorEmail: this.isDebt ? user.email : (this.addByFriend && this.canAddByFriend)? this.friend.email : this.email,
+      debtorEmail: this.isDebt ? (this.addByFriend && this.canAddByFriend)? this.friend?.email : this.email : user.email,
+      creditorEmail: this.isDebt ? user.email : (this.addByFriend && this.canAddByFriend)? this.friend?.email : this.email,
       amount: this.amount,
       description: this.desc == undefined ? '' : this.desc,
       repaymentDate: this.withEndDate ? this.date : null,
     }
+    console.log(this.addByFriend)
+    console.log(this.canAddByFriend)
+    console.log(debtRequest)
 
     let validateResp = this.requestValidated(debtRequest);
     if (!validateResp.isValid) {
@@ -159,13 +162,11 @@ export class MenageDebtComponent implements OnInit {
     return emailRegex.test(email);
   }
 
-  private loadFriends(page: number, size: number) {
-    this.friendsService.getFriendsForCustomer(page, size).subscribe({
-      next: (page: Page<CustomerDTO>) => {
-        this.friends = page.content;
-        this.totalRecords = page.totalElements;
-        this.rows = page.size;
-        this.canAddByFriend = page.totalElements > 0;
+  private loadFriends() {
+    this.friendsService.getAllFriendsForCustomer().subscribe({
+      next: (friends: CustomerDTO[]) => {
+        this.friends = friends;
+        this.canAddByFriend = friends.length > 0;
       },
       error: error => {
         console.error('Error loading customers', error);

@@ -1,30 +1,30 @@
 <div class="flex flex-column" style="height: 85vh;">
 
-
   <div *ngIf="canAddByFriend" class="mb-3 flex flex-row align-items-center">
     <div class="flex">
       <p-inputSwitch [(ngModel)]="addByFriend" class="mt-2"></p-inputSwitch>
     </div>
     <div class="flex align-items-center mt-1 ml-4">
-      <div *ngIf="!addByFriend" >Dodanie po emial</div>
-      <div *ngIf="addByFriend" >Dodanie przez znajomych</div>
+      <div *ngIf="!addByFriend">Dodanie po emial</div>
+      <div *ngIf="addByFriend">Dodanie przez znajomych</div>
     </div>
   </div>
 
   <ng-container *ngIf="canAddByFriend && addByFriend else addByEmail">
     <div *ngIf="addByFriend" class="mb-4" style="max-width: 480px">
-          <p-dropdown [options]="friends" [(ngModel)]="friend" optionLabel="email" [filter]="true" filterBy="email" [showClear]="true" [style]="{width:'100%'}" placeholder="Wybierz znajomego" class="min-w-screen">
-            <ng-template pTemplate="selectedItem">
-              <div class="flex flex-row" *ngIf="friend">
-                <div class="ml-2">{{friend.email}}</div>
-              </div>
-            </ng-template>
-            <ng-template let-friend pTemplate="item">
-              <div class="flex flex-row">
-                <div class="ml-2">{{friend.email}}</div>
-              </div>
-            </ng-template>
-          </p-dropdown>
+      <p-dropdown [options]="friends" [(ngModel)]="friend" optionLabel="email" [filter]="true" filterBy="email"
+                  [showClear]="true" [style]="{width:'100%'}" placeholder="Wybierz znajomego" class="min-w-screen">
+        <ng-template pTemplate="selectedItem">
+          <div class="flex flex-row" *ngIf="friend">
+            <div class="ml-2">{{ friend.email }}</div>
+          </div>
+        </ng-template>
+        <ng-template let-friend pTemplate="item">
+          <div class="flex flex-row">
+            <div class="ml-2">{{ friend.email }}</div>
+          </div>
+        </ng-template>
+      </p-dropdown>
     </div>
   </ng-container>
 
@@ -54,12 +54,13 @@
     <label> Czy ustawić date spłaty?</label>
   </div>
   <div *ngIf="withEndDate" class="p-inputgroup max-w-30rem mb-4">
-    <p-calendar [(ngModel)]="date" [showIcon]="true"
+    <p-calendar [(ngModel)]="date"
+                [showIcon]="true"
+                [touchUI]="true"
                 [minDate]="minDate"
                 [locale]="pl"
-                [disabledDates]="invalidDates">
-
-      dateFormat="dd.mm.yy">
+                [disabledDates]="invalidDates"
+                [dateFormat]="'dd.mm.yy'">
     </p-calendar>
   </div>
 

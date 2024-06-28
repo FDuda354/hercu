@@ -17,6 +17,11 @@ export class FriendsService {
   ) {
   }
 
+  getAllFriendsForCustomer() {
+    return this.http.get<CustomerDTO[]>(this.baseUrl + `/api/customers/friends/all`)
+
+  }
+
   getFriendsForCustomer(page: number, size: number) {
     return this.http.get<Page<CustomerDTO>>(this.baseUrl + `/api/customers/friends?page=${page}&size=${size}`)
 
