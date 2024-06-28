@@ -82,8 +82,8 @@ export class MenageDebtComponent implements OnInit {
     this.isWorking = true;
     const user: CustomerDTO = JSON.parse(<string>this.jwtService.getCustomer());
     const debtRequest: DebtRequest = {
-      debtorEmail: this.isDebt ? this.addByFriend? this.friend.email : this.email : user.email,
-      creditorEmail: this.isDebt ? user.email : this.addByFriend? this.friend.email : this.email,
+      debtorEmail: this.isDebt ? (this.addByFriend && this.canAddByFriend)? this.friend.email : this.email : user.email,
+      creditorEmail: this.isDebt ? user.email : (this.addByFriend && this.canAddByFriend)? this.friend.email : this.email,
       amount: this.amount,
       description: this.desc == undefined ? '' : this.desc,
       repaymentDate: this.withEndDate ? this.date : null,
@@ -101,7 +101,7 @@ export class MenageDebtComponent implements OnInit {
         this.showWarn('Błąd', 'Niepoprawna wartośc długu');
       }
       if (!validateResp.isDescValid) {
-        this.showWarn('Błąd', 'Za długi opis (max 100 znaków)');
+        this.showWarn('Błąd', 'Za długi opis (max 100 znaków)')
       }
       this.isWorking = false;
       return;
