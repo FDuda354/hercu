@@ -88,9 +88,6 @@ export class MenageDebtComponent implements OnInit {
       description: this.desc == undefined ? '' : this.desc,
       repaymentDate: this.withEndDate ? this.date : null,
     }
-    console.log(this.addByFriend)
-    console.log(this.canAddByFriend)
-    console.log(debtRequest)
 
     let validateResp = this.requestValidated(debtRequest);
     if (!validateResp.isValid) {
