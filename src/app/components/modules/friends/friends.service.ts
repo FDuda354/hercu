@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { DebtDTO } from '../../common/models/debt-dto';
 import { Page } from '../../common/models/page';
 import { CustomerDTO } from '../../common/models/customer-dto';
 import { Observable } from 'rxjs';

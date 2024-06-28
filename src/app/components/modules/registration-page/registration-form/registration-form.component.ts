@@ -46,36 +46,36 @@ export class RegistrationFormComponent implements OnInit {
       return
     }
     this.isWorking = true;
-      this.customerService.register(this.registerForm.value).subscribe({
-        next: () => {
-          const authReq: AuthRequest = {
-            username: this.registerForm.get('email')?.value,
-            password: this.registerForm.get('password')?.value
-          }
-          this.authenticationService.login(authReq)
-            .subscribe({
-              next: (authenticationResponse) => {
-                this.jwtService.setToken(authenticationResponse.token);
-                this.jwtService.setCustomer(authenticationResponse.customerDTO);
-                this.router.navigate(['/']);
-                this.isWorking = false;
-              },
-              error: (err) => {
-                this.showError('Błąd', 'Wystąpił błąd zalogowania');
-                this.isWorking = false;
-              }
-            });
-
-        },
-        error: err => {
-          if (err.error.status === 409) {
-            this.showError('Błąd', 'Podany urzytkownik już istnieje');
-          } else {
-            this.showError('Błąd', 'Wystąpił błąd podczas rejestracji');
-          }
-          this.isWorking = false;
+    this.customerService.register(this.registerForm.value).subscribe({
+      next: () => {
+        const authReq: AuthRequest = {
+          username: this.registerForm.get('email')?.value,
+          password: this.registerForm.get('password')?.value
         }
-      });
+        this.authenticationService.login(authReq)
+          .subscribe({
+            next: (authenticationResponse) => {
+              this.jwtService.setToken(authenticationResponse.token);
+              this.jwtService.setCustomer(authenticationResponse.customerDTO);
+              this.router.navigate(['/']);
+              this.isWorking = false;
+            },
+            error: (err) => {
+              this.showError('Błąd', 'Wystąpił błąd zalogowania');
+              this.isWorking = false;
+            }
+          });
+
+      },
+      error: err => {
+        if (err.error.status === 409) {
+          this.showError('Błąd', 'Podany urzytkownik już istnieje');
+        } else {
+          this.showError('Błąd', 'Wystąpił błąd podczas rejestracji');
+        }
+        this.isWorking = false;
+      }
+    });
 
   }
 

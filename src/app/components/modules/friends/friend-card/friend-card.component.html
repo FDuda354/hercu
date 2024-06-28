@@ -1,5 +1,6 @@
 <p-toast position="top-right" key="tr"></p-toast>
-<p-confirmDialog [style]="getConfirmStyle()" key="deleteConfirmDialog" [position]="'bottom-center'" [baseZIndex]="10000" rejectButtonStyleClass="p-button-outlined"></p-confirmDialog>
+<p-confirmDialog [style]="getConfirmStyle()" key="deleteConfirmDialog" [position]="'bottom-center'" [baseZIndex]="10000"
+                 rejectButtonStyleClass="p-button-outlined"></p-confirmDialog>
 
 <p-card [style]="{width: '250px', height:'360px'}" styleClass="p-card-shadow text-center">
   <ng-template pTemplate="header">
@@ -28,11 +29,11 @@
       Balans
     </div>
 
-      <div style="margin-top: 10px;" [ngStyle]="{
+    <div style="margin-top: 10px;" [ngStyle]="{
     'color': balance < 0 ? '#ff6d0d' :
              balance == 0 ? '#FFD700' : '#77DD07'}"
-           class="text-2xl">{{ balance | number:'1.0-2' }} PLN
-      </div>
+         class="text-2xl">{{ balance | number:'1.0-2' }} PLN
+    </div>
 
     <button
       pButton

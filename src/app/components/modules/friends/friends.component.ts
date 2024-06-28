@@ -1,10 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { DebtService } from '../../../services/debt.service';
-import { ConfirmationService, MessageService } from 'primeng/api';
-import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { CustomerDTO } from '../../common/models/customer-dto';
 import { Page } from '../../common/models/page';
-import { DebtDTO } from '../../common/models/debt-dto';
 import { FriendsService } from './friends.service';
 
 @Component({
@@ -13,7 +10,7 @@ import { FriendsService } from './friends.service';
   styleUrls: ['./friends.component.scss'],
   providers: [MessageService]
 })
-export class FriendsComponent implements OnInit{
+export class FriendsComponent implements OnInit {
   isLoading: boolean = true;
   loadError: boolean = false;
   display: boolean = false;
@@ -53,7 +50,7 @@ export class FriendsComponent implements OnInit{
   }
 
   private loadFriends(page: number, size: number) {
-    this.friendsService.getFriendsForCustomer(page, size ).subscribe({
+    this.friendsService.getFriendsForCustomer(page, size).subscribe({
       next: (page: Page<CustomerDTO>) => {
         this.friends = page.content;
         this.totalRecords = page.totalElements;

@@ -2,7 +2,6 @@ import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@a
 import { CustomerService } from '../../../../services/customer.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CustomerDTO } from '../../../common/models/customer-dto';
-import { JwtService } from '../../../../services/auth/jwt.service';
 import { DebtService } from '../../../../services/debt.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
 
@@ -40,7 +39,7 @@ export class FriendCardComponent implements OnInit {
       this.profileImage = url;
     });
 
-   this.getBalance(this.friend.id);
+    this.getBalance(this.friend.id);
   }
 
   loadCustomerImage(customerImage: string | undefined): Promise<string> {
@@ -67,7 +66,7 @@ export class FriendCardComponent implements OnInit {
     if (id === undefined) {
       return;
     }
-    if (this.inDialog){
+    if (this.inDialog) {
       return
     }
     this.inDialog = true;
@@ -94,14 +93,14 @@ export class FriendCardComponent implements OnInit {
       reject: () => {
         this.inDialog = false;
       },
-      key: "deleteConfirmDialog"
+      key: 'deleteConfirmDialog'
     });
 
 
   }
 
   private getBalance(friendId: number) {
-     this.debtService.getFriendBalance(friendId).subscribe({
+    this.debtService.getFriendBalance(friendId).subscribe({
       next: (balance) => {
         this.balance = balance;
       },

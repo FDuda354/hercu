@@ -1,9 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { MessageService } from 'primeng/api';
-import { DebtService } from '../../../../services/debt.service';
 import { JwtService } from '../../../../services/auth/jwt.service';
 import { CustomerDTO } from '../../../common/models/customer-dto';
-import { DebtRequest } from '../../../common/components/add-debt/debt-request';
 import { ValidateResp } from '../../../common/models/ValidateResp';
 import { FriendsService } from '../friends.service';
 
@@ -12,7 +10,7 @@ import { FriendsService } from '../friends.service';
   templateUrl: './add-friend.component.html',
   styleUrls: ['./add-friend.component.scss']
 })
-export class AddFriendComponent  {
+export class AddFriendComponent {
 
   @Output() friendAdded = new EventEmitter<void>();
 
@@ -56,7 +54,7 @@ export class AddFriendComponent  {
         if (error.status == 404) {
           this.isWorking = false;
           this.showWarn('DANE', 'Podany użytkownik nie istnieje');
-        } else if(error.status == 400) {
+        } else if (error.status == 400) {
           this.isWorking = false;
           this.showError('Błąd servera', 'Masz już znajomego ' + this.email);
         } else {

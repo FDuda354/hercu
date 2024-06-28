@@ -41,7 +41,6 @@ export class DebtDetailsComponent implements OnInit {
     private messageService: MessageService,
     private jwtService: JwtService,
     private confirmationService: ConfirmationService
-
   ) {
   }
 
@@ -72,7 +71,7 @@ export class DebtDetailsComponent implements OnInit {
 
         this.loadError = true
         console.error('Error loading customers', error);
-        if (error.status == 403){
+        if (error.status == 403) {
           window.location.href = 'https://pl.redtube.com';
         }
 
@@ -131,9 +130,9 @@ export class DebtDetailsComponent implements OnInit {
   }
 
   cancelDebt(id: number | undefined) {
-    if(id == null)
+    if (id == null)
       return
-    if (this.inDialog){
+    if (this.inDialog) {
       return
     }
     this.inDialog = true;
@@ -155,7 +154,7 @@ export class DebtDetailsComponent implements OnInit {
             console.error('Error loading customers', error);
             this.showError('Błąd servera', 'Nie udało się anulować długu')
 
-            if (error.status == 403){
+            if (error.status == 403) {
               window.location.href = 'https://pl.redtube.com';
             }
             this.inDialog = false;
@@ -165,16 +164,16 @@ export class DebtDetailsComponent implements OnInit {
       reject: () => {
         this.inDialog = false;
       },
-      key: "deleteConfirmDialog"
+      key: 'deleteConfirmDialog'
     });
 
 
   }
 
   reactiveDebt(id: number | undefined) {
-    if(id == null)
+    if (id == null)
       return
-    if (this.inDialog){
+    if (this.inDialog) {
       return
     }
     this.inDialog = true;
@@ -196,7 +195,7 @@ export class DebtDetailsComponent implements OnInit {
             console.error('Error loading customers', error);
             this.showError('Błąd servera', 'Nie udało się przywrócić długu')
 
-            if (error.status == 403){
+            if (error.status == 403) {
               window.location.href = 'https://pl.redtube.com';
             }
             this.inDialog = false;
@@ -206,7 +205,7 @@ export class DebtDetailsComponent implements OnInit {
       reject: () => {
         this.inDialog = false;
       },
-      key: "deleteConfirmDialog"
+      key: 'deleteConfirmDialog'
     });
 
 

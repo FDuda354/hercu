@@ -3,7 +3,6 @@ import { Transaction } from '../../common/models/transaction';
 import { TransactionService } from '../../../services/transaction.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Page } from '../../common/models/page';
-import { DebtStatus } from '../../common/models/debt-dto';
 import { JwtService } from '../../../services/auth/jwt.service';
 import { CustomerDTO } from '../../common/models/customer-dto';
 
@@ -94,7 +93,7 @@ export class TransactionsComponent implements OnInit {
   }
 
   deleteTransaction(transaction: Transaction) {
-    if (this.inDialog){
+    if (this.inDialog) {
       return
     }
     this.inDialog = true;
@@ -105,23 +104,23 @@ export class TransactionsComponent implements OnInit {
       acceptLabel: 'Tak',
       rejectLabel: 'Nie',
       accept: () => {
-         this.transactionService.rollBackTransaction(transaction.id).subscribe({
-           next: () => {
-             this.loadTransaction(0, 15)
-             this.showSuccess('Sukces', 'Udało się cofnąc transakcje')
-             this.inDialog = false;
+        this.transactionService.rollBackTransaction(transaction.id).subscribe({
+          next: () => {
+            this.loadTransaction(0, 15)
+            this.showSuccess('Sukces', 'Udało się cofnąc transakcje')
+            this.inDialog = false;
 
-           },
-           error: error => {
-             this.inDialog = false;
-             this.showError('Błąd Servera', 'Nie udało się cofnąć transakcji');
-           }
-         });
+          },
+          error: error => {
+            this.inDialog = false;
+            this.showError('Błąd Servera', 'Nie udało się cofnąć transakcji');
+          }
+        });
       },
       reject: () => {
         this.inDialog = false;
       },
-      key: "deleteConfirmDialog"
+      key: 'deleteConfirmDialog'
     });
   }
 
