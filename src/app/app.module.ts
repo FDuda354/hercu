@@ -63,6 +63,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { FriendsComponent } from './components/modules/friends/friends.component';
 import { FriendCardComponent } from './components/modules/friends/friend-card/friend-card.component';
 import { AddFriendComponent } from './components/modules/friends/add-friend/add-friend.component';
+import { InputSwitchModule } from 'primeng/inputswitch';
 
 @NgModule({
   declarations: [
@@ -130,6 +131,7 @@ import { AddFriendComponent } from './components/modules/friends/add-friend/add-
     MatButtonModule,
     InputTextareaModule,
     ConfirmDialogModule,
+    InputSwitchModule,
   ],
   providers: [
     UserAuthGuard,

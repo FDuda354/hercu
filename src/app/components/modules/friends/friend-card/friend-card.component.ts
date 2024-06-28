@@ -71,8 +71,8 @@ export class FriendCardComponent implements OnInit {
     }
     this.inDialog = true;
     this.confirmationService.confirm({
-      message: 'Czy na pewno chcesz anulować dług?',
-      header: 'Anulowanie Długu',
+      message: 'Czy na pewno chcesz usunąć znajomego? Już go nie lubisz? :(',
+      header: 'Usuwanie znajomego',
       icon: 'pi pi-info-circle',
       acceptLabel: 'Tak',
       rejectLabel: 'Nie',

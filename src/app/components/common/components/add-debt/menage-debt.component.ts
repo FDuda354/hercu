@@ -1,10 +1,14 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { DebtRequest } from './debt-request';
 import { MessageService } from 'primeng/api';
 import { JwtService } from '../../../../services/auth/jwt.service';
 import { CustomerDTO } from '../../models/customer-dto';
 import { DebtService } from '../../../../services/debt.service';
 import { ValidateResp } from '../../models/ValidateResp';
+import { Page } from '../../models/page';
+import { FriendsService } from '../../../modules/friends/friends.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { CustomerService } from '../../../../services/customer.service';
 
 @Component({
   selector: 'app-menage-debt',
@@ -26,15 +30,33 @@ export class MenageDebtComponent implements OnInit {
   amount!: number;
   desc!: string;
   isWorking: boolean = false;
+  canAddByFriend: boolean = false;
+  friends: CustomerDTO[] = [];
+  isMobileVisible = false;
+  totalRecords: number = 0;
+  rows: number = 10;
+  currentPage = 0;
+  addByFriend: boolean = true;
+  friend!: CustomerDTO;
 
   constructor(
     private messageService: MessageService,
     private debtService: DebtService,
     private jwtService: JwtService,
+    private friendsService: FriendsService,
   ) {
   }
 
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
+    this.isMobileVisible = window.innerWidth <= 768;
+  }
+
   ngOnInit() {
+    this.loadFriends(0, 5);
+    this.isMobileVisible = window.innerWidth <= 768;
+
     this.pl = {
       firstDayOfWeek: 1,
       dayNames: ['poniedziałek', 'wtorek', 'środa', 'czwartek', 'piątek', 'sobota', 'niedziela'],
@@ -60,12 +82,13 @@ export class MenageDebtComponent implements OnInit {
     this.isWorking = true;
     const user: CustomerDTO = JSON.parse(<string>this.jwtService.getCustomer());
     const debtRequest: DebtRequest = {
-      debtorEmail: this.isDebt ? this.email : user.email,
-      creditorEmail: this.isDebt ? user.email : this.email,
+      debtorEmail: this.isDebt ? this.addByFriend? this.friend.email : this.email : user.email,
+      creditorEmail: this.isDebt ? user.email : this.addByFriend? this.friend.email : this.email,
       amount: this.amount,
       description: this.desc == undefined ? '' : this.desc,
       repaymentDate: this.withEndDate ? this.date : null,
     }
+
     let validateResp = this.requestValidated(debtRequest);
     if (!validateResp.isValid) {
       if (validateResp.isEmailTheSame) {
@@ -134,6 +157,21 @@ export class MenageDebtComponent implements OnInit {
   private isEmailValid(email: string): boolean {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
+  }
+
+  private loadFriends(page: number, size: number) {
+    this.friendsService.getFriendsForCustomer(page, size).subscribe({
+      next: (page: Page<CustomerDTO>) => {
+        this.friends = page.content;
+        this.totalRecords = page.totalElements;
+        this.rows = page.size;
+        this.canAddByFriend = page.totalElements > 0;
+      },
+      error: error => {
+        console.error('Error loading customers', error);
+        this.showError('Błąd Servera', 'Nie udało się pobrać danych')
+      }
+    });
   }
 
   showError(title: string, content: string) {
