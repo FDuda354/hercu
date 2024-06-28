@@ -1,10 +1,10 @@
 export interface CustomerDTO {
-  id?: number,
-  firstName?: string,
-  surname?: string,
-  email?: string,
-  age?: number,
-  role?: Role,
+  id: number,
+  firstName: string,
+  surname: string,
+  email: string,
+  age: number,
+  role: Role,
   gender?: Gender,
   profileImage?: string,
 }

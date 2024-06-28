@@ -59,4 +59,9 @@ export class DebtService {
     return this.http.put<void>(this.baseUrl + `/api/debt/reactive?debtId=${id}`, null)
 
   }
+
+  getFriendBalance(friendId: number) {
+    return this.http.get<number>(this.baseUrl + `/api/debt/summary/friend-balance?friendId=${friendId}`)
+
+  }
 }

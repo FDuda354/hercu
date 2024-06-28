@@ -30,6 +30,10 @@ export class LoginFormComponent implements OnInit {
   }
 
   login() {
+    if (this.authRequest.username == null || this.authRequest.password == null) {
+      this.showWarn('XD', 'Może byś coś wpisał najpierw');
+      return
+    }
     if (this.isWorking) {
       return
     }
@@ -58,6 +62,16 @@ export class LoginFormComponent implements OnInit {
       severity: 'error',
       summary: title,
       detail: content
+    });
+  }
+
+  showWarn(title: string, content: string) {
+    this.messageService.add({
+      key: 'bc',
+      severity: 'warn',
+      summary: title,
+      detail: content,
+      life: 5000
     });
   }
 }

@@ -24,7 +24,8 @@
 <!--transaction list-->
 <ng-template #transactionListTemplate let-transactions="transactions">
   <p-toast position="top-right" key="tr"></p-toast>
-  <p-confirmDialog [style]="getConfirmStyle()" key="deleteConfirmDialog" [position]="'bottom-center'" [baseZIndex]="10000" rejectButtonStyleClass="p-button-outlined"></p-confirmDialog>
+  <p-confirmDialog [style]="getConfirmStyle()" key="deleteConfirmDialog" [position]="'bottom-center'"
+                   [baseZIndex]="10000" rejectButtonStyleClass="p-button-outlined"></p-confirmDialog>
   <div *ngFor="let transaction of transactions">
     <mat-expansion-panel hideToggle class="mb-2">
       <mat-expansion-panel-header>

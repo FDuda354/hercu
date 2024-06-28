@@ -1,3 +1,6 @@
 .stick-to-bottom {
   margin-top: auto;
 }
+:host ::ng-deep .p-dropdown {
+  width: 14rem;
+}

@@ -61,6 +61,9 @@ import { SettingItemComponent } from './components/modules/settings/setting-item
 import { PasswordChangeComponent } from './components/modules/settings/password-change/password-change.component';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { FriendsComponent } from './components/modules/friends/friends.component';
+import { FriendCardComponent } from './components/modules/friends/friend-card/friend-card.component';
+import { AddFriendComponent } from './components/modules/friends/add-friend/add-friend.component';
+import { InputSwitchModule } from 'primeng/inputswitch';
 
 @NgModule({
   declarations: [
@@ -91,6 +94,8 @@ import { FriendsComponent } from './components/modules/friends/friends.component
     SettingItemComponent,
     PasswordChangeComponent,
     FriendsComponent,
+    FriendCardComponent,
+    AddFriendComponent,
   ],
   imports: [
     BrowserModule,
@@ -126,6 +131,7 @@ import { FriendsComponent } from './components/modules/friends/friends.component
     MatButtonModule,
     InputTextareaModule,
     ConfirmDialogModule,
+    InputSwitchModule,
   ],
   providers: [
     UserAuthGuard,
