@@ -21,7 +21,7 @@ import { CreditorsComponent } from './components/modules/creditors/creditors.com
 import { TransactionsComponent } from './components/modules/transactions/transactions.component';
 import { SettingsComponent } from './components/modules/settings/settings.component';
 import { RouterModule } from '@angular/router';
-import { MenageDebtComponent } from './components/common/components/add-debt/menage-debt.component';
+import { MenageDebtComponent } from './components/common/components/menage-debt/menage-debt.component';
 import { CheckboxModule } from 'primeng/checkbox';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { CalendarModule } from 'primeng/calendar';
@@ -64,6 +64,9 @@ import { FriendsComponent } from './components/modules/friends/friends.component
 import { FriendCardComponent } from './components/modules/friends/friend-card/friend-card.component';
 import { AddFriendComponent } from './components/modules/friends/add-friend/add-friend.component';
 import { InputSwitchModule } from 'primeng/inputswitch';
+import { ProfileImageChangeComponent } from './components/modules/settings/profile-image-change/profile-image-change.component';
+import {FileUploadModule} from "primeng/fileupload";
+import {ImageModule} from "primeng/image";
 
 @NgModule({
   declarations: [
@@ -96,43 +99,46 @@ import { InputSwitchModule } from 'primeng/inputswitch';
     FriendsComponent,
     FriendCardComponent,
     AddFriendComponent,
+    ProfileImageChangeComponent,
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    RouterModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule,
-    InputTextModule,
-    SidebarModule,
-    ButtonModule,
-    AvatarModule,
-    RippleModule,
-    MenuModule,
-    CheckboxModule,
-    InputNumberModule,
-    CalendarModule,
-    PasswordModule,
-    BrowserModule,
-    BrowserAnimationsModule,
-    ToastModule,
-    PaginatorModule,
-    CardModule,
-    NgOptimizedImage,
-    TableModule,
-    ChartModule,
-    ChipModule,
-    SkeletonModule,
-    MessageModule,
-    ReactiveFormsModule,
-    MatExpansionModule,
-    MatCardModule,
-    MatButtonModule,
-    InputTextareaModule,
-    ConfirmDialogModule,
-    InputSwitchModule,
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        RouterModule,
+        AppRoutingModule,
+        HttpClientModule,
+        FormsModule,
+        InputTextModule,
+        SidebarModule,
+        ButtonModule,
+        AvatarModule,
+        RippleModule,
+        MenuModule,
+        CheckboxModule,
+        InputNumberModule,
+        CalendarModule,
+        PasswordModule,
+        BrowserModule,
+        BrowserAnimationsModule,
+        ToastModule,
+        PaginatorModule,
+        CardModule,
+        NgOptimizedImage,
+        TableModule,
+        ChartModule,
+        ChipModule,
+        SkeletonModule,
+        MessageModule,
+        ReactiveFormsModule,
+        MatExpansionModule,
+        MatCardModule,
+        MatButtonModule,
+        InputTextareaModule,
+        ConfirmDialogModule,
+        InputSwitchModule,
+        FileUploadModule,
+        ImageModule,
+    ],
   providers: [
     UserAuthGuard,
     {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true},

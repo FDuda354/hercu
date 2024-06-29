@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Page } from '../components/common/models/page';
 import { DebtDTO } from '../components/common/models/debt-dto';
-import { DebtRequest } from '../components/common/components/add-debt/debt-request';
+import { DebtRequest } from '../components/common/components/menage-debt/debt-request';
 
 @Injectable({
   providedIn: 'root'

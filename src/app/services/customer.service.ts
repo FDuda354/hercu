@@ -23,10 +23,17 @@ export class CustomerService {
   }
 
   getCustomerImage(customerImage: string): Observable<Blob> {
-    return this.http.get(this.baseUrl + `/api/customers/image?customerImage=${customerImage}`, {responseType: 'blob'});
+    return this.http.get(this.baseUrl + `/api/customers/image/customer`, {responseType: 'blob'});
   }
 
   deleteFriend(friendId: number) {
     return this.http.delete(this.baseUrl + `/api/customers/friend?friendId=${friendId}`);
+  }
+
+  uploadProfileImage(image: File): Observable<void> {
+    const formData = new FormData();
+    formData.append('image', image);
+    return this.http.post<void>(this.baseUrl + '/api/customers/image', formData);
+
   }
 }
