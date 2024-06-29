@@ -6,7 +6,7 @@ import { CustomerDTO } from '../../models/customer-dto';
 import { DebtService } from '../../../../services/debt.service';
 import { ValidateResp } from '../../models/ValidateResp';
 import { Page } from '../../models/page';
-import { FriendsService } from '../../../modules/friends/friends.service';
+import { FriendsService } from '../../../../services/friends.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CustomerService } from '../../../../services/customer.service';
 
@@ -160,10 +160,10 @@ export class MenageDebtComponent implements OnInit {
   }
 
   private loadFriends() {
-    this.friendsService.getAllFriendsForCustomer().subscribe({
-      next: (friends: CustomerDTO[]) => {
-        this.friends = friends;
-        this.canAddByFriend = friends.length > 0;
+    this.friendsService.getFriendsForCustomer(0, 500).subscribe({
+      next: (page: Page<CustomerDTO>) => {
+        this.friends = page.content;
+        this.canAddByFriend = this.friends.length > 0;
       },
       error: error => {
         console.error('Error loading customers', error);

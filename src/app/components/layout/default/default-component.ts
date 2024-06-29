@@ -33,11 +33,6 @@ export class DefaultComponent implements OnInit {
       url: 'transactions',
       routerLink: 'transactions',
     },
-    {
-      label: 'Ustawienia', icon: 'pi pi-cog',
-      url: 'settings',
-      routerLink: 'settings',
-    }
   ];
 
 }

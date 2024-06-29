@@ -15,9 +15,8 @@ import {Transaction} from "../../../common/models/transaction";
   providers: [MessageService]
 })
 export class ProfileImageChangeComponent implements OnInit{
-  uploadedFiles: any[] = [];
-  private readonly baseUrl = `${environment.api.baseUrl}`;
   profileImage = 'assets/images/user.png';
+  cantUploading: boolean = false;
 
   constructor(
     private messageService: MessageService,
@@ -47,27 +46,31 @@ export class ProfileImageChangeComponent implements OnInit{
         },
         error: (error: HttpErrorResponse) => {
           resolve('assets/images/user.png');
+          console.error('Error upload image', error);
+          this.showError('Błąd Servera', 'Nie udało się pobrać zdjęcia');
         }
       });
     });
   }
-  onUpload(event: any) {
-    this.uploadedFiles = []
-    this.uploadedFiles.push(event.files[0]);
-
-    this.showInfo('info', 'Udało się przesłać zdjęcie');
-  }
 
   uploadProfileImage($event: any) {
+    this.cantUploading = true;
     let image = $event.files[0] as File;
     this.customerService.uploadProfileImage(image).subscribe({
       next: () => {
+        const customer: CustomerDTO = JSON.parse(<string>this.jwtService.getCustomer());
+        this.loadCustomerImage(customer?.profileImage).then(url => {
+          this.profileImage = url;
+        });
         this.showInfo('Sukces', 'udało się zmienić zdj profilowe');
+        this.cantUploading = false;
 
       },
       error: error => {
         console.error('Error upload image', error);
         this.showError('Błąd Servera', 'Nie udało się przesłać zdjęcia');
+        this.cantUploading = false;
+
       }
     });
   }
@@ -76,16 +79,6 @@ export class ProfileImageChangeComponent implements OnInit{
     this.messageService.add({
       key: 'tr',
       severity: 'info',
-      summary: title,
-      detail: content,
-      life: 5000
-    });
-  }
-
-  showWarn(title: string, content: string) {
-    this.messageService.add({
-      key: 'tr',
-      severity: 'warn',
       summary: title,
       detail: content,
       life: 5000
@@ -102,7 +95,5 @@ export class ProfileImageChangeComponent implements OnInit{
 
     });
   }
-
-
 
 }

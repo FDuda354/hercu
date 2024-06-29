@@ -67,6 +67,7 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import { ProfileImageChangeComponent } from './components/modules/settings/profile-image-change/profile-image-change.component';
 import {FileUploadModule} from "primeng/fileupload";
 import {ImageModule} from "primeng/image";
+import { FieldsetModule } from 'primeng/fieldset';
 
 @NgModule({
   declarations: [
@@ -138,6 +139,7 @@ import {ImageModule} from "primeng/image";
         InputSwitchModule,
         FileUploadModule,
         ImageModule,
+        FieldsetModule,
     ],
   providers: [
     UserAuthGuard,

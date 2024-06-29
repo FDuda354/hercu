@@ -3,7 +3,7 @@ import { MessageService } from 'primeng/api';
 import { JwtService } from '../../../../services/auth/jwt.service';
 import { CustomerDTO } from '../../../common/models/customer-dto';
 import { ValidateResp } from '../../../common/models/ValidateResp';
-import { FriendsService } from '../friends.service';
+import { FriendsService } from '../../../../services/friends.service';
 
 @Component({
   selector: 'app-add-friend',
