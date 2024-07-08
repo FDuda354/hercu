@@ -22,8 +22,12 @@ export class CustomerService {
     return this.http.post<void>(this.baseUrl + `/api/customers`, req);
   }
 
-  getCustomerImage(customerImage: string): Observable<Blob> {
-    return this.http.get(this.baseUrl + `/api/customers/image/customer`, {responseType: 'blob'});
+  getCustomerImage(customerImage?: string): Observable<Blob> {
+    if (customerImage) {
+      return this.http.get(this.baseUrl + `/api/customers/image?customerImage=${customerImage}`, { responseType: 'blob' });
+    } else {
+      return this.http.get(this.baseUrl + `/api/customers/image`, { responseType: 'blob' });
+    }
   }
 
   deleteFriend(friendId: number) {

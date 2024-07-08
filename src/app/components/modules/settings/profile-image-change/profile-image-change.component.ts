@@ -1,12 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {MessageService} from "primeng/api";
-import {environment} from "../../../../../environments/environment";
 import {JwtService} from "../../../../services/auth/jwt.service";
-import {CustomerDTO} from "../../../common/models/customer-dto";
 import {HttpErrorResponse} from "@angular/common/http";
 import {CustomerService} from "../../../../services/customer.service";
-import {Page} from "../../../common/models/page";
-import {Transaction} from "../../../common/models/transaction";
 
 @Component({
   selector: 'app-profile-image-change',
@@ -14,7 +10,7 @@ import {Transaction} from "../../../common/models/transaction";
   styleUrls: ['./profile-image-change.component.scss'],
   providers: [MessageService]
 })
-export class ProfileImageChangeComponent implements OnInit{
+export class ProfileImageChangeComponent implements OnInit {
   profileImage = 'assets/images/user.png';
   cantUploading: boolean = false;
 
@@ -22,21 +18,18 @@ export class ProfileImageChangeComponent implements OnInit{
     private messageService: MessageService,
     private jwtService: JwtService,
     private customerService: CustomerService,
-    ) {}
+  ) {
+  }
 
   ngOnInit(): void {
-    const customer: CustomerDTO = JSON.parse(<string>this.jwtService.getCustomer());
-    this.loadCustomerImage(customer?.profileImage).then(url => {
+    this.loadCustomerImage().then(url => {
       this.profileImage = url;
     });
   }
 
-  loadCustomerImage(customerImage: string | undefined): Promise<string> {
-    if (customerImage == undefined) {
-      return Promise.resolve('assets/images/user.png');
-    }
-    return new Promise((resolve, reject) => {
-      this.customerService.getCustomerImage(customerImage).subscribe({
+  loadCustomerImage(): Promise<string> {
+    return new Promise((resolve) => {
+      this.customerService.getCustomerImage().subscribe({
         next: (imageBlob: Blob) => {
           const reader = new FileReader();
           reader.onloadend = () => {
@@ -58,9 +51,9 @@ export class ProfileImageChangeComponent implements OnInit{
     let image = $event.files[0] as File;
     this.customerService.uploadProfileImage(image).subscribe({
       next: () => {
-        const customer: CustomerDTO = JSON.parse(<string>this.jwtService.getCustomer());
-        this.loadCustomerImage(customer?.profileImage).then(url => {
+        this.loadCustomerImage().then(url => {
           this.profileImage = url;
+          //wywołaj metode
         });
         this.showInfo('Sukces', 'udało się zmienić zdj profilowe');
         this.cantUploading = false;

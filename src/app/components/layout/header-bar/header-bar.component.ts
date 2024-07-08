@@ -26,8 +26,8 @@ export class HeaderBarComponent implements OnInit {
     this.loadCustomerImage(this.user?.profileImage).then(url => {
       this.profileImage = url;
     });
-  }
 
+  }
 
   @Input() isMobileVisible!: boolean;
   @Input() menuItems!: Array<MenuItem>;
