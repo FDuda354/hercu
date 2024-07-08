@@ -50,6 +50,7 @@ export class FriendsComponent implements OnInit {
   }
 
   private loadFriends(page: number, size: number) {
+    this.isLoading = true;
     this.friendsService.getFriendsForCustomer(page, size).subscribe({
       next: (page: Page<CustomerDTO>) => {
         this.friends = page.content;
