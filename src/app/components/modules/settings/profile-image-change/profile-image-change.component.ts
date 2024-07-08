@@ -3,6 +3,7 @@ import {MessageService} from "primeng/api";
 import {JwtService} from "../../../../services/auth/jwt.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {CustomerService} from "../../../../services/customer.service";
+import {CommunicationService} from "../../../../services/communication.service";
 
 @Component({
   selector: 'app-profile-image-change',
@@ -16,7 +17,7 @@ export class ProfileImageChangeComponent implements OnInit {
 
   constructor(
     private messageService: MessageService,
-    private jwtService: JwtService,
+    private communicationService: CommunicationService,
     private customerService: CustomerService,
   ) {
   }
@@ -53,10 +54,10 @@ export class ProfileImageChangeComponent implements OnInit {
       next: () => {
         this.loadCustomerImage().then(url => {
           this.profileImage = url;
-          //wywołaj metode
+          this.communicationService.trigger('reloadProfileImage');
+          this.showInfo('Sukces', 'udało się zmienić zdj profilowe');
+          this.cantUploading = false;
         });
-        this.showInfo('Sukces', 'udało się zmienić zdj profilowe');
-        this.cantUploading = false;
 
       },
       error: error => {

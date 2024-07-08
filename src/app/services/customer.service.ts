@@ -5,6 +5,7 @@ import {
   CustomerRegistrationRequest
 } from '../components/modules/registration-page/registration-form/customer-registration-request';
 import { Observable } from 'rxjs';
+import {CustomerDTO} from "../components/common/models/customer-dto";
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +39,11 @@ export class CustomerService {
     const formData = new FormData();
     formData.append('image', image);
     return this.http.post<void>(this.baseUrl + '/api/customers/image', formData);
+
+  }
+
+  getCustomerDetails(): Observable<CustomerDTO>  {
+    return this.http.get<CustomerDTO>(this.baseUrl + `/api/customers/details`);
 
   }
 }

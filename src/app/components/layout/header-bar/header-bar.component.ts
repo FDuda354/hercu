@@ -1,33 +1,27 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { CustomerDTO, Role } from '../../common/models/customer-dto';
 import { JwtService } from '../../../services/auth/jwt.service';
 import { CustomerService } from '../../../services/customer.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import {CommunicationService} from "../../../services/communication.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-header-bar',
   templateUrl: './header-bar.component.html',
   styleUrls: ['./header-bar.component.scss']
 })
-export class HeaderBarComponent implements OnInit {
+export class HeaderBarComponent implements OnInit, OnDestroy {
 
+  protected readonly Role = Role;
   user!: CustomerDTO;
   profileImage = 'assets/images/user.png';
-
-  constructor(
-    private jwtService: JwtService,
-    private customerService: CustomerService,
-  ) {
-  }
-
-  ngOnInit(): void {
-    this.user = JSON.parse(<string>this.jwtService.getCustomer());
-    this.loadCustomerImage(this.user?.profileImage).then(url => {
+  private profileImageSubscription: Subscription = this.communicationService.on('reloadProfileImage').subscribe(() => {
+    this.loadCustomerImage().then(url => {
       this.profileImage = url;
     });
-
-  }
+  });
 
   @Input() isMobileVisible!: boolean;
   @Input() menuItems!: Array<MenuItem>;
@@ -56,14 +50,27 @@ export class HeaderBarComponent implements OnInit {
     }
   ];
 
-  protected readonly Role = Role;
+  constructor(
+    private jwtService: JwtService,
+    private customerService: CustomerService,
+    private communicationService: CommunicationService,
+  ) {
+  }
 
-  loadCustomerImage(customerImage: string | undefined): Promise<string> {
-    if (customerImage == undefined) {
-      return Promise.resolve('assets/images/user.png');
-    }
+  ngOnInit(): void {
+    this.loadUser()
+    this.loadCustomerImage().then(url => {
+      this.profileImage = url;
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.profileImageSubscription.unsubscribe();
+  }
+
+  loadCustomerImage(): Promise<string> {
     return new Promise((resolve, reject) => {
-      this.customerService.getCustomerImage(customerImage).subscribe({
+      this.customerService.getCustomerImage().subscribe({
         next: (imageBlob: Blob) => {
           const reader = new FileReader();
           reader.onloadend = () => {
@@ -77,5 +84,16 @@ export class HeaderBarComponent implements OnInit {
         }
       });
     });
+  }
+
+  private loadUser() {
+     this.customerService.getCustomerDetails().subscribe({
+       next: (customerDto: CustomerDTO) => {
+         this.user = customerDto;
+       },
+       error: error => {
+         this.user = JSON.parse(<string>this.jwtService.getCustomer());
+       }
+     });
   }
 }
