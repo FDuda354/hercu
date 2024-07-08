@@ -54,9 +54,9 @@ export class AddFriendComponent {
         if (error.status == 404) {
           this.isWorking = false;
           this.showWarn('DANE', 'Podany użytkownik nie istnieje');
-        } else if (error.status == 400) {
+        } else if (error.status == 400) { //TODO dodac inny status dla ponad 500 oraz jak znajomi istnieja
           this.isWorking = false;
-          this.showError('Błąd servera', 'Masz już znajomego ' + this.email);
+          this.showWarn('Błąd', 'Nie możesz dodać znajomego ' + this.email);
         } else {
           this.isWorking = false;
           this.showError('Błąd servera', 'Wystąpił błąd serwera');

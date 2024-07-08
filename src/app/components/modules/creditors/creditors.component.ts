@@ -41,6 +41,7 @@ export class CreditorsComponent implements OnInit {
   }
 
   loadDebts(page: number, size: number) {
+    this.isLoading = true;
     this.debtService.getDebtsForDebtor(page, size, this.onlyActive).subscribe({
       next: (page: Page<DebtDTO>) => {
         this.debts = page.content;
