@@ -68,6 +68,8 @@ import { ProfileImageChangeComponent } from './components/modules/settings/profi
 import {FileUploadModule} from "primeng/fileupload";
 import {ImageModule} from "primeng/image";
 import { FieldsetModule } from 'primeng/fieldset';
+import { NotificationService } from './services/notification.service';
+import { BadgeModule } from 'primeng/badge';
 
 @NgModule({
   declarations: [
@@ -140,9 +142,11 @@ import { FieldsetModule } from 'primeng/fieldset';
         FileUploadModule,
         ImageModule,
         FieldsetModule,
+        BadgeModule,
     ],
   providers: [
     UserAuthGuard,
+    NotificationService,
     {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true},
   ],
   bootstrap: [AppComponent]

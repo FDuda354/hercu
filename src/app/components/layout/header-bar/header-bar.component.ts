@@ -1,11 +1,13 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { CustomerDTO, Role } from '../../common/models/customer-dto';
 import { JwtService } from '../../../services/auth/jwt.service';
 import { CustomerService } from '../../../services/customer.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import {CommunicationService} from "../../../services/communication.service";
-import {Subscription} from "rxjs";
+import { CommunicationService } from '../../../services/communication.service';
+import { Subscription } from 'rxjs';
+import { NotificationService } from '../../../services/notification.service';
+import { Notification } from '../../common/models/notification';
 
 @Component({
   selector: 'app-header-bar',
@@ -17,11 +19,10 @@ export class HeaderBarComponent implements OnInit, OnDestroy {
   protected readonly Role = Role;
   user!: CustomerDTO;
   profileImage = 'assets/images/user.png';
-  private profileImageSubscription: Subscription = this.communicationService.on('reloadProfileImage').subscribe(() => {
-    this.loadCustomerImage().then(url => {
-      this.profileImage = url;
-    });
-  });
+  private profileImageSubscription: Subscription;
+  private notificationsSubscription: Subscription;
+  notifications: string[] = [];
+  unreadNotificationsCount: number = 0;
 
   @Input() isMobileVisible!: boolean;
   @Input() menuItems!: Array<MenuItem>;
@@ -45,6 +46,7 @@ export class HeaderBarComponent implements OnInit, OnDestroy {
       command: () => {
         this.jwtService.removeCustomer();
         this.jwtService.removeToken();
+        this.notificationService.onUserLogout();
       },
       routerLink: 'login',
     }
@@ -54,18 +56,30 @@ export class HeaderBarComponent implements OnInit, OnDestroy {
     private jwtService: JwtService,
     private customerService: CustomerService,
     private communicationService: CommunicationService,
+    private notificationService: NotificationService
   ) {
+    this.profileImageSubscription = this.communicationService.on('reloadProfileImage').subscribe(() => {
+      this.loadCustomerImage().then(url => {
+        this.profileImage = url;
+      });
+    });
+    this.notificationsSubscription = this.notificationService.notifications$.subscribe(notifications => {
+      this.notifications = notifications;
+    });
   }
 
   ngOnInit(): void {
-    this.loadUser()
+    this.loadUser();
     this.loadCustomerImage().then(url => {
       this.profileImage = url;
     });
+    this.getUnreadNotificationsCount();
+    this.getLastNotifications();
   }
 
   ngOnDestroy(): void {
     this.profileImageSubscription.unsubscribe();
+    this.notificationsSubscription.unsubscribe();
   }
 
   loadCustomerImage(): Promise<string> {
@@ -87,13 +101,41 @@ export class HeaderBarComponent implements OnInit, OnDestroy {
   }
 
   private loadUser() {
-     this.customerService.getCustomerDetails().subscribe({
-       next: (customerDto: CustomerDTO) => {
-         this.user = customerDto;
-       },
-       error: error => {
-         this.user = JSON.parse(<string>this.jwtService.getCustomer());
-       }
-     });
+    this.customerService.getCustomerDetails().subscribe({
+      next: (customerDto: CustomerDTO) => {
+        this.user = customerDto;
+      },
+      error: error => {
+        this.user = JSON.parse(<string>this.jwtService.getCustomer());
+      }
+    });
+  }
+
+  private getUnreadNotificationsCount() {
+    this.notificationService.getUnreadNotificationsCount().subscribe({
+      next: (notificationsCount: number) => {
+        this.unreadNotificationsCount = notificationsCount;
+      },
+      error: error => {
+        //ToDO dorobic errory
+      }
+    });
+  }
+
+  private getLastNotifications() {
+    this.notificationService.getNotifications().subscribe({
+      next: (notifications: Notification[]) => {
+        this.notifications = notifications.map(notification => notification.message);
+        //ToDO dorobic cały message
+
+      },
+      error: error => {
+        //ToDO dorobic errory
+      }
+    });
+  }
+
+  getUnreadNotifications() {
+    return this.unreadNotificationsCount + this.notifications.length ;
   }
 }

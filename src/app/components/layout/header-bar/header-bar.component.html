@@ -15,9 +15,14 @@
 
   <!-- Elementy po prawej -->
   <div class="flex flex-row align-items-center">
+
+
+
     <button pButton pRipple type="button" icon="pi pi-bell"
-            class="p-button-rounded p-button-secondary p-button-text mr-2">
+            class="p-button-rounded p-button-secondary p-button-text mr-2"
+    >
     </button>
+    <i class="mb-5 mr-5" pBadge style="font-size: 2rem" [value]="getUnreadNotifications().toString()" [badgeDisabled]="getUnreadNotifications() < 1" severity="danger"></i>
 
     <p-avatar [image]="profileImage" styleClass="mr-2" size="small" shape="circle" class="mr-2"></p-avatar>
     <div class="max-w-10rem md:max-w-16rem lg:max-w-23rem">
