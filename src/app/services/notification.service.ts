@@ -37,6 +37,5 @@ export class NotificationService {
 
   deleteNotification(id: number) {
     return this.http.delete<void>(this.baseUrl + `/api/notification?id=${id}`)
-
   }
 }
