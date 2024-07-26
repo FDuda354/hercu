@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
 import * as SockJS from 'sockjs-client';
 import { Client, IMessage } from '@stomp/stompjs';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { JwtService } from './auth/jwt.service';
 import { environment } from '../../environments/environment';
 import { CustomerDTO } from '../components/common/models/customer-dto';
+import { Notification } from '../components/common/models/notification';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WebSocketService {
 
-  private notificationSubject: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
+  private notificationSubject: Subject<Notification> = new Subject<Notification>();
   public notifications$ = this.notificationSubject.asObservable();
   private stompClient!: Client;
 
@@ -33,12 +34,12 @@ export class WebSocketService {
 
     this.stompClient.onConnect = (frame) => {
       const user: CustomerDTO = JSON.parse(<string>this.jwtService.getCustomer());
-      console.log(user)
       this.stompClient.subscribe('/all/messages', (message: IMessage) => {
-        this.handleMessage(message.body);
+        this.handleMessage(JSON.parse(message.body));
       });
       this.stompClient.subscribe(`/user/${user.email}/one/messages`, (message: IMessage) => {
-        this.handleMessage(message.body);
+
+        this.handleMessage(JSON.parse(message.body));
       });
 
     };
@@ -62,13 +63,9 @@ export class WebSocketService {
     this.initializeWebSocketConnection();
   }
 
-  public clearNotifications() {
-    this.notificationSubject.next([]);
-  }
 
-  private handleMessage(message: string) {
-    const currentNotifications = this.notificationSubject.value;
-    this.notificationSubject.next([...currentNotifications, message]);
+  private handleMessage(message: Notification) {
+    this.notificationSubject.next(message);
   }
 
 

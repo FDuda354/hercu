@@ -17,12 +17,58 @@
   <div class="flex flex-row align-items-center">
 
 
-
     <button pButton pRipple type="button" icon="pi pi-bell"
             class="p-button-rounded p-button-secondary p-button-text mr-2"
+            [ngClass]="{'mr-4' : getUnreadNotificationsNumber() == 0}"
+            (click)="op.toggle($event); toggleNotifications()"
     >
     </button>
-    <i class="mb-5 mr-5" pBadge style="font-size: 2rem" [value]="getUnreadNotifications().toString()" [badgeDisabled]="getUnreadNotifications() < 1" severity="danger"></i>
+
+    <div class="badge mb-4 mr-4" *ngIf="getUnreadNotificationsNumber() > 0">
+      {{ getUnreadNotificationsNumber().toString() }}
+    </div>
+
+    <p-overlayPanel #op [showCloseIcon]="false" [style]="{width: '450px'}">
+      <ng-template pTemplate>
+        <p-virtualScroller [value]="notifications" scrollHeight="500px" [itemSize]="100">
+          <ng-template pTemplate="header">
+            <div class="flex align-items-center justify-content-center gap-3 flex-wrap">
+              Powiadomienia
+            </div>
+          </ng-template>
+          <ng-template let-notification pTemplate="item">
+            <div
+              class="flex flex-row mt-2 align-items-center p-2 "
+              style="height: 100px;"
+            >
+              <div class="flex align-items-center" style="width: 15%;">
+                <i class="pi pi-info-circle" style="font-size: 2rem;"></i>
+              </div>
+
+              <div class="flex-grow-1 p-2">
+                <div class="flex">{{ notification.message }}</div>
+              </div>
+
+              <div class="align-items-start" style="margin-top: -50px">
+                  <h6 >{{ notification.date | transformDate }}</h6>
+
+                <div>
+                  <button pButton pRipple type="button"
+                          icon="pi pi-times"
+                          class="p-button-rounded p-button-danger ml-4"
+                          (click)="deleteNotification(notification.id)"
+                          style="max-height: 30px; max-width:30px">
+
+                  </button>
+                </div>
+
+              </div>
+            </div>
+
+          </ng-template>
+        </p-virtualScroller>
+      </ng-template>
+    </p-overlayPanel>
 
     <p-avatar [image]="profileImage" styleClass="mr-2" size="small" shape="circle" class="mr-2"></p-avatar>
     <div class="max-w-10rem md:max-w-16rem lg:max-w-23rem">
@@ -44,3 +90,8 @@
     </div>
   </div>
 </div>
+
+
+
+
+

@@ -23,16 +23,20 @@ export class NotificationService {
 
   onUserLogout() {
     this.webSocketService.disconnectWebSocket();
-    this.webSocketService.clearNotifications();
-  }
-
-  getUnreadNotificationsCount() {
-    return this.http.get<number>(this.baseUrl + `/api/notification/user/unread/count`)
-
   }
 
   getNotifications() {
     return this.http.get<Notification[]>(this.baseUrl + `/api/notification/last/user`)
+
+  }
+
+  readNotifications() {
+    return this.http.post<void>(this.baseUrl + `/api/notification/read/user`, null)
+
+  }
+
+  deleteNotification(id: number) {
+    return this.http.delete<void>(this.baseUrl + `/api/notification?id=${id}`)
 
   }
 }
