@@ -4,6 +4,7 @@ import {JwtService} from "../../../../services/auth/jwt.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {CustomerService} from "../../../../services/customer.service";
 import {CommunicationService} from "../../../../services/communication.service";
+import { CustomerDTO } from '../../../common/models/customer-dto';
 
 @Component({
   selector: 'app-profile-image-change',
@@ -19,6 +20,7 @@ export class ProfileImageChangeComponent implements OnInit {
     private messageService: MessageService,
     private communicationService: CommunicationService,
     private customerService: CustomerService,
+    private jwtService: JwtService,
   ) {
   }
 
@@ -29,6 +31,9 @@ export class ProfileImageChangeComponent implements OnInit {
   }
 
   loadCustomerImage(): Promise<string> {
+    let user: CustomerDTO = JSON.parse(<string>this.jwtService.getCustomer());
+
+
     return new Promise((resolve) => {
       this.customerService.getCustomerImage().subscribe({
         next: (imageBlob: Blob) => {
@@ -41,7 +46,10 @@ export class ProfileImageChangeComponent implements OnInit {
         error: (error: HttpErrorResponse) => {
           resolve('assets/images/user.png');
           console.error('Error upload image', error);
-          this.showError('Błąd Servera', 'Nie udało się pobrać zdjęcia');
+          if(user.profileImage != null){
+            this.showError('Błąd Servera', 'Nie udało się pobrać zdjęcia');
+
+          }
         }
       });
     });
@@ -50,6 +58,7 @@ export class ProfileImageChangeComponent implements OnInit {
   uploadProfileImage($event: any) {
     this.cantUploading = true;
     let image = $event.files[0] as File;
+    console.log(image)
     this.customerService.uploadProfileImage(image).subscribe({
       next: () => {
         this.loadCustomerImage().then(url => {
