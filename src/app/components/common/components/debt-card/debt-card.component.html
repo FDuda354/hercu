@@ -19,7 +19,7 @@
   </ng-template>
   <div class="surface-overlay white-space-nowrap overflow-hidden " style="margin-top: -50px">
     <div *ngIf="debt.repaymentDate == null">
-      Brak terminu
+      Brak terminu spłaty
     </div>
     <div *ngIf="debt.repaymentDate != null">
       do {{ debt.repaymentDate | transformDate }}

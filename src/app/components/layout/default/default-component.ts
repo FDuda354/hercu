@@ -19,12 +19,12 @@ export class DefaultComponent implements OnInit {
       routerLink: '/',
     },
     {
-      label: 'Dłużnicy', icon: 'pi pi-users',
+      label: 'Twoi dłużnicy', icon: 'pi pi-users',
       url: 'debtors',
       routerLink: 'debtors',
     },
     {
-      label: 'Wierzyciele', icon: 'pi pi-users',
+      label: 'Twoje długi', icon: 'pi pi-users',
       url: 'creditors',
       routerLink: 'creditors',
     },
