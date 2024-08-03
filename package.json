@@ -1,6 +1,6 @@
 {
-  "name": "debtorfront",
-  "version": "1.2.1",
+  "name": "hercu",
+  "version": "0.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
