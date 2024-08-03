@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { CustomerDTO } from '../../components/common/models/customer-dto';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 
@@ -20,9 +19,6 @@ export class JwtService {
     localStorage.removeItem('token');
   }
 
-  setCustomer(customer: CustomerDTO) {
-    localStorage.setItem('customer', JSON.stringify(customer));
-  }
 
   getCustomer(): string | null {
     return localStorage.getItem('customer');
