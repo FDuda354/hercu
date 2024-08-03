@@ -1,0 +1,40 @@
+<p-toast position="top-right" key="tr"></p-toast>
+
+<div class="flex justify-content-center align-items-center flex-wrap gap-5 pb-1">
+  <p-fieldset legend="Twoje piękne zdjęcie" [style]="{'max-width': '250px'}">
+    <p-image [src]="profileImage" alt="ProfileImage" width="250" [preview]="true"></p-image>
+  </p-fieldset>
+
+  <p-fileUpload
+    name="image"
+    [customUpload]="true"
+    (uploadHandler)="uploadProfileImage($event)"
+    accept="image/*"
+    [fileLimit]="1"
+    [maxFileSize]="10000000"
+    chooseLabel="Wybierz z dysku"
+    uploadLabel="Prześlij zdjęcie"
+    cancelLabel="Usuń"
+    mode="advanced"
+    [disabled]="cantUploading"
+  >
+    <ng-template let-file pTemplate="content">
+      <div [style]="{'min-height': '250px'}">
+        <div *ngIf="file.length == 0" class="flex justify-content-center align-items-cente text-1xl strong">
+          Przeciągnij zjęcie lub wybierz z dysku
+        </div>
+
+      </div>
+
+    </ng-template>
+
+
+  </p-fileUpload>
+</div>
+
+
+
+
+
+
+

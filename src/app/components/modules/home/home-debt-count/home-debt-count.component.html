@@ -6,7 +6,7 @@
     <div class="red-text text-4xl">{{ debtSummary | number:'1.0-2' }} PLN</div>
     <div class="green-text  text-3xl">Wierzytelności: {{ creditCountSummary }}</div>
     <div class="green-text text-4xl">{{ creditSummary | number:'1.0-2' }} PLN</div>
-    <div class=" text-3xl">Suma:</div>
+    <div class=" text-3xl">Balans:</div>
     <div [ngStyle]="{
     'color': balance < 0 ? '#ff6d0d' :
              balance == 0 ? '#FFD700' : '#77DD07'

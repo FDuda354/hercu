@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../../../../environments/environment';
+import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Page } from '../../common/models/page';
-import { CustomerDTO } from '../../common/models/customer-dto';
+import { Page } from '../components/common/models/page';
+import { CustomerDTO } from '../components/common/models/customer-dto';
 import { Observable } from 'rxjs';
 
 @Injectable({

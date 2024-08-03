@@ -2,7 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { CustomerDTO } from '../../common/models/customer-dto';
 import { Page } from '../../common/models/page';
-import { FriendsService } from './friends.service';
+import { FriendsService } from '../../../services/friends.service';
 
 @Component({
   selector: 'app-friends',
@@ -50,6 +50,7 @@ export class FriendsComponent implements OnInit {
   }
 
   private loadFriends(page: number, size: number) {
+    this.isLoading = true;
     this.friendsService.getFriendsForCustomer(page, size).subscribe({
       next: (page: Page<CustomerDTO>) => {
         this.friends = page.content;

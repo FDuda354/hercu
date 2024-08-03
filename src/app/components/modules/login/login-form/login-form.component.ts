@@ -4,6 +4,7 @@ import { AuthenticationService } from '../../../../services/auth/authentication.
 import { MessageService, PrimeNGConfig } from 'primeng/api';
 import { Router } from '@angular/router';
 import { JwtService } from '../../../../services/auth/jwt.service';
+import { WebSocketService } from '../../../../services/web-socket.service';
 
 @Component({
   selector: 'app-login-form',
@@ -26,6 +27,7 @@ export class LoginFormComponent implements OnInit {
     private primengConfig: PrimeNGConfig,
     private jwtService: JwtService,
     private router: Router,
+    private webSocketService: WebSocketService
   ) {
   }
 
@@ -42,6 +44,7 @@ export class LoginFormComponent implements OnInit {
       next: (response) => {
         this.jwtService.setToken(response.token)
         this.jwtService.setCustomer(response.customerDTO)
+        this.webSocketService.reconnectWebSocket()
         this.router.navigate([''])
         this.isWorking = false;
       },

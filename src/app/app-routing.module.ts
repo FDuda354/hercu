@@ -12,6 +12,9 @@ import { RegistrationPageComponent } from './components/modules/registration-pag
 import { DebtDetailsComponent } from './components/common/components/debt-details/debt-details.component';
 import { PasswordChangeComponent } from './components/modules/settings/password-change/password-change.component';
 import { FriendsComponent } from './components/modules/friends/friends.component';
+import {
+  ProfileImageChangeComponent
+} from "./components/modules/settings/profile-image-change/profile-image-change.component";
 
 
 const routes: Routes = [
@@ -23,6 +26,7 @@ const routes: Routes = [
       {path: 'transactions', component: TransactionsComponent, canActivate: [UserAuthGuard]},
       {path: 'settings', component: SettingsComponent, canActivate: [UserAuthGuard]},
       {path: 'password-change', component: PasswordChangeComponent, canActivate: [UserAuthGuard]},
+      {path: 'profile-image-change', component: ProfileImageChangeComponent, canActivate: [UserAuthGuard]},
       {path: 'friends', component: FriendsComponent, canActivate: [UserAuthGuard]},
 
     ]

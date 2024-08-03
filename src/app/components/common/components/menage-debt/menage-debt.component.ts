@@ -6,7 +6,7 @@ import { CustomerDTO } from '../../models/customer-dto';
 import { DebtService } from '../../../../services/debt.service';
 import { ValidateResp } from '../../models/ValidateResp';
 import { Page } from '../../models/page';
-import { FriendsService } from '../../../modules/friends/friends.service';
+import { FriendsService } from '../../../../services/friends.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CustomerService } from '../../../../services/customer.service';
 
@@ -54,7 +54,7 @@ export class MenageDebtComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadFriends(0, 5);
+    this.loadFriends();
     this.isMobileVisible = window.innerWidth <= 768;
 
     this.pl = {
@@ -82,8 +82,8 @@ export class MenageDebtComponent implements OnInit {
     this.isWorking = true;
     const user: CustomerDTO = JSON.parse(<string>this.jwtService.getCustomer());
     const debtRequest: DebtRequest = {
-      debtorEmail: this.isDebt ? (this.addByFriend && this.canAddByFriend)? this.friend.email : this.email : user.email,
-      creditorEmail: this.isDebt ? user.email : (this.addByFriend && this.canAddByFriend)? this.friend.email : this.email,
+      debtorEmail: this.isDebt ? (this.addByFriend && this.canAddByFriend)? this.friend?.email : this.email : user.email,
+      creditorEmail: this.isDebt ? user.email : (this.addByFriend && this.canAddByFriend)? this.friend?.email : this.email,
       amount: this.amount,
       description: this.desc == undefined ? '' : this.desc,
       repaymentDate: this.withEndDate ? this.date : null,
@@ -159,13 +159,11 @@ export class MenageDebtComponent implements OnInit {
     return emailRegex.test(email);
   }
 
-  private loadFriends(page: number, size: number) {
-    this.friendsService.getFriendsForCustomer(page, size).subscribe({
+  private loadFriends() {
+    this.friendsService.getFriendsForCustomer(0, 500).subscribe({
       next: (page: Page<CustomerDTO>) => {
         this.friends = page.content;
-        this.totalRecords = page.totalElements;
-        this.rows = page.size;
-        this.canAddByFriend = page.totalElements > 0;
+        this.canAddByFriend = this.friends.length > 0;
       },
       error: error => {
         console.error('Error loading customers', error);
